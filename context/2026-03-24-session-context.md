@@ -1,4 +1,18 @@
-# 2026-03-24 Session Context
+# 2026-03-24 Session Context (Historical Snapshot)
+
+## Supersession Note
+
+Parts of this session snapshot were superseded on `2026-03-25` after
+re-reviewing nullable-field projection semantics with maintainers. In
+particular, nullable object fields are now treated as correctly projected when
+they are omitted from `required`, and generated-doc drift is no longer part of
+the primary findings surface. Markdown timeout annotations are also no longer
+treated as YAML projection bugs. Use
+`context/paris-static-evidence-table.md`,
+`context/markdown-openrpc-static-check-method.md`, and current
+`npm run engine:static-check -- --fork paris` output as the authoritative
+current state. For the current pre-`Amsterdam` restart point, use
+`context/2026-03-25-pre-amsterdam-context.md` instead of this file.
 
 ## Purpose
 
@@ -141,59 +155,39 @@ Current checker capabilities include:
 - schema field requiredness checks
 - positional method parameter nullability checks
 - positional method parameter presence checks
-- generated-doc requiredness checks
-- generated-doc plain-type flattening checks
-- fenced JSON example type checks
-- `InteractiveRequest` JSON type checks
-- duplicate-request / divergent-response checks within OpenRPC examples
-- duplicate-request / divergent-response checks within generated docs
-- OpenRPC example to generated-doc example fidelity checks
-- timeout projection checks
+- generic helper logic for additional static checks if later needed
 
 ## Current Paris Checker Result
 
-Last rechecked command:
+This section is superseded by the `2026-03-25` re-review.
+
+Use the current command:
 
 ```bash
-node scripts/engine-static-check.js --fork paris
+npm run engine:static-check -- --fork paris
 ```
 
-Current result:
+Current authoritative result:
 
-- `57` findings
-- `9` issue groups
+- `2` findings
+- `1` issue group
 
-Current issue groups:
+Current issue group:
 
-- `PARIS-PSTATUS-PROJECTION`
 - `PARIS-FCU-PARAM-PROJECTION`
-- `PARIS-FCU-PAYLOADID-PROJECTION`
-- `PARIS-ETC-DOC-EXAMPLE-TYPES`
-- `PARIS-NP-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-FCU-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-ETC-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-NP-EXAMPLE-CONSISTENCY`
-- `PARIS-TIMEOUT-PROJECTION`
 
 Interpretation:
 
 - these are not runtime bugs
-- these are static inconsistencies between markdown, OpenRPC, and generated docs
-- some are internal contradictions inside example sets
+- these are static inconsistencies between markdown and OpenRPC methods
+- generated-doc drift and timeout projection are no longer part of the primary
+  findings surface
+- nullable object fields projected via `required: false` are treated as
+  acceptable
 
 ## Notable Static Findings Confirmed Today
 
-### 1. `PayloadStatusV1` nullability / presence drift
-
-Markdown says:
-
-- `latestValidHash: DATA|null`
-- `validationError: String|null`
-
-But the OpenRPC schema encodes both as optional but non-null fields, and the
-generated docs flatten both to plain non-required `string`.
-
-### 2. `engine_forkchoiceUpdatedV1` second parameter drift
+### 1. `engine_forkchoiceUpdatedV1` second parameter drift
 
 Markdown says the second positional parameter is `Object|null`.
 
@@ -205,83 +199,6 @@ which changes semantics from:
 to:
 
 - `slot may be omitted; if present it is non-null`
-
-Generated docs also flatten it to a plain optional `object`.
-
-### 3. `ForkchoiceUpdatedResponseV1.payloadId` drift
-
-Markdown says `payloadId: DATA|null`.
-
-OpenRPC schema encodes it as optional but non-null `bytes8`, and generated docs
-flatten it to a plain non-required `string`.
-
-### 4. `engine_exchangeTransitionConfigurationV1` docs example type drift
-
-OpenRPC source example uses `"0x0"` for `terminalTotalDifficulty`.
-
-Generated docs convert that to numeric `0` in:
-
-- the sidebar `InteractiveRequest`
-- the request example
-- the response example
-
-This is now proven both as:
-
-- a docs-only type mismatch
-- an OpenRPC-example -> generated-doc-example projection mismatch
-
-### 5. Generated docs drop nested request-field `required` markers
-
-Affected docs:
-
-- `engine_newPayloadV1`
-- `engine_forkchoiceUpdatedV1`
-- `engine_exchangeTransitionConfigurationV1`
-
-The corresponding schemas clearly list those fields in `required`, but the docs
-omit `*required*` on nested request fields.
-
-### 6. `engine_newPayloadV1` example contradiction
-
-Both the OpenRPC method YAML and the generated docs contain two examples whose
-requests are identical but whose responses differ:
-
-- one `VALID`
-- one `INVALID`
-
-Important note:
-
-- this finding was manually rechecked after a false-positive concern
-- the concern came from comparing response lines rather than request lines
-- the checker finding was retained after re-verification
-
-### 7. Timeout metadata projection gap
-
-`paris.md` specifies timeout metadata for these methods:
-
-- `engine_newPayloadV1`
-- `engine_forkchoiceUpdatedV1`
-- `engine_getPayloadV1`
-- `engine_exchangeTransitionConfigurationV1`
-
-That timeout metadata is not projected into:
-
-- OpenRPC method YAML
-- generated docs
-
-## False-Positive Handling Outcome
-
-A manual recheck step was added to the process after a challenge about
-`engine_newPayloadV1` example consistency.
-
-Result:
-
-- no finding was removed during the last recheck
-- but the review discipline was improved
-- the static method document now explicitly warns against:
-  - mixing request and response evidence
-  - confusing `optional` with `nullable`
-  - treating dynamic claims as static claims
 
 ## Current Git-Tree Intent
 

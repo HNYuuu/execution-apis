@@ -4,7 +4,8 @@
 
 This document decomposes the `Paris` Engine API spec into atomic, testable
 rules. It is the durable `Paris` rule inventory and the bridge from descriptive
-spec reading to executable checks. For current static-review evidence, see
+spec reading to executable checks. Under the current review conventions,
+`Paris` has no confirmed `markdown <-> OpenRPC YAML` static findings; see
 `context/paris-static-evidence-table.md`.
 
 Each rule is tagged with:
@@ -82,8 +83,8 @@ Section source:
 | id | src | rule | projection | test layer |
 | --- | --- | --- | --- | --- |
 | `PARIS-STRUCT-PSTATUS-01` | `paris.md:82` | `PayloadStatusV1.status` must be one of `VALID`, `INVALID`, `SYNCING`, `ACCEPTED`, `INVALID_BLOCK_HASH`. | projected | schema-static, single-call |
-| `PARIS-STRUCT-PSTATUS-02` | `paris.md:83` | `PayloadStatusV1.latestValidHash` must accept `DATA` or explicit `null`. | drift | schema-static, single-call |
-| `PARIS-STRUCT-PSTATUS-03` | `paris.md:84` | `PayloadStatusV1.validationError` must accept `String` or explicit `null`. | drift | schema-static, single-call |
+| `PARIS-STRUCT-PSTATUS-02` | `paris.md:83` | `PayloadStatusV1.latestValidHash` must accept `DATA` or explicit `null`. | projected | schema-static, single-call |
+| `PARIS-STRUCT-PSTATUS-03` | `paris.md:84` | `PayloadStatusV1.validationError` must accept `String` or explicit `null`. | projected | schema-static, single-call |
 
 ### `TransitionConfigurationV1`
 
@@ -166,12 +167,12 @@ Section source:
 | `PARIS-METHOD-NP-05` | `paris.md:168` | Client may initiate sync if requisite data for payload validation are missing. | md-only | stateful |
 | `PARIS-METHOD-NP-06` | `paris.md:170` | If the payload extends the canonical chain and requisite data are available locally, the client must validate the payload. | md-only | stateful |
 | `PARIS-METHOD-NP-07` | `paris.md:172` | If the payload does not belong to the canonical chain, the client may choose not to validate it. | md-only | stateful |
-| `PARIS-METHOD-NP-08` | `paris.md:175` | Invalid or zero-length transactions must yield `{status: INVALID, latestValidHash: null, validationError: errorMessage | null}`. | drift | single-call |
-| `PARIS-METHOD-NP-09` | `paris.md:176` | Invalid `blockHash` must yield `{status: INVALID_BLOCK_HASH, latestValidHash: null, validationError: errorMessage | null}`. | drift | single-call |
-| `PARIS-METHOD-NP-10` | `paris.md:177` | Failed terminal block conditions must yield `{status: INVALID, latestValidHash: zeroHash, validationError: errorMessage | null}`. | drift | single-call, stateful |
-| `PARIS-METHOD-NP-11` | `paris.md:178` | Missing requisite data for acceptance or validation must yield `{status: SYNCING, latestValidHash: null, validationError: null}`. | drift | single-call, stateful |
+| `PARIS-METHOD-NP-08` | `paris.md:175` | Invalid or zero-length transactions must yield `{status: INVALID, latestValidHash: null, validationError: errorMessage | null}`. | projected | single-call |
+| `PARIS-METHOD-NP-09` | `paris.md:176` | Invalid `blockHash` must yield `{status: INVALID_BLOCK_HASH, latestValidHash: null, validationError: errorMessage | null}`. | projected | single-call |
+| `PARIS-METHOD-NP-10` | `paris.md:177` | Failed terminal block conditions must yield `{status: INVALID, latestValidHash: zeroHash, validationError: errorMessage | null}`. | projected | single-call, stateful |
+| `PARIS-METHOD-NP-11` | `paris.md:178` | Missing requisite data for acceptance or validation must yield `{status: SYNCING, latestValidHash: null, validationError: null}`. | projected | single-call, stateful |
 | `PARIS-METHOD-NP-12` | `paris.md:179` | Fully validated payloads must return the result of the `Payload validation` routine. | md-only | single-call, stateful |
-| `PARIS-METHOD-NP-13` | `paris.md:180-185` | A payload that is well-formed, has valid transactions, has valid `blockHash`, has known well-formed ancestors, does not extend the canonical chain, and has not been fully validated must yield `{status: ACCEPTED, latestValidHash: null, validationError: null}`. | drift | stateful |
+| `PARIS-METHOD-NP-13` | `paris.md:180-185` | A payload that is well-formed, has valid transactions, has valid `blockHash`, has known well-formed ancestors, does not extend the canonical chain, and has not been fully validated must yield `{status: ACCEPTED, latestValidHash: null, validationError: null}`. | projected | stateful |
 | `PARIS-METHOD-NP-14` | `paris.md:187` | Errors outside normal method processing must be surfaced as an error object. | md-only | single-call |
 
 ### `engine_forkchoiceUpdatedV1`
@@ -186,7 +187,7 @@ Section source:
 | --- | --- | --- | --- | --- |
 | `PARIS-METHOD-FCU-01` | `paris.md:211` | Client may initiate sync if `headBlockHash` is unknown or missing requisite validation data. | md-only | stateful |
 | `PARIS-METHOD-FCU-02` | `paris.md:213` | If `headBlockHash` references a `VALID` ancestor of the canonical head, the client may skip the forkchoice update and must not start payload building. | md-only | stateful |
-| `PARIS-METHOD-FCU-03` | `paris.md:213` | In the valid-ancestor shortcut case, the response must be `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`. | drift | single-call, stateful |
+| `PARIS-METHOD-FCU-03` | `paris.md:213` | In the valid-ancestor shortcut case, the response must be `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`. | projected | single-call, stateful |
 | `PARIS-METHOD-FCU-04` | `paris.md:215` | If `headBlockHash` references a PoW block, the client must validate terminal block conditions against EIP-3675. | md-only | stateful |
 | `PARIS-METHOD-FCU-05` | `paris.md:215` | If terminal block validation fails for a PoW head, the client must not update forkchoice and must not begin payload building. | md-only | stateful |
 | `PARIS-METHOD-FCU-06` | `paris.md:217` | Before updating forkchoice, the client must ensure validity of the payload referenced by `headBlockHash` and may validate it during the call. | md-only | stateful |
@@ -197,16 +198,16 @@ Section source:
 | `PARIS-METHOD-FCU-11` | `paris.md:227` | `payloadAttributes.timestamp` must be greater than the timestamp of the block referenced by `headBlockHash`; otherwise return `-38003 Invalid payload attributes`. | projected | single-call, stateful |
 | `PARIS-METHOD-FCU-12` | `paris.md:229` | Valid `payloadAttributes` must start a build process on top of `headBlockHash` and produce `buildProcessId`. | md-only | stateful |
 | `PARIS-METHOD-FCU-13` | `paris.md:231` | If `payloadAttributes` validation fails, the forkchoice update must not be rolled back. | md-only | stateful |
-| `PARIS-METHOD-FCU-14` | `paris.md:234` | Unknown head or missing requisite validation data must yield `{payloadStatus: {status: SYNCING, latestValidHash: null, validationError: null}, payloadId: null}`. | drift | single-call, stateful |
-| `PARIS-METHOD-FCU-15` | `paris.md:235` | Invalid payloads must yield `{payloadStatus: {status: INVALID, latestValidHash: validHash, validationError: errorMessage | null}, payloadId: null}`. | drift | single-call, stateful |
-| `PARIS-METHOD-FCU-16` | `paris.md:236` | Invalid terminal block or zero-hash invalidation branch must yield `{payloadStatus: {status: INVALID, latestValidHash: zeroHash, validationError: errorMessage | null}, payloadId: null}`. | drift | single-call, stateful |
-| `PARIS-METHOD-FCU-17` | `paris.md:237` | A valid head without a started build process must yield `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`. | drift | single-call, stateful |
+| `PARIS-METHOD-FCU-14` | `paris.md:234` | Unknown head or missing requisite validation data must yield `{payloadStatus: {status: SYNCING, latestValidHash: null, validationError: null}, payloadId: null}`. | projected | single-call, stateful |
+| `PARIS-METHOD-FCU-15` | `paris.md:235` | Invalid payloads must yield `{payloadStatus: {status: INVALID, latestValidHash: validHash, validationError: errorMessage | null}, payloadId: null}`. | projected | single-call, stateful |
+| `PARIS-METHOD-FCU-16` | `paris.md:236` | Invalid terminal block or zero-hash invalidation branch must yield `{payloadStatus: {status: INVALID, latestValidHash: zeroHash, validationError: errorMessage | null}, payloadId: null}`. | projected | single-call, stateful |
+| `PARIS-METHOD-FCU-17` | `paris.md:237` | A valid head without a started build process must yield `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`. | projected | single-call, stateful |
 | `PARIS-METHOD-FCU-18` | `paris.md:238` | A valid head with a started build process must yield `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: buildProcessId}`. | projected | single-call, stateful |
 | `PARIS-METHOD-FCU-19` | `paris.md:239` | Invalid or inconsistent `forkchoiceState` must yield error `-38002`. | projected | single-call |
 | `PARIS-METHOD-FCU-20` | `paris.md:240` | Invalid `payloadAttributes` after a successful forkchoice application must yield error `-38003`. | projected | single-call, stateful |
 | `PARIS-METHOD-FCU-21` | `paris.md:242` | Errors outside normal method processing must be surfaced as an error object. | md-only | single-call |
-| `PARIS-METHOD-FCU-22` | `paris.md:195-196` | The second positional parameter accepts explicit `null` as well as `PayloadAttributesV1`. | drift | schema-static, single-call |
-| `PARIS-METHOD-FCU-23` | `paris.md:206` | `ForkchoiceUpdatedResponseV1.payloadId` accepts explicit `null`. | drift | schema-static, single-call |
+| `PARIS-METHOD-FCU-22` | `paris.md:195-196` | The second positional parameter accepts explicit `null` as well as `PayloadAttributesV1`. | projected | schema-static, single-call |
+| `PARIS-METHOD-FCU-23` | `paris.md:206` | `ForkchoiceUpdatedResponseV1.payloadId` accepts explicit `null`. | projected | schema-static, single-call |
 
 ### `engine_getPayloadV1`
 
@@ -255,48 +256,37 @@ Initial automated coverage now exists in:
 - `npm run engine:static-check`
 
 This automation is intentionally limited to `artifact-level static
-inconsistencies` across markdown, OpenRPC method YAML, OpenRPC schema YAML,
-and generated docs. It does not currently classify runtime behavior,
-state-machine semantics, or client implementation differences as findings.
+inconsistencies` between markdown and OpenRPC method/schema YAML. Generated
+docs are treated as downstream artifacts and are not part of the primary
+findings surface in the current phase. The checker does not classify runtime
+behavior, state-machine semantics, or client implementation differences as
+findings.
 
 The checker is now data-driven by issue group and supports fork filtering, for example:
 
 - `npm run engine:static-check -- --fork paris`
 
-Current Paris automation covers these issue groups:
+Current Paris regression coverage is configured for these issue groups:
 
 - `PARIS-PSTATUS-PROJECTION`
 - `PARIS-FCU-PARAM-PROJECTION`
 - `PARIS-FCU-PAYLOADID-PROJECTION`
-- `PARIS-ETC-DOC-EXAMPLE-TYPES`
-- `PARIS-NP-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-FCU-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-ETC-REQUEST-DOC-REQUIREDNESS`
-- `PARIS-NP-EXAMPLE-CONSISTENCY`
-- `PARIS-TIMEOUT-PROJECTION`
 
-Current automated checks cover these rule IDs and derived doc manifestations:
+Current automated checks cover these rule IDs:
 
 - `PARIS-STRUCT-PSTATUS-02`
 - `PARIS-STRUCT-PSTATUS-03`
 - `PARIS-METHOD-FCU-23`
 - `PARIS-METHOD-FCU-22`
 
-In addition, the checker includes generated-doc example type checks for
-`engine_exchangeTransitionConfigurationV1`, including the `InteractiveRequest`
-sidebar payload, and example consistency checks for `engine_newPayloadV1`
-across both OpenRPC method YAML and generated docs. It also now compares
-OpenRPC method examples against generated-doc examples to detect projection
-drift between source examples and published docs.
-
 Current checker output for `npm run engine:static-check -- --fork paris` is:
 
-- `57` findings
-- `9` issue groups
+- `0` findings
+- `0` failing issue groups
 
 The highest-value rule classes for early automation are:
 
-1. `drift` rules, especially nullability and positional-parameter semantics
+1. previously drift-prone nullability and positional-parameter rules
 2. named error branches
 3. method-specific precondition checks
 4. stateful routine obligations around payload validation and building
