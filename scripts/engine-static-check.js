@@ -74,6 +74,35 @@ function extractMethodParamBlock(methodBlock, paramName) {
     );
 }
 
+function extractNestedBlock(text, predicate) {
+    const lines = text.split('\n');
+    const startIndex = lines.findIndex((line) => predicate(line));
+    if (startIndex === -1) {
+        return null;
+    }
+
+    const startIndent = countIndent(lines[startIndex]);
+    const collected = [lines[startIndex]];
+
+    for (let index = startIndex + 1; index < lines.length; index += 1) {
+        const line = lines[index];
+        if (line.trim() !== '' && countIndent(line) <= startIndent) {
+            break;
+        }
+        collected.push(line);
+    }
+
+    return collected.join('\n');
+}
+
+function extractMethodResultBlock(methodBlock) {
+    return extractNestedBlock(methodBlock, (line) => line === '  result:');
+}
+
+function extractMethodErrorsBlock(methodBlock) {
+    return extractNestedBlock(methodBlock, (line) => line === '  errors:');
+}
+
 function schemaPropertyIsRequired(schemaBlock, propertyName) {
     const lines = schemaBlock.split('\n');
     const startIndex = lines.findIndex((line) => line === '  required:');
@@ -532,6 +561,10 @@ function runSchemaFieldNullableCheck(check) {
     }
 
     const required = schemaPropertyIsRequired(schemaBlock, check.property);
+    if (check.allowOptionalAsNull && !required) {
+        return { ok: true };
+    }
+
     return {
         ok: false,
         message: `Expected explicit null support for ${check.schemaName}.${check.property}, but found ${nullabilityDescription(propertyBlock, required)}.`,
@@ -546,13 +579,62 @@ function runSchemaFieldRequiredCheck(check) {
         return { ok: false, message: `Schema ${check.schemaName} was not found.` };
     }
 
-    if (schemaPropertyIsRequired(schemaBlock, check.property)) {
+    const required = schemaPropertyIsRequired(schemaBlock, check.property);
+    if (required) {
+        return { ok: true };
+    }
+
+    if (check.allowOptionalAsNull) {
         return { ok: true };
     }
 
     return {
         ok: false,
         message: `Expected ${check.schemaName}.${check.property} to be listed in the required fields.`,
+        file: check.file,
+    };
+}
+
+function runSchemaFieldDisallowRefCheck(check) {
+    const text = readUtf8(check.file);
+    const schemaBlock = extractTopLevelSchemaBlock(text, check.schemaName);
+    if (!schemaBlock) {
+        return { ok: false, message: `Schema ${check.schemaName} was not found.` };
+    }
+
+    const propertyBlock = extractYamlPropertyBlock(schemaBlock, check.property);
+    if (!propertyBlock) {
+        return { ok: false, message: `Property ${check.schemaName}.${check.property} was not found.` };
+    }
+
+    const disallowedPattern = new RegExp(
+        `\\$ref:\\s*['"]?${check.disallowedRef.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"]?`,
+    );
+    if (!disallowedPattern.test(propertyBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: check.message || `Expected ${check.schemaName}.${check.property} not to reference ${check.disallowedRef}.`,
+        file: check.file,
+    };
+}
+
+function runSchemaAdditionalPropertiesFalseCheck(check) {
+    const text = readUtf8(check.file);
+    const schemaBlock = extractTopLevelSchemaBlock(text, check.schemaName);
+    if (!schemaBlock) {
+        return { ok: false, message: `Schema ${check.schemaName} was not found.` };
+    }
+
+    if (/^\s*additionalProperties:\s*false\s*$/m.test(schemaBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: check.message || `Expected ${check.schemaName} to declare additionalProperties: false.`,
         file: check.file,
     };
 }
@@ -574,6 +656,10 @@ function runMethodParamNullableCheck(check) {
     }
 
     const required = /required:\s*true/.test(paramBlock);
+    if (check.allowOptionalAsNull && !required) {
+        return { ok: true };
+    }
+
     return {
         ok: false,
         message: `Expected explicit null support for parameter "${check.paramName}" of ${check.methodName}, but found ${required ? 'required and non-null' : 'optional but non-null'}.`,
@@ -593,13 +679,183 @@ function runMethodParamRequiredCheck(check) {
         return { ok: false, message: `Parameter ${check.paramName} of ${check.methodName} was not found.` };
     }
 
-    if (/required:\s*true/.test(paramBlock)) {
+    const required = /required:\s*true/.test(paramBlock);
+    if (required) {
+        return { ok: true };
+    }
+
+    if (check.allowOptionalAsNull) {
         return { ok: true };
     }
 
     return {
         ok: false,
         message: `Expected parameter "${check.paramName}" of ${check.methodName} to be present positionally rather than optional.`,
+        file: check.file,
+    };
+}
+
+function runMethodParamSchemaRefsCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const paramBlock = extractMethodParamBlock(methodBlock, check.paramName);
+    if (!paramBlock) {
+        return { ok: false, message: `Parameter ${check.paramName} of ${check.methodName} was not found.` };
+    }
+
+    const missingRefs = check.expectedRefs.filter((ref) => !paramBlock.includes(ref));
+    if (missingRefs.length === 0) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected parameter "${check.paramName}" of ${check.methodName} to reference ${missingRefs.join(', ')}.`,
+        file: check.file,
+    };
+}
+
+function runMethodResultArrayItemsNullableCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const resultBlock = extractMethodResultBlock(methodBlock);
+    if (!resultBlock) {
+        return { ok: false, message: `Result block of ${check.methodName} was not found.` };
+    }
+
+    const itemsBlock = extractNestedBlock(resultBlock, (line) => line.trim() === 'items:');
+    if (!itemsBlock) {
+        return { ok: false, message: `Array items block of result ${check.methodName} was not found.` };
+    }
+
+    if (blockAllowsExplicitNull(itemsBlock)) {
+        return { ok: true };
+    }
+
+    if (check.allowObjectRefAsNull && /\$ref:\s*['"]?#\/components\/schemas\/[A-Za-z0-9_]+['"]?/.test(itemsBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected result array items of ${check.methodName} to allow explicit null entries.`,
+        file: check.file,
+    };
+}
+
+function runMethodErrorCodePresentCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const errorsBlock = extractMethodErrorsBlock(methodBlock);
+    if (!errorsBlock) {
+        return {
+            ok: false,
+            message: `Expected ${check.methodName} to declare error code ${check.errorCode}, but the method has no errors block.`,
+            file: check.file,
+        };
+    }
+
+    if (new RegExp(`- code:\\s*${check.errorCode}\\b`).test(errorsBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected ${check.methodName} to declare error code ${check.errorCode}.`,
+        file: check.file,
+    };
+}
+
+function runMethodErrorCodeAbsentCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const errorsBlock = extractMethodErrorsBlock(methodBlock);
+    if (!errorsBlock) {
+        return { ok: true };
+    }
+
+    if (!new RegExp(`- code:\\s*${check.errorCode}\\b`).test(errorsBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected ${check.methodName} not to declare error code ${check.errorCode}.`,
+        file: check.file,
+    };
+}
+
+function runMethodResultPropertyRequiredCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const resultBlock = extractMethodResultBlock(methodBlock);
+    if (!resultBlock) {
+        return { ok: false, message: `Result block of ${check.methodName} was not found.` };
+    }
+
+    const schemaBlock = extractNestedBlock(resultBlock, (line) => line.trim() === 'schema:');
+    if (!schemaBlock) {
+        return { ok: false, message: `Result schema block of ${check.methodName} was not found.` };
+    }
+
+    const parsed = parseYamlishBlock(schemaBlock);
+    const schema = parsed && typeof parsed === 'object' ? parsed.schema : null;
+    const required = schema && Array.isArray(schema.required) ? schema.required : [];
+    if (required.includes(check.property)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected result property "${check.property}" of ${check.methodName} to be listed as required.`,
+        file: check.file,
+    };
+}
+
+function runMethodResultNullableCheck(check) {
+    const text = readUtf8(check.file);
+    const methodBlock = extractMethodBlock(text, check.methodName);
+    if (!methodBlock) {
+        return { ok: false, message: `Method ${check.methodName} was not found.` };
+    }
+
+    const resultBlock = extractMethodResultBlock(methodBlock);
+    if (!resultBlock) {
+        return { ok: false, message: `Result block of ${check.methodName} was not found.` };
+    }
+
+    const schemaBlock = extractNestedBlock(resultBlock, (line) => line.trim() === 'schema:');
+    if (!schemaBlock) {
+        return { ok: false, message: `Result schema block of ${check.methodName} was not found.` };
+    }
+
+    if (blockAllowsExplicitNull(schemaBlock)) {
+        return { ok: true };
+    }
+
+    return {
+        ok: false,
+        message: `Expected result of ${check.methodName} to allow a top-level null value.`,
         file: check.file,
     };
 }
@@ -720,24 +976,6 @@ function runDocLabelRequiredCheck(check) {
     return {
         ok: false,
         message: `Expected documentation label "${check.label}" in ${check.file} to be marked as required.`,
-        file: check.file,
-    };
-}
-
-function runMethodBlockContainsCheck(check) {
-    const text = readUtf8(check.file);
-    const methodBlock = extractMethodBlock(text, check.methodName);
-    if (!methodBlock) {
-        return { ok: false, message: `Method ${check.methodName} was not found.` };
-    }
-
-    if (methodBlock.includes(check.pattern)) {
-        return { ok: true };
-    }
-
-    return {
-        ok: false,
-        message: `Expected method block ${check.methodName} in ${check.file} to contain "${check.pattern}".`,
         file: check.file,
     };
 }
@@ -885,10 +1123,26 @@ function runCheck(check) {
             return runSchemaFieldNullableCheck(check);
         case 'schema-field-required':
             return runSchemaFieldRequiredCheck(check);
+        case 'schema-field-disallow-ref':
+            return runSchemaFieldDisallowRefCheck(check);
+        case 'schema-additional-properties-false':
+            return runSchemaAdditionalPropertiesFalseCheck(check);
         case 'method-param-nullable':
             return runMethodParamNullableCheck(check);
         case 'method-param-required':
             return runMethodParamRequiredCheck(check);
+        case 'method-param-schema-refs':
+            return runMethodParamSchemaRefsCheck(check);
+        case 'method-result-array-items-nullable':
+            return runMethodResultArrayItemsNullableCheck(check);
+        case 'method-error-code-present':
+            return runMethodErrorCodePresentCheck(check);
+        case 'method-error-code-absent':
+            return runMethodErrorCodeAbsentCheck(check);
+        case 'method-result-property-required':
+            return runMethodResultPropertyRequiredCheck(check);
+        case 'method-result-nullable':
+            return runMethodResultNullableCheck(check);
         case 'doc-json-type':
             return runDocJsonTypeCheck(check);
         case 'doc-interactive-request-json-type':
@@ -897,8 +1151,6 @@ function runCheck(check) {
             return runDocLabelNotPlainTypeCheck(check);
         case 'doc-label-required':
             return runDocLabelRequiredCheck(check);
-        case 'method-block-contains':
-            return runMethodBlockContainsCheck(check);
         case 'file-contains':
             return runFileContainsCheck(check);
         case 'method-examples-consistent':

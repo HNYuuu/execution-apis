@@ -26,7 +26,6 @@ Covered artifact types:
 - Markdown specifications under `src/engine/`
 - OpenRPC method definitions under `src/engine/openrpc/methods/`
 - OpenRPC schema definitions under `src/engine/openrpc/schemas/`
-- Generated documentation under `docs-api/api/methods/`
 - Repository test fixtures under `tests/`
 - Downstream conformance execution in Hive `rpc-compat`
 
@@ -182,9 +181,7 @@ Automate detection of the most important spec-level mismatches before involving 
    - `src/engine/openrpc/methods/`
    - `src/engine/openrpc/schemas/`
    Explicitly detect required vs optional vs nullable drift.
-3. `Doc projection checker`
-   Check generated docs for drift from source artifacts.
-4. `Rule coverage checker`
+3. `Rule coverage checker`
    Check which atomic rules currently have no corresponding test intent.
 
 ### Deliverables
@@ -198,14 +195,28 @@ Current implementation:
 - `scripts/engine-static-check-data.js` holds issue-group definitions so future
   forks can extend coverage by adding data rather than rewriting the runner.
 - Current checker findings are intentionally restricted to `static artifact
-  inconsistencies` across markdown, OpenRPC methods, OpenRPC schemas, and
-  generated docs. Dynamic method behavior, stateful routines, and client
-  execution differences remain deferred to later phases.
-- Current implemented coverage is Paris-focused and targets nullability,
-  presence semantics, timeout projection, generated-doc example type drift,
-  `InteractiveRequest` example drift, and duplicate-request /
-  divergent-response example consistency, plus OpenRPC-example to docs-example
-  projection drift.
+  inconsistencies` between fork-scoped markdown and OpenRPC methods/schemas.
+  Generated docs are treated as downstream manifestations of YAML and are not a
+  primary findings surface in the current phase. Dynamic method behavior,
+  stateful routines, and client execution differences remain deferred to later
+  phases.
+- Current nullable-field convention accepts two equivalent YAML projections for
+  a markdown `...|null` field: explicit null support, or omission from
+  `required` so field absence is treated as null-equivalent. The same
+  `optional-as-null` convention can also be applied to positional parameters
+  when the review rule explicitly allows it.
+- Method metadata such as markdown timeout annotations is currently treated as
+  out of scope for the Markdown/OpenRPC inconsistency checker unless the
+  repository establishes that such metadata must be represented in YAML.
+- Current implemented coverage now spans `Paris -> Osaka`.
+- The checker currently supports both `fork-local` and `cumulative` review
+  modes.
+- Current implemented rule coverage targets:
+  - nullability and presence semantics
+  - versioned-union parameter projection
+  - result-array null-item projection
+  - top-level result nullability
+  - static method error-code presence and absence
 
 ## Phase 4: Fixture-Level Conformance Tests
 
@@ -310,9 +321,7 @@ The initial execution order should be:
 
 The next concrete task is:
 
-Create the `Engine API specification surface inventory` covering all fork-scoped specs from `Paris` through `Amsterdam`, including:
-
-- method introduction, modification, deprecation, and cross-reference locations
-- structure introduction and schema evolution
-- routine introduction, inheritance, and override points
-- linkage between methods, structures, and routines
+Complete the remaining `Amsterdam` static review pass using the established
+`markdown <-> OpenRPC YAML` method, then consolidate cross-fork findings from
+`Paris -> Osaka` before moving back up to the broader specification-surface
+inventory work.

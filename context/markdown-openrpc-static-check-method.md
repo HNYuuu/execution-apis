@@ -8,27 +8,25 @@ This document explains the method currently used in this repository to find
 - markdown Engine API specs
 - OpenRPC method YAML
 - OpenRPC schema YAML
-- generated docs
 
 It is not a dynamic testing method. It does not execute clients or attempt to
 prove runtime behavior.
 
 ## Source-Of-Truth Model
 
-For the current `Paris` work, the working hierarchy is:
+For the current fork-scoped Engine API work, the working hierarchy is:
 
-1. `src/engine/paris.md`
+1. `src/engine/<fork>.md`
 2. `src/engine/openrpc/methods/*.yaml` and `src/engine/openrpc/schemas/*.yaml`
-3. `docs-api/api/methods/*.mdx`
 
 This hierarchy is justified by the repository structure and by the Engine API
 README, which treats the fork-scoped markdown docs as the primary spec surface.
 
-The method therefore asks three questions:
+The method therefore asks two questions:
 
 1. Did markdown semantics survive projection into OpenRPC?
-2. Did OpenRPC semantics survive projection into generated docs?
-3. Are there internal contradictions inside OpenRPC examples or docs examples?
+2. Is the OpenRPC projection precise enough to preserve the intended markdown
+   semantics?
 
 ## What Counts As A Static Inconsistency
 
@@ -37,19 +35,36 @@ reading repository artifacts, without any client execution.
 
 Examples that qualify:
 
-- markdown says `DATA|null`, schema says plain `$ref` and omits `required`
-- markdown says a positional argument may be `null`, method YAML marks it
-  `required: false` instead
-- schema marks fields as required, generated docs omit `*required*`
-- OpenRPC example uses `"0x0"`, generated docs example uses numeric `0`
-- two examples in the same artifact use the same request but contradictory
-  responses
+- markdown says `DATA|null`, but schema encodes the field as both non-null and
+  required
+- markdown says a positional argument accepts versions `A | B`, but method YAML
+  only references `B`
+- markdown says a field must be present, schema only makes it optional
+- markdown says a result array may contain `null` entries, but method YAML only
+  allows non-null items
+- markdown declares a concrete method error code, but method YAML omits it
+
+Current interpretation for nullable object fields and nullable positional
+parameters:
+
+- if a markdown field allows `null`, the YAML projection is accepted when
+  either:
+  - the field explicitly supports `null`, or
+  - the field is not listed in `required`, meaning field absence is treated as
+    equivalent to `null`
+- the same `optional-as-null` convention may be applied to positional
+  parameters when the review rule explicitly allows it
+- for result arrays, an `items` block that is a `$ref` to an object schema may
+  also be treated as null-equivalent when the review rule explicitly allows it
 
 Examples that do not qualify:
 
 - whether an EL client really returns a given response at runtime
 - whether payload validation order is implemented correctly
 - whether state transitions across multiple Engine API calls are correct
+- whether generated docs under `docs-api/api/` drift from YAML
+- whether YAML examples are internally contradictory without a markdown
+  contradiction
 
 ## Detection Workflow
 
@@ -57,15 +72,13 @@ Examples that do not qualify:
 
 Work one fork at a time. For the current slice:
 
-- markdown: `src/engine/paris.md`
+- markdown: `src/engine/<fork>.md`
 - methods: `src/engine/openrpc/methods/*.yaml`
 - schemas: `src/engine/openrpc/schemas/*.yaml`
-- docs: `docs-api/api/methods/engine_*V1.mdx`
 
 ### Step 2: Identify The Projection Targets
 
-For each markdown artifact, identify its corresponding OpenRPC and docs
-projection.
+For each markdown artifact, identify its corresponding OpenRPC projection.
 
 Examples:
 
@@ -73,8 +86,6 @@ Examples:
   `src/engine/openrpc/schemas/payload.yaml`
 - `engine_forkchoiceUpdatedV1` request semantics project into
   `src/engine/openrpc/methods/forkchoice.yaml`
-- generated docs project into
-  `docs-api/api/methods/engine_forkchoiceUpdatedV1.mdx`
 
 ### Step 3: Decompose Markdown Rules Into Static Rule Shapes
 
@@ -86,11 +97,10 @@ The current method uses these shapes:
 - `field requiredness / presence`
 - `positional parameter nullability`
 - `positional parameter presence`
+- `parameter version-union projection`
+- `result array item nullability`
+- `declared error-code presence`
 - `enum/value-set projection`
-- `timeout metadata projection`
-- `example JSON scalar type projection`
-- `source example -> generated example fidelity`
-- `duplicate-request / divergent-response contradictions`
 
 ### Step 4: Map Each Rule Shape To Concrete Artifact Locations
 
@@ -98,9 +108,8 @@ The mapping is:
 
 - markdown structure fields -> schema blocks
 - markdown positional method params -> method blocks
-- schema requiredness -> generated-doc field labels
-- OpenRPC method examples -> generated-doc examples
-- generated docs sidebar `InteractiveRequest` -> docs embedded request payload
+- markdown method result arrays -> method result schema blocks
+- markdown method error declarations -> method error blocks
 
 This keeps the check static and explicit.
 
@@ -119,6 +128,14 @@ Current fork filter example:
 npm run engine:static-check -- --fork paris
 ```
 
+The current implementation has already been exercised on:
+
+- `Paris`
+- `Shanghai`
+- `Cancun`
+- `Prague`
+- `Osaka`
+
 ## How Each Check Type Works
 
 ### `schema-field-nullable`
@@ -136,11 +153,14 @@ Method:
    - `type: null`
    - `type: [ ..., null, ... ]`
    - other explicitly null-bearing schema constructs
-4. If none are present, flag drift.
+4. If none are present, check whether the field is omitted from `required` and
+   the rule allows `optional-as-null`.
+5. If neither condition holds, flag drift.
 
 Important:
 
-- This is about `explicit null`, not merely `field may be omitted`.
+- This is about `explicit null` unless the review rule explicitly allows
+  `optional-as-null`.
 
 ### `schema-field-required`
 
@@ -154,10 +174,34 @@ Method:
 1. Extract the schema block.
 2. Read the `required:` list.
 3. Check whether the field is named there.
-4. If not, flag drift.
+4. If not, but the rule allows `optional-as-null`, accept the projection.
+5. Otherwise, flag drift.
 
-This is why `optional but non-null` is treated differently from
-`required and nullable`.
+This means a nullable markdown field may be projected as either:
+
+- `required and nullable`, or
+- `optional and non-null`
+
+depending on the agreed projection convention for the review slice.
+
+### `schema-field-disallow-ref`
+
+Goal:
+
+- detect when markdown requires a more precise schema projection, but the YAML
+  field falls back to an overly broad `$ref`
+
+Method:
+
+1. Extract the named top-level schema block from the YAML text.
+2. Extract the named property block from `properties:`.
+3. Check whether that property block contains the disallowed `$ref`.
+4. If it does, flag drift.
+
+Current use:
+
+- this is used for fixed-size byte encodings, where markdown specifies an exact
+  width but the schema projects the field as unconstrained `bytes`
 
 ### `method-param-nullable`
 
@@ -171,7 +215,9 @@ Method:
 1. Extract the method block by method name.
 2. Extract the parameter block by parameter name.
 3. Look for explicit null support using the same nullability scan as above.
-4. If none is present, flag drift.
+4. If none is present, but the rule allows `optional-as-null` and the parameter
+   is not required, accept the projection.
+5. Otherwise, flag drift.
 
 ### `method-param-required`
 
@@ -184,187 +230,123 @@ Method:
 
 1. Extract the parameter block.
 2. Read `required: true/false`.
-3. If the parameter is not marked required, flag drift.
+3. If the parameter is not marked required, but the rule allows
+   `optional-as-null`, accept the projection.
+4. Otherwise, flag drift.
 
 Interpretation:
 
-- In positional JSON-RPC, “slot may contain `null`” is not the same as “slot may
-  be omitted”.
+- In positional JSON-RPC, “slot may contain `null`” and “slot may be omitted”
+  are treated as distinct by default, but the checker can relax this when the
+  review convention explicitly treats omission as null-equivalent.
 
-### `doc-label-required`
-
-Goal:
-
-- detect when required fields are not shown as required in generated docs
-
-Method:
-
-1. Search the docs file for the field label line.
-2. Check whether the line contains `*required*`.
-3. If not, flag drift.
-
-This is only used when another artifact already establishes that the field is
-required.
-
-### `doc-label-not-plain-type`
+### `method-param-schema-refs`
 
 Goal:
 
-- detect when generated docs flatten richer semantics into a plain type label
+- detect when markdown allows multiple schema versions for one positional
+  parameter, but method YAML projects only a subset
 
 Method:
 
-1. Search for the docs label line.
-2. Compare it against a known flattened line such as
-   `* **latestValidHash** \`string\``.
-3. If the rendered label is exactly the flattened form, flag drift.
+1. Extract the method block by method name.
+2. Extract the parameter block by parameter name.
+3. Check whether the block references every expected schema ref.
+4. If any expected ref is missing, flag drift.
 
-This is useful for:
-
-- nullable fields rendered as plain `string`
-- nullable/object params rendered as plain `object`
-
-### `doc-json-type`
+### `method-result-array-items-nullable`
 
 Goal:
 
-- detect scalar type drift inside fenced JSON examples
+- detect when markdown allows `null` entries inside a result array, but method
+  YAML only allows non-null items
 
 Method:
 
-1. Parse every fenced `json` block in the docs file.
-2. Find the value at the configured JSON path.
-3. Compare its actual JSON type with the expected type.
+1. Extract the method block by method name.
+2. Extract the `result` block and its nested `items:` block.
+3. Check whether the `items:` block explicitly allows `null`.
+4. If not, but the review rule allows `object-ref-as-null` and `items:` is a
+   schema `$ref`, accept the projection.
+5. Otherwise, flag drift.
 
-Example:
-
-- expect `string`
-- docs example contains numeric `0`
-
-### `doc-interactive-request-json-type`
+### `method-result-property-required`
 
 Goal:
 
-- detect scalar type drift in the sidebar `InteractiveRequest` payload
+- detect when markdown requires a field to exist in the result object, but the
+  OpenRPC method projection does not list that field as required
 
 Method:
 
-1. Extract the serialized `request={"{...}"}`
-   string from the MDX component.
-2. Decode the escaped JSON string.
-3. Parse it as JSON.
-4. Compare the type at the configured path.
+1. Extract the method block by method name.
+2. Extract the nested `result -> schema` block.
+3. Parse the `required:` list on that result schema.
+4. Check whether the expected property is listed there.
+5. If not, flag drift.
 
-This is separate from fenced example parsing because the sidebar request lives
-inside an MDX prop, not a fenced code block.
-
-### `method-examples-consistent`
+### `method-result-nullable`
 
 Goal:
 
-- detect contradictions internal to OpenRPC method examples
+- detect when markdown allows the entire result value to be `null`, but the
+  OpenRPC method projection only allows a non-null result schema
 
 Method:
 
-1. Extract the `examples:` block from the method YAML.
-2. Parse each example’s `params` and `result` into normalized JSON-like
-   objects.
-3. Group examples by normalized request.
-4. If the same normalized request appears more than once with different
-   normalized responses, flag drift.
+1. Extract the method block by method name.
+2. Extract the nested `result -> schema` block.
+3. Check whether that schema block explicitly allows `null`.
+4. If not, flag drift.
 
-This is a purely static contradiction check. It does not claim which response
-is correct.
-
-### `doc-examples-consistent`
+### `method-error-code-present`
 
 Goal:
 
-- detect contradictions internal to generated docs examples
+- detect when markdown declares a concrete method error code, but method YAML
+  omits it from the `errors:` block
 
 Method:
 
-1. Parse each `#### Request` / `#### Response` pair in the docs examples
-   section.
-2. Normalize requests and responses as JSON strings.
-3. Group by request and detect divergent responses.
+1. Extract the method block by method name.
+2. Extract the `errors:` block.
+3. Check whether the expected `- code:` entry is present.
+4. If not, flag drift.
 
-### `method-doc-examples-match`
+### `method-error-code-absent`
 
 Goal:
 
-- detect projection drift between OpenRPC source examples and generated docs
-  examples
+- detect when method YAML declares a concrete error code that the markdown
+  method section does not project
 
 Method:
 
-1. Parse the OpenRPC method examples.
-2. Parse the generated docs examples.
-3. Compare:
-   - example count
-   - example name
-   - normalized request payload
-   - normalized response payload
-4. If any differ, flag drift.
+1. Extract the method block by method name.
+2. Extract the `errors:` block.
+3. Check whether the disallowed `- code:` entry is present.
+4. If it is present, flag drift.
 
-This is how the checker proves that a docs example differs from its OpenRPC
-source, rather than only saying that the docs example looks suspicious by
-itself.
+## Review Modes
 
-## Manual Recheck Procedure
+There are two valid review modes:
 
-To reduce false positives, recheck every finding manually with this sequence:
+- `fork-local`: compare one fork document against the current YAML projection
+  using only that fork text
+- `cumulative`: compare one fork document plus any later explicit updates to
+  the same older methods against the current YAML projection
 
-1. Verify the compared lines refer to the same semantic object.
-   Example: do not compare a request line to a response line.
-2. Verify the source-of-truth layer is correct.
-   For `Paris`, markdown wins over OpenRPC/docs.
-3. Verify the checker did not collapse a real distinction.
-   Example: distinguish `optional` from `nullable`.
-4. Verify the finding is static.
-   If it needs a client run, it belongs to a later phase.
-5. Verify the inconsistency is observable in the repository text.
-   If it depends on external assumptions, downgrade or drop it.
+The reviewer should choose the mode before interpreting a finding. A result
+that is a drift in `fork-local` mode may be acceptable in `cumulative` mode if
+later forks explicitly update the older method.
 
-## Common False-Positive Risks
+## Scope Boundary
 
-The main false-positive risks are:
+This method intentionally excludes:
 
-- comparing request and response lines by mistake
-- treating `field may be omitted` as equivalent to `field may be null`
-- assuming docs are normative when markdown or OpenRPC is the real source
-- reading markdown routine semantics into a checker that only compares
-  projection artifacts
-
-These are exactly why the current work is scoped to static inconsistency only.
-
-## Current Scope Boundary
-
-The current method intentionally excludes:
-
-- full parsing of markdown routines such as payload validation order
-- any claim about whether an EL client follows the spec
-- any stateful or multi-call behavior
-- any cross-client comparison
-
-Those belong to later fixture, state-machine, and differential-testing phases.
-
-## Practical Review Checklist
-
-When reviewing a candidate Paris finding, ask:
-
-1. Is there a concrete markdown/OpenRPC/docs line reference?
-2. Is the mismatch visible without running code?
-3. Is the semantic dimension one of:
-   - type
-   - nullability
-   - requiredness
-   - presence
-   - timeout metadata
-   - example fidelity
-4. Did we compare the right artifact layers?
-5. If docs are involved, can the mismatch be traced back either to:
-   - OpenRPC -> docs projection drift
-   - docs-only internal contradiction
-
-If all five are satisfied, the finding belongs in the static evidence set.
+- generated docs drift under `docs-api/api/`
+- internal YAML example-quality issues that do not contradict markdown
+- markdown method metadata such as timeout values that are not intended to be
+  represented in OpenRPC YAML
+- markdown-only routine rules with no direct YAML representation
+- any claim requiring client execution or multi-call state observation
