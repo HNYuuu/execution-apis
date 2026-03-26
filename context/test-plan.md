@@ -218,6 +218,59 @@ Current implementation:
   - top-level result nullability
   - static method error-code presence and absence
 
+## Phase 4: EL Differential Testing
+
+### Purpose
+
+Move from static spec consistency into live behavioral comparison across major
+execution clients while keeping the test environment highly controlled.
+
+### Testing target
+
+The primary target is `EL client Engine API server-side behavior`.
+
+The CL side is initially treated as a lightweight test driver rather than as a
+system under test.
+
+### Covered client set
+
+- `geth`
+- `nethermind`
+- `erigon`
+- `besu`
+- `reth`
+
+### Working model
+
+The first dynamic phase should avoid a naturally evolving multi-node network.
+Instead it should use:
+
+1. one isolated sandbox per EL client
+2. a state controller that pushes every EL client into the same abstract state
+3. a lightweight CL-side driver that replays the same Engine API sequence to
+   every client
+4. a normalizer and comparator for differential analysis
+
+### Spec input policy
+
+- OpenRPC YAML is used for request skeletons, shape validation, and method
+  discovery.
+- Fork-scoped markdown is used for semantic edge enrichment, high-value
+  mutations, and hard invariants.
+- YAML must not be treated as a complete oracle where the static review has
+  already shown markdown-only semantics.
+
+### Initial deliverables
+
+- harness MVP for at least two clients
+- deterministic state fixtures
+- fixed request-sequence scenarios
+- normalized differential comparison
+- first markdown-derived mutation library
+
+See `context/el-differential-testing-plan.md` for the concrete architecture and
+phase breakdown.
+
 ## Phase 4: Fixture-Level Conformance Tests
 
 ### Purpose

@@ -7,6 +7,9 @@ spec-review and test-planning work.
 
 - `test-plan.md`
   High-level roadmap from `Paris` through `Amsterdam`.
+- `el-differential-testing-plan.md`
+  Concrete plan for the next phase: lightweight CL-driven differential testing
+  across major EL clients.
 - `markdown-openrpc-static-check-method.md`
   Reusable method document for `markdown <-> OpenRPC YAML` static review.
 - `null-seed-inventory-paris-osaka.md`
@@ -45,11 +48,16 @@ spec-review and test-planning work.
   history, but superseded as a working snapshot.
 - `2026-03-25-pre-amsterdam-context.md`
   Historical restart point from immediately before the `Amsterdam` review.
+- `2026-03-26-differential-testing-context.md`
+  Current restart point after the static-review phase and at the beginning of
+  EL differential-testing planning.
 
 ## Suggested Reading Order
 
-1. `2026-03-25-pre-amsterdam-context.md`
-2. `test-plan.md`
-3. `markdown-openrpc-static-check-method.md`
-4. Fork evidence table for the fork you want to inspect
-5. `null-seed-inventory-paris-osaka.md` when preparing dynamic/null mutations
+1. `2026-03-26-differential-testing-context.md`
+2. `el-differential-testing-plan.md`
+3. `test-plan.md`
+4. `2026-03-25-pre-amsterdam-context.md`
+5. `markdown-openrpc-static-check-method.md`
+6. Fork evidence table for the fork you want to inspect
+7. `null-seed-inventory-paris-osaka.md` when preparing dynamic/null mutations
