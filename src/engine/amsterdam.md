@@ -9,33 +9,35 @@ This specification is based on and extends [Engine API - Osaka](./osaka.md) spec
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Structures](#structures)
-  - [ExecutionPayloadV4](#executionpayloadv4)
-  - [ExecutionPayloadBodyV2](#executionpayloadbodyv2)
-- [Methods](#methods)
-  - [engine_newPayloadV5](#engine_newpayloadv5)
-    - [Request](#request)
-    - [Response](#response)
-    - [Specification](#specification)
-  - [engine_getPayloadV6](#engine_getpayloadv6)
-    - [Request](#request-1)
-    - [Response](#response-1)
-    - [Specification](#specification-1)
-  - [engine_getPayloadBodiesByHashV2](#engine_getpayloadbodiesbyhashv2)
-    - [Request](#request-2)
-    - [Response](#response-2)
-    - [Specification](#specification-2)
-  - [engine_getPayloadBodiesByRangeV2](#engine_getpayloadbodiesbyrangev2)
-    - [Request](#request-3)
-    - [Response](#response-3)
-    - [Specification](#specification-3)
-  - [engine_forkchoiceUpdatedV4](#engine_forkchoiceupdatedv4)
-    - [Request](#request-4)
-    - [Response](#response-4)
-    - [Specification](#specification-4)
-  - [PayloadAttributesV4](#payloadattributesv4)
-  - [Update the methods of previous forks](#update-the-methods-of-previous-forks)
-    - [Osaka API](#osaka-api)
+- [Engine API -- Amsterdam](#engine-api----amsterdam)
+  - [Table of contents](#table-of-contents)
+  - [Structures](#structures)
+    - [ExecutionPayloadV4](#executionpayloadv4)
+    - [ExecutionPayloadBodyV2](#executionpayloadbodyv2)
+    - [PayloadAttributesV4](#payloadattributesv4)
+  - [Methods](#methods)
+    - [engine\_newPayloadV5](#engine_newpayloadv5)
+      - [Request](#request)
+      - [Response](#response)
+      - [Specification](#specification)
+    - [engine\_getPayloadV6](#engine_getpayloadv6)
+      - [Request](#request-1)
+      - [Response](#response-1)
+      - [Specification](#specification-1)
+    - [engine\_getPayloadBodiesByHashV2](#engine_getpayloadbodiesbyhashv2)
+      - [Request](#request-2)
+      - [Response](#response-2)
+      - [Specification](#specification-2)
+    - [engine\_getPayloadBodiesByRangeV2](#engine_getpayloadbodiesbyrangev2)
+      - [Request](#request-3)
+      - [Response](#response-3)
+      - [Specification](#specification-3)
+    - [engine\_forkchoiceUpdatedV4](#engine_forkchoiceupdatedv4)
+      - [Request](#request-4)
+      - [Response](#response-4)
+      - [Specification](#specification-4)
+    - [Update the methods of previous forks](#update-the-methods-of-previous-forks)
+      - [Osaka API](#osaka-api)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -72,6 +74,17 @@ This structure has the syntax of [`ExecutionPayloadBodyV1`](./shanghai.md#execut
 - `transactions`: `Array of DATA` - Array of transaction objects, each object is a byte list (`DATA`) representing `TransactionType || TransactionPayload` or `LegacyTransaction` as defined in [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718)
 - `withdrawals`: `Array of WithdrawalV1` - Array of withdrawals, each object is an `OBJECT` containing the fields of a `WithdrawalV1` structure. Value is `null` for blocks produced before Shanghai.
 - `blockAccessList`: `DATA|null` - RLP-encoded block access list as defined in [EIP-7928](https://eips.ethereum.org/EIPS/eip-7928). Value is `null` for blocks produced before Amsterdam or if the data has been pruned.
+
+### PayloadAttributesV4
+
+This structure has the syntax of [`PayloadAttributesV3`](./cancun.md#payloadattributesv3) and appends a single field: `slotNumber`.
+
+- `timestamp`: `QUANTITY`, 64 Bits - value for the `timestamp` field of the new payload
+- `prevRandao`: `DATA`, 32 Bytes - value for the `prevRandao` field of the new payload
+- `suggestedFeeRecipient`: `DATA`, 20 Bytes - suggested value for the `feeRecipient` field of the new payload
+- `withdrawals`: `Array of WithdrawalV1` - Array of withdrawals, each object is an `OBJECT` containing the fields of a `WithdrawalV1` structure.
+- `parentBeaconBlockRoot`: `DATA`, 32 Bytes - Root of the parent beacon block.
+- `slotNumber`: `QUANTITY`, 64 Bits - value for the `slotNumber` field of the new payload
 
 ## Methods
 
@@ -208,17 +221,6 @@ This method follows the same specification as [`engine_forkchoiceUpdatedV3`](./c
     3. `payloadAttributes.timestamp` is greater than `timestamp` of a block referenced by `forkchoiceState.headBlockHash`, return `-38003: Invalid payload attributes` on failure.
 
     4. If any of the above checks fails, the `forkchoiceState` update **MUST NOT** be rolled back.
-
-### PayloadAttributesV4
-
-This structure has the syntax of [`PayloadAttributesV3`](./cancun.md#payloadattributesv3) and appends a single field: `slotNumber`.
-
-- `timestamp`: `QUANTITY`, 64 Bits - value for the `timestamp` field of the new payload
-- `prevRandao`: `DATA`, 32 Bytes - value for the `prevRandao` field of the new payload
-- `suggestedFeeRecipient`: `DATA`, 20 Bytes - suggested value for the `feeRecipient` field of the new payload
-- `withdrawals`: `Array of WithdrawalV1` - Array of withdrawals, each object is an `OBJECT` containing the fields of a `WithdrawalV1` structure.
-- `parentBeaconBlockRoot`: `DATA`, 32 Bytes - Root of the parent beacon block.
-- `slotNumber`: `QUANTITY`, 64 Bits - value for the `slotNumber` field of the new payload
 
 ### Update the methods of previous forks
 
