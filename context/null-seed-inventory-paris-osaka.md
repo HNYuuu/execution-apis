@@ -1,9 +1,9 @@
-# Null Seed Inventory: Paris to Osaka
+# Null Seed Inventory: Paris to Amsterdam
 
 ## Purpose
 
 This document collects all `null`-related semantics that surfaced during the
-`Paris -> Shanghai -> Cancun -> Prague -> Osaka` review passes.
+`Paris -> Shanghai -> Cancun -> Prague -> Osaka -> Amsterdam` review passes.
 
 It is intentionally broader than the static evidence tables:
 
@@ -100,6 +100,32 @@ It is intentionally broader than the static evidence tables:
   `array<BlobAndProofV2 | null> | null`.
   Classification: correctly projected, but an important dynamic seed family.
   Dynamic seeds: `[A, null, C]`, all-`null` arrays of matching length, and top-level `null` while generally unable to serve blob data.
+
+## Amsterdam
+
+- `ExecutionPayloadBodyV2.blockAccessList` is `DATA|null` in [amsterdam.md#L74](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L74), with explicit rules that it **MUST** be `null` for pre-Amsterdam blocks and for pruned access lists in [amsterdam.md#L155](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L155) and [amsterdam.md#L180](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L180).
+  Current YAML in [payload.yaml#L340](/Users/ningyuhe/Documents/execution-apis/src/engine/openrpc/schemas/payload.yaml#L340) correctly models `blockAccessList` as `bytes | null`.
+  Classification: correctly projected, but a high-value dynamic-test seed.
+  Dynamic seeds: pre-Amsterdam body with `blockAccessList: null`, post-Amsterdam body with non-null access list, and pruned body with `blockAccessList: null`.
+
+- `engine_getPayloadBodiesByHashV2` says the result is an array of `ExecutionPayloadBodyV2` objects or `null` for unavailable blocks in [amsterdam.md#L148](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L148).
+  Current YAML in [payload.yaml#L903](/Users/ningyuhe/Documents/execution-apis/src/engine/openrpc/methods/payload.yaml#L903) projects the result as an array of `ExecutionPayloadBodyV2` items.
+  Classification: not currently counted as a static bug under the active object-ref convention.
+  Dynamic seeds: request one known block and one unavailable block, verify positional `null`, and distinguish `body.blockAccessList: null` from an entirely `null` array entry.
+
+- `engine_getPayloadBodiesByRangeV2` says the result is an array of `ExecutionPayloadBodyV2` objects or `null` for unavailable blocks in [amsterdam.md#L173](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L173).
+  Current YAML in [payload.yaml#L952](/Users/ningyuhe/Documents/execution-apis/src/engine/openrpc/methods/payload.yaml#L952) projects the result as an array of `ExecutionPayloadBodyV2` items.
+  Classification: not currently counted as a static bug under the active object-ref convention.
+  Dynamic seeds: sparse positional `null`s, truncated arrays with no trailing `null`, and mixtures of available bodies whose internal `blockAccessList` is `null` because of pre-fork or pruning conditions.
+
+- `engine_forkchoiceUpdatedV4.payloadAttributes` is `Object|null` in [amsterdam.md#L191](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L191).
+  Current YAML in [forkchoice.yaml#L166](/Users/ningyuhe/Documents/execution-apis/src/engine/openrpc/methods/forkchoice.yaml#L166) models it as `required: false`.
+  Classification: accepted projection under the current convention.
+  Dynamic seeds: explicit `null`, omitted parameter, structurally valid `PayloadAttributesV4`, and near-boundary timestamps around Amsterdam activation combined with `slotNumber`.
+
+- `engine_newPayloadV5` introduces a new invalid branch tied to `blockAccessList` validation, and on failure **MUST** return `{status: INVALID, latestValidHash: null, validationError: errorMessage | null}` in [amsterdam.md#L103](/Users/ningyuhe/Documents/execution-apis/src/engine/amsterdam.md#L103).
+  Classification: inherited null-bearing status behavior with a new Amsterdam-specific trigger.
+  Dynamic seeds: valid payload with mismatching `blockAccessList`, missing `blockAccessList`, and malformed RLP-encoded access lists to distinguish `INVALID` status from `-32602`.
 
 ## Recommended Mutation Families
 

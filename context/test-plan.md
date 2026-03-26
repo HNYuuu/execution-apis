@@ -208,7 +208,7 @@ Current implementation:
 - Method metadata such as markdown timeout annotations is currently treated as
   out of scope for the Markdown/OpenRPC inconsistency checker unless the
   repository establishes that such metadata must be represented in YAML.
-- Current implemented coverage now spans `Paris -> Osaka`.
+- Current implemented coverage now spans `Paris -> Amsterdam`.
 - The checker currently supports both `fork-local` and `cumulative` review
   modes.
 - Current implemented rule coverage targets:

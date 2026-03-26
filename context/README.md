@@ -11,7 +11,7 @@ spec-review and test-planning work.
   Reusable method document for `markdown <-> OpenRPC YAML` static review.
 - `null-seed-inventory-paris-osaka.md`
   Consolidated `null`-semantics seed list collected from `Paris` through
-  `Osaka`, including both confirmed static issues and deferred dynamic-test
+  `Amsterdam`, including both confirmed static issues and deferred dynamic-test
   mutations.
 
 ## Fork Evidence Tables
@@ -28,6 +28,9 @@ spec-review and test-planning work.
   `fork-local` mode.
 - `osaka-static-evidence-table.md`
   `Osaka` static review result. Current status: `1` confirmed finding.
+- `amsterdam-static-evidence-table.md`
+  `Amsterdam` static review result. Current status: `1` confirmed finding in
+  `fork-local` mode.
 
 ## Rule Inventory
 
@@ -41,7 +44,7 @@ spec-review and test-planning work.
   Historical snapshot from the early `Paris`-only phase. Kept for audit
   history, but superseded as a working snapshot.
 - `2026-03-25-pre-amsterdam-context.md`
-  Current restart point before beginning the `Amsterdam` review.
+  Historical restart point from immediately before the `Amsterdam` review.
 
 ## Suggested Reading Order
 

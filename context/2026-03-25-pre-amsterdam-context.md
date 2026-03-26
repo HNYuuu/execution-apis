@@ -1,11 +1,20 @@
 # 2026-03-25 Pre-Amsterdam Context
 
+## Supersession Note
+
+This file remains useful as the checkpoint immediately before `Amsterdam`
+review began, but it is no longer the latest fork-status summary.
+
+For the current `Amsterdam` result, see:
+
+- `context/amsterdam-static-evidence-table.md`
+
 ## Purpose
 
 This is the current restart point before beginning the `Amsterdam` static
 review pass.
 
-Use this file first when resuming the work.
+Use this file to recover the state immediately before `Amsterdam` work began.
 
 ## Current Scope
 
