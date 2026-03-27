@@ -6,7 +6,7 @@ This document decomposes the `Paris` Engine API spec into atomic, testable
 rules. It is the durable `Paris` rule inventory and the bridge from descriptive
 spec reading to executable checks. Under the current review conventions,
 `Paris` has no confirmed `markdown <-> OpenRPC YAML` static findings; see
-`context/paris-static-evidence-table.md`.
+`context/evidence/paris-static-evidence-table.md`.
 
 Each rule is tagged with:
 

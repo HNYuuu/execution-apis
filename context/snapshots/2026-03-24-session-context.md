@@ -8,11 +8,11 @@ particular, nullable object fields are now treated as correctly projected when
 they are omitted from `required`, and generated-doc drift is no longer part of
 the primary findings surface. Markdown timeout annotations are also no longer
 treated as YAML projection bugs. Use
-`context/paris-static-evidence-table.md`,
-`context/markdown-openrpc-static-check-method.md`, and current
+`context/evidence/paris-static-evidence-table.md`,
+`context/methods/markdown-openrpc-static-check-method.md`, and current
 `npm run engine:static-check -- --fork paris` output as the authoritative
 current state. For the current pre-`Amsterdam` restart point, use
-`context/2026-03-25-pre-amsterdam-context.md` instead of this file.
+`context/snapshots/2026-03-25-pre-amsterdam-context.md` instead of this file.
 
 ## Purpose
 
@@ -74,10 +74,10 @@ The `context/` directory was reduced to a minimal durable set.
 
 Kept:
 
-- `context/test-plan.md`
-- `context/markdown-openrpc-static-check-method.md`
-- `context/paris-atomic-rules.md`
-- `context/paris-static-evidence-table.md`
+- `context/plans/test-plan.md`
+- `context/methods/markdown-openrpc-static-check-method.md`
+- `context/rules/paris-atomic-rules.md`
+- `context/evidence/paris-static-evidence-table.md`
 
 Deleted as redundant intermediate artifacts:
 
@@ -92,7 +92,7 @@ Reason:
 
 ## Durable Context Files And Their Roles
 
-### `context/test-plan.md`
+### `context/plans/test-plan.md`
 
 The persistent cross-fork plan.
 
@@ -102,7 +102,7 @@ Use this file for:
 - phase ordering
 - cross-fork work planning
 
-### `context/markdown-openrpc-static-check-method.md`
+### `context/methods/markdown-openrpc-static-check-method.md`
 
 The reusable method document for finding static inconsistencies.
 
@@ -112,7 +112,7 @@ Use this file for:
 - what counts as a static inconsistency
 - manual false-positive review procedure
 
-### `context/paris-atomic-rules.md`
+### `context/rules/paris-atomic-rules.md`
 
 The durable `Paris` rule inventory.
 
@@ -122,7 +122,7 @@ Use this file for:
 - static vs single-call vs stateful tagging
 - template for future fork inventories
 
-### `context/paris-static-evidence-table.md`
+### `context/evidence/paris-static-evidence-table.md`
 
 The detailed evidence table for current `Paris` static findings.
 
@@ -205,10 +205,10 @@ to:
 The following files are intended to remain as the durable working set for this
 phase:
 
-- `context/test-plan.md`
-- `context/markdown-openrpc-static-check-method.md`
-- `context/paris-atomic-rules.md`
-- `context/paris-static-evidence-table.md`
+- `context/plans/test-plan.md`
+- `context/methods/markdown-openrpc-static-check-method.md`
+- `context/rules/paris-atomic-rules.md`
+- `context/evidence/paris-static-evidence-table.md`
 - `scripts/engine-static-check.js`
 - `scripts/engine-static-check-data.js`
 
@@ -221,7 +221,7 @@ If work resumes from this point, the most natural next steps are:
 1. keep deepening `Paris` only if a new static inconsistency class is found
 2. otherwise start porting the same method to `Shanghai`
 3. reuse:
-   - `context/markdown-openrpc-static-check-method.md`
+   - `context/methods/markdown-openrpc-static-check-method.md`
    - `scripts/engine-static-check.js`
    - `scripts/engine-static-check-data.js`
 4. create the `Shanghai` equivalents of:
@@ -239,6 +239,6 @@ npm run engine:static-check -- --fork paris
 
 Then use:
 
-- `context/paris-static-evidence-table.md` for review
-- `context/markdown-openrpc-static-check-method.md` for method
-- `context/test-plan.md` for cross-fork planning
+- `context/evidence/paris-static-evidence-table.md` for review
+- `context/methods/markdown-openrpc-static-check-method.md` for method
+- `context/plans/test-plan.md` for cross-fork planning

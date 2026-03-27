@@ -86,30 +86,52 @@ valid CL-side peer. It does not need to implement full CL behavior.
 
 ## State Model
 
-Testing should be organized around abstract observable states rather than client
-internal implementation states.
+Testing should be organized around `test precondition families`, not around
+claimed EL-internal implementation states.
 
-Initial state families:
+These precondition families are externally defined and externally observable.
+They exist to answer one question:
 
-- `S0 bootstrap`
-  Fresh process, known genesis, no useful Engine API history.
-- `S1 imported-chain`
-  Client has imported a fixed prebuilt chain and knows a stable head.
-- `S2 forkchoice-known`
-  Client has received a valid `engine_forkchoiceUpdated*` and exposes a known
-  forkchoice context.
-- `S3 build-started`
-  Client has started payload building and returned a `payloadId`.
-- `S4 payload-available`
-  Client can answer `engine_getPayload*` for a known `payloadId`.
-- `S5 payload-imported`
-  Client has accepted at least one payload via `engine_newPayload*`.
-- `S6 degraded-data`
-  Client is in a state with missing bodies, missing blobs, or other
-  intentionally incomplete data.
-- `S7 fork-boundary`
-  Client is configured close to or across a fork boundary relevant to the
-  method under test.
+- what conditions must hold so that a given Engine API request family becomes
+  meaningful and comparable across clients?
+
+The first implementation should use these six state families only.
+
+### B0 bootstrap
+
+- fresh process
+- known genesis and fork schedule
+- no useful Engine API history
+- no active payload build process
+
+### B1 chain-known
+
+- client has imported a deterministic fixed chain
+- client knows a stable canonical head
+- block hashes and block numbers used by tests are valid and reproducible
+
+### B2 forkchoice-established
+
+- client has successfully processed at least one valid
+  `engine_forkchoiceUpdated*`
+- the harness knows the exact forkchoice inputs used to establish the state
+
+### B3 build-session-open
+
+- client has started a build process
+- a valid `payloadId` has been returned
+- the harness retains that exact `payloadId`
+
+### B4 payload-processed
+
+- at least one payload has already been submitted via `engine_newPayload*`
+- the harness knows which payload was submitted and what response was returned
+
+### B5 incomplete-data
+
+- client is intentionally placed in a state where some relevant data is absent
+- examples: missing block bodies, missing blobs, missing proofs, or historical
+  gaps
 
 These states should be defined externally and reproducibly, not by inspecting
 private client internals.
@@ -131,6 +153,11 @@ The state controller should always record:
 - what request sequence was replayed
 - what state checkpoint was expected
 - what observable evidence confirms state alignment
+
+Every usable state family must therefore have both:
+
+- a reproducible setup recipe
+- an observable confirmation rule
 
 ## Specification Inputs
 
@@ -234,6 +261,27 @@ Examples:
 - missing blobs
 - old-version blob/proof availability cases
 
+## Why We Do Not Use The Full Cross Product
+
+We should not run:
+
+- every state family
+- times every method
+- times every method version
+- times every parameter possibility
+
+Reasons:
+
+1. most combinations are not semantically meaningful
+2. parameter space is effectively unbounded
+3. many combinations only repeat the same branch, such as repeated `Unknown
+   payload` outcomes
+4. stateful methods are better covered by a few high-value sequences than by a
+   huge bag of disconnected one-shot calls
+
+So coverage must be guided by `state-method applicability`, not by raw
+Cartesian enumeration.
+
 ## Method Prioritization
 
 Start with the methods that matter most for CL/EL interaction and downstream
@@ -255,6 +303,70 @@ Priority tier 3:
 
 - `engine_exchangeCapabilities`
 - `engine_exchangeTransitionConfigurationV1`
+
+## State-Method Applicability Matrix
+
+The first MVP should follow this matrix.
+
+Legend:
+
+- `skip`: not worth targeting in this state for the MVP
+- `basic`: include a small number of sanity and invalid-input cases
+- `focus`: high-priority coverage for this state
+
+| State | exchange* | forkchoiceUpdated* | getPayload* | newPayload* | getPayloadBodies* | getBlobs* |
+|---|---|---|---|---|---|---|
+| `B0 bootstrap` | `basic` | `basic` | `basic` | `basic` | `skip` | `skip` |
+| `B1 chain-known` | `skip` | `basic` | `skip` | `basic` | `focus` | `basic` |
+| `B2 forkchoice-established` | `skip` | `focus` | `basic` | `basic` | `skip` | `skip` |
+| `B3 build-session-open` | `skip` | `basic` | `focus` | `basic` | `skip` | `skip` |
+| `B4 payload-processed` | `skip` | `focus` | `basic` | `focus` | `skip` | `skip` |
+| `B5 incomplete-data` | `skip` | `basic` | `basic` | `basic` | `focus` | `focus` |
+
+## Recommended Parameter Classes Per Method Family
+
+### engine_forkchoiceUpdated*
+
+- valid forkchoice with no payload build request
+- valid forkchoice with payload build request
+- repeated same forkchoice
+- unknown head block hash
+- inconsistent safe/finalized relation
+- fork-sensitive payloadAttributes variation
+- null-sensitive `payloadAttributes`
+
+### engine_getPayload*
+
+- known valid `payloadId`
+- unknown `payloadId`
+- stale or expired `payloadId` if observable
+- fork-version-specific payload schema checks
+
+### engine_newPayload*
+
+- well-formed valid payload
+- malformed payload shape
+- wrong fork-version payload
+- markdown-derived boundary values
+- markdown-derived error or invalidity branches
+
+### engine_getPayloadBodiesByHash* and engine_getPayloadBodiesByRange*
+
+- known existing blocks
+- unknown blocks
+- partially unavailable history
+- range-size boundary
+- invalid `start` / `count`
+- null-position semantics
+
+### engine_getBlobs*
+
+- all blobs available
+- some blobs missing
+- all blobs missing
+- too-large request
+- versioned-hash ordering cases
+- top-level null vs positional-null cases where fork-specific
 
 ## Client Coverage Plan
 
@@ -293,7 +405,7 @@ Deliver:
 
 Deliver:
 
-- reproducible state fixtures `S0` to `S5`
+- reproducible state fixtures `B0` to `B5`
 - deterministic chain/import setup
 - checkpoint and reset support
 
@@ -328,9 +440,53 @@ these minimum requirements:
 
 - support `geth` and `reth`
 - support one fork first, preferably `Paris` or `Shanghai`
+- support state families `B0`, `B2`, `B3`, and `B4` first
 - support one deterministic sequence:
   `forkchoiceUpdated -> getPayload -> newPayload`
 - support one boundary sequence based on a markdown-derived invariant
+
+## Client-Specific State Controller Handoff
+
+The first client-specific implementation task, such as `geth`, should not try
+to solve the whole differential-testing stack. It should only solve the state
+controller slice.
+
+Required deliverables for a client-specific state controller:
+
+1. A repeatable way to launch isolated client instances with:
+   - deterministic datadir
+   - deterministic genesis
+   - Engine API enabled
+   - JWT-based auth ready for the test driver
+2. A repeatable way to prepare the client for:
+   - `B0 bootstrap`
+   - `B1 chain-known`
+   - `B2 forkchoice-established`
+   - `B3 build-session-open`
+   - `B4 payload-processed`
+3. For each state family above:
+   - exact setup recipe
+   - exact request sequence used to enter the state
+   - exact observable evidence that the state has been reached
+4. A reset strategy:
+   - either destroy and recreate the instance
+   - or restore from a known clean checkpoint
+
+Non-goals for that subtask:
+
+- implementing the full multi-client comparator
+- defining cross-client normalization policy
+- generating all semantic mutations
+
+For every client-specific implementation, require this output shape:
+
+- `state_family`
+- `supported_forks`
+- `setup_inputs`
+- `setup_steps`
+- `observable_confirmation`
+- `known_limitations`
+- `reset_strategy`
 
 ## Relationship To The Completed Static Review
 

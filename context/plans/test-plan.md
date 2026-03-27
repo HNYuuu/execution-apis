@@ -268,7 +268,7 @@ Instead it should use:
 - normalized differential comparison
 - first markdown-derived mutation library
 
-See `context/el-differential-testing-plan.md` for the concrete architecture and
+See `context/plans/el-differential-testing-plan.md` for the concrete architecture and
 phase breakdown.
 
 ## Phase 4: Fixture-Level Conformance Tests

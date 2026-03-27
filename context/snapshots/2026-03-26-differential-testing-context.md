@@ -152,22 +152,22 @@ Recommended rollout order:
 
 Primary planning documents:
 
-- `context/test-plan.md`
-- `context/el-differential-testing-plan.md`
+- `context/plans/test-plan.md`
+- `context/plans/el-differential-testing-plan.md`
 
 Static-review method and findings:
 
-- `context/markdown-openrpc-static-check-method.md`
-- `context/paris-static-evidence-table.md`
-- `context/shanghai-static-evidence-table.md`
-- `context/cancun-static-evidence-table.md`
-- `context/prague-static-evidence-table.md`
-- `context/osaka-static-evidence-table.md`
-- `context/amsterdam-static-evidence-table.md`
+- `context/methods/markdown-openrpc-static-check-method.md`
+- `context/evidence/paris-static-evidence-table.md`
+- `context/evidence/shanghai-static-evidence-table.md`
+- `context/evidence/cancun-static-evidence-table.md`
+- `context/evidence/prague-static-evidence-table.md`
+- `context/evidence/osaka-static-evidence-table.md`
+- `context/evidence/amsterdam-static-evidence-table.md`
 
 Dynamic seed inventory:
 
-- `context/null-seed-inventory-paris-osaka.md`
+- `context/seeds/null-seed-inventory-paris-amsterdam.md`
 
 ## Current Branch And Working State
 
@@ -194,7 +194,7 @@ scope:
 
 ## Short Reading Order
 
-1. `context/2026-03-26-differential-testing-context.md`
-2. `context/el-differential-testing-plan.md`
-3. `context/test-plan.md`
-4. `context/null-seed-inventory-paris-osaka.md`
+1. `context/snapshots/2026-03-26-differential-testing-context.md`
+2. `context/plans/el-differential-testing-plan.md`
+3. `context/plans/test-plan.md`
+4. `context/seeds/null-seed-inventory-paris-amsterdam.md`

@@ -1,63 +1,73 @@
 # Context Index
 
-This directory holds the durable working context for the `Engine API`
-spec-review and test-planning work.
+This directory holds durable working context for the `Engine API` spec-review
+and EL differential-testing work.
 
-## Shared Documents
+Top level is now intentionally small. Detailed material is grouped by purpose.
 
-- `test-plan.md`
-  High-level roadmap from `Paris` through `Amsterdam`.
-- `el-differential-testing-plan.md`
-  Concrete plan for the next phase: lightweight CL-driven differential testing
-  across major EL clients.
-- `markdown-openrpc-static-check-method.md`
-  Reusable method document for `markdown <-> OpenRPC YAML` static review.
-- `null-seed-inventory-paris-osaka.md`
-  Consolidated `null`-semantics seed list collected from `Paris` through
-  `Amsterdam`, including both confirmed static issues and deferred dynamic-test
-  mutations.
+## Layout
 
-## Fork Evidence Tables
+- `plans/`
+  Active planning documents.
+- `evidence/`
+  Fork-by-fork static-review results.
+- `methods/`
+  Reusable review methodology documents.
+- `seeds/`
+  Dynamic-test seed inventories.
+- `rules/`
+  Detailed rule inventories and decompositions.
+- `snapshots/`
+  Historical restart points and session summaries.
 
-- `paris-static-evidence-table.md`
-  `Paris` static review result. Current status: `0` confirmed findings.
-- `shanghai-static-evidence-table.md`
-  `Shanghai` static review result. Current status: `2` confirmed findings.
-- `cancun-static-evidence-table.md`
-  `Cancun` static review result. Current status: `1` issue group / `3`
-  findings.
-- `prague-static-evidence-table.md`
-  `Prague` static review result. Current status: `0` confirmed findings in
-  `fork-local` mode.
-- `osaka-static-evidence-table.md`
-  `Osaka` static review result. Current status: `1` confirmed finding.
-- `amsterdam-static-evidence-table.md`
-  `Amsterdam` static review result. Current status: `1` confirmed finding in
-  `fork-local` mode.
+## Start Here
 
-## Rule Inventory
+Read in this order:
 
-- `paris-atomic-rules.md`
-  Detailed atomic rule decomposition for `Paris`. This remains the template for
-  later fork-specific rule inventories.
+1. `snapshots/2026-03-26-differential-testing-context.md`
+2. `plans/el-differential-testing-plan.md`
+3. `plans/test-plan.md`
 
-## Session Snapshots
+Then pick one branch:
 
-- `2026-03-24-session-context.md`
-  Historical snapshot from the early `Paris`-only phase. Kept for audit
-  history, but superseded as a working snapshot.
-- `2026-03-25-pre-amsterdam-context.md`
-  Historical restart point from immediately before the `Amsterdam` review.
-- `2026-03-26-differential-testing-context.md`
-  Current restart point after the static-review phase and at the beginning of
-  EL differential-testing planning.
+- Static review method:
+  `methods/markdown-openrpc-static-check-method.md`
+- Dynamic null and edge seeds:
+  `seeds/null-seed-inventory-paris-amsterdam.md`
+- Fork-specific static evidence:
+  any file under `evidence/`
 
-## Suggested Reading Order
+## Key Files
 
-1. `2026-03-26-differential-testing-context.md`
-2. `el-differential-testing-plan.md`
-3. `test-plan.md`
-4. `2026-03-25-pre-amsterdam-context.md`
-5. `markdown-openrpc-static-check-method.md`
-6. Fork evidence table for the fork you want to inspect
-7. `null-seed-inventory-paris-osaka.md` when preparing dynamic/null mutations
+- `plans/test-plan.md`
+  Cross-fork roadmap from `Paris` through `Amsterdam`.
+- `plans/el-differential-testing-plan.md`
+  Current execution-facing plan for the EL differential-testing phase.
+- `methods/markdown-openrpc-static-check-method.md`
+  Reusable method for markdown vs OpenRPC static review.
+- `seeds/null-seed-inventory-paris-amsterdam.md`
+  Consolidated null-semantics and dynamic-mutation seed list.
+- `rules/paris-atomic-rules.md`
+  Most detailed current rule inventory template.
+
+## Evidence Status
+
+- `evidence/paris-static-evidence-table.md`
+  `Paris`: `0` confirmed findings.
+- `evidence/shanghai-static-evidence-table.md`
+  `Shanghai`: `2` confirmed findings.
+- `evidence/cancun-static-evidence-table.md`
+  `Cancun`: `1` issue group / `3` findings.
+- `evidence/prague-static-evidence-table.md`
+  `Prague`: `0` confirmed findings in `fork-local` mode.
+- `evidence/osaka-static-evidence-table.md`
+  `Osaka`: `1` confirmed finding.
+- `evidence/amsterdam-static-evidence-table.md`
+  `Amsterdam`: `1` confirmed finding in `fork-local` mode.
+
+## Historical Notes
+
+Older snapshots are kept under `snapshots/` for auditability, but new work
+should normally start from:
+
+- `snapshots/2026-03-26-differential-testing-context.md`

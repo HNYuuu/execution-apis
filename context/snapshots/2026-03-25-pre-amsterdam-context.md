@@ -7,7 +7,7 @@ review began, but it is no longer the latest fork-status summary.
 
 For the current `Amsterdam` result, see:
 
-- `context/amsterdam-static-evidence-table.md`
+- `context/evidence/amsterdam-static-evidence-table.md`
 
 ## Purpose
 
@@ -68,26 +68,26 @@ Supported review modes:
 
 - `Paris`
   - status: `0` findings
-  - evidence: `context/paris-static-evidence-table.md`
+  - evidence: `context/evidence/paris-static-evidence-table.md`
 - `Shanghai`
   - status: `2` findings
-  - evidence: `context/shanghai-static-evidence-table.md`
+  - evidence: `context/evidence/shanghai-static-evidence-table.md`
   - current findings:
     - `engine_forkchoiceUpdatedV2` missing `PayloadAttributesV1` in the method
       union
     - `engine_getPayloadBodiesByRangeV1` missing `-32602`
 - `Cancun`
   - status: `1` issue group / `3` findings
-  - evidence: `context/cancun-static-evidence-table.md`
+  - evidence: `context/evidence/cancun-static-evidence-table.md`
   - current findings:
     - `engine_newPayloadV2`, `engine_forkchoiceUpdatedV2`, and
       `engine_getPayloadV2` omit required `-38005`
 - `Prague`
   - status: `0` findings in `fork-local` mode
-  - evidence: `context/prague-static-evidence-table.md`
+  - evidence: `context/evidence/prague-static-evidence-table.md`
 - `Osaka`
   - status: `1` finding
-  - evidence: `context/osaka-static-evidence-table.md`
+  - evidence: `context/evidence/osaka-static-evidence-table.md`
   - current finding:
     - `engine_getBlobsV2` drops the top-level `result: null` branch in methods
       YAML
@@ -96,7 +96,7 @@ Supported review modes:
 
 The current `null`-focused seed list is:
 
-- `context/null-seed-inventory-paris-osaka.md`
+- `context/seeds/null-seed-inventory-paris-amsterdam.md`
 
 This document includes:
 
