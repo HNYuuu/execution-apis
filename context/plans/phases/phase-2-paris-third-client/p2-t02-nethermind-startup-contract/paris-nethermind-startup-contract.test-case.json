@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-T02",
+  "expected_clients": [
+    "geth",
+    "reth",
+    "nethermind"
+  ],
+  "expected_acquisition_mode": "build_hive_wrapper",
+  "expected_target_wrapper_image": "hive/clients/nethermind:latest",
+  "expected_baseimage": "nethermindeth/nethermind",
+  "expected_tag": "master",
+  "expected_http_port": 8545,
+  "expected_authrpc_port": 8551,
+  "expected_jwt_secret_file": "/jwt.secret",
+  "expected_blocker_ids": [
+    "P2-T02-B01"
+  ]
+}

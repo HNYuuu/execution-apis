@@ -1,0 +1,181 @@
+{
+  "task_id": "P2-T02",
+  "generated_at": "2026-04-01T14:38:03.290Z",
+  "status": "pass",
+  "inputs": {
+    "config_file": "context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.config.json",
+    "test_case_file": "context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.test-case.json",
+    "nethermind_sources": {
+      "dockerfile": "/tmp/hive/clients/nethermind/Dockerfile",
+      "startup_script": "/tmp/hive/clients/nethermind/nethermind.sh",
+      "generated_config_script": "/tmp/hive/clients/nethermind/mkconfig.jq"
+    },
+    "phase1_parity_sources": {
+      "geth_startup_script": "/tmp/hive/clients/go-ethereum/geth.sh",
+      "reth_startup_script": "/tmp/hive/clients/reth/reth.sh",
+      "phase1_hive_memo": "context/plans/t05-hive-reality-check/paris-hive-integration-memo.md"
+    }
+  },
+  "summary": {
+    "target_client": "nethermind",
+    "acquisition_mode": "build_hive_wrapper",
+    "target_wrapper_image": "hive/clients/nethermind:latest",
+    "blocker_count": 1,
+    "parity_client_count": 3
+  },
+  "validations": [
+    {
+      "check": "nethermind Hive wrapper source files exist locally",
+      "status": "pass",
+      "details": [
+        {
+          "label": "Hive Nethermind Dockerfile",
+          "path": "/tmp/hive/clients/nethermind/Dockerfile"
+        },
+        {
+          "label": "Hive Nethermind startup script",
+          "path": "/tmp/hive/clients/nethermind/nethermind.sh"
+        },
+        {
+          "label": "Hive Nethermind config generator",
+          "path": "/tmp/hive/clients/nethermind/mkconfig.jq"
+        },
+        {
+          "label": "Hive geth startup script",
+          "path": "/tmp/hive/clients/go-ethereum/geth.sh"
+        },
+        {
+          "label": "Hive reth startup script",
+          "path": "/tmp/hive/clients/reth/reth.sh"
+        }
+      ]
+    },
+    {
+      "check": "nethermind startup contract is concrete about acquisition path, JWT, ports, and config generation",
+      "status": "pass",
+      "details": {
+        "acquisition_contract": {
+          "mode": "build_hive_wrapper",
+          "hive_client_name": "nethermind",
+          "source_dir": "/tmp/hive/clients/nethermind",
+          "target_wrapper_image": "hive/clients/nethermind:latest",
+          "build_args": {
+            "baseimage": "nethermindeth/nethermind",
+            "tag": "master"
+          },
+          "recommended_invocation": "./hive --sim ethereum/engine --client nethermind"
+        },
+        "nethermind_runtime_contract": {
+          "entrypoint": "/nethermind.sh",
+          "generated_chainspec_path": "/chainspec/test.json",
+          "generated_runtime_config_path": "/configs/test.json",
+          "http_port": 8545,
+          "ws_port": 8546,
+          "unauthenticated_engine_port": 8550,
+          "authrpc_port": 8551,
+          "jwt_secret_file": "/jwt.secret",
+          "bootnode_file": "/nethermind/static-nodes.json",
+          "chain_import_mode": "generated-config-driven-via-Hive-section",
+          "readiness_port": 8545
+        }
+      }
+    },
+    {
+      "check": "geth/reth parity notes are explicit enough to prevent startup differences from being misclassified as Engine-API discrepancies",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "jwt_secret_file": "/jwtsecret",
+          "chain_import_mode": "shell-driven-geth-import",
+          "authrpc_mode": "command-line-flags",
+          "runtime_readiness_port": 8545
+        },
+        {
+          "client": "reth",
+          "jwt_secret_file": "/jwt.secret",
+          "chain_import_mode": "shell-driven-reth-import",
+          "authrpc_mode": "command-line-flags",
+          "runtime_readiness_port": 8545
+        },
+        {
+          "client": "nethermind",
+          "jwt_secret_file": "/jwt.secret",
+          "chain_import_mode": "generated-config-driven-via-Hive-section",
+          "authrpc_mode": "generated-config",
+          "runtime_readiness_port": 8545
+        }
+      ]
+    },
+    {
+      "check": "phase-2 blocker list is explicit rather than implicit",
+      "status": "pass",
+      "details": [
+        {
+          "id": "P2-T02-B01",
+          "title": "Local Hive wrapper image is not built yet",
+          "details": "docker image inspect hive/clients/nethermind:latest returned 'No such image'. Build or let Hive build the wrapper in P2-T03 before runtime tests."
+        }
+      ]
+    }
+  ],
+  "startup_contract": {
+    "acquisition_contract": {
+      "mode": "build_hive_wrapper",
+      "hive_client_name": "nethermind",
+      "source_dir": "/tmp/hive/clients/nethermind",
+      "target_wrapper_image": "hive/clients/nethermind:latest",
+      "build_args": {
+        "baseimage": "nethermindeth/nethermind",
+        "tag": "master"
+      },
+      "recommended_invocation": "./hive --sim ethereum/engine --client nethermind"
+    },
+    "nethermind_runtime_contract": {
+      "entrypoint": "/nethermind.sh",
+      "generated_chainspec_path": "/chainspec/test.json",
+      "generated_runtime_config_path": "/configs/test.json",
+      "http_port": 8545,
+      "ws_port": 8546,
+      "unauthenticated_engine_port": 8550,
+      "authrpc_port": 8551,
+      "jwt_secret_file": "/jwt.secret",
+      "bootnode_file": "/nethermind/static-nodes.json",
+      "chain_import_mode": "generated-config-driven-via-Hive-section",
+      "readiness_port": 8545
+    },
+    "parity_notes": [
+      {
+        "client": "geth",
+        "jwt_secret_file": "/jwtsecret",
+        "chain_import_mode": "shell-driven-geth-import",
+        "authrpc_mode": "command-line-flags",
+        "runtime_readiness_port": 8545,
+        "note": "geth imports genesis and chain explicitly in the shell script, then exposes authrpc on 8551 with /jwtsecret."
+      },
+      {
+        "client": "reth",
+        "jwt_secret_file": "/jwt.secret",
+        "chain_import_mode": "shell-driven-reth-import",
+        "authrpc_mode": "command-line-flags",
+        "runtime_readiness_port": 8545,
+        "note": "reth imports genesis and chain explicitly in the shell script, then exposes authrpc through --authrpc.jwtsecret=/jwt.secret."
+      },
+      {
+        "client": "nethermind",
+        "jwt_secret_file": "/jwt.secret",
+        "chain_import_mode": "generated-config-driven-via-Hive-section",
+        "authrpc_mode": "generated-config",
+        "runtime_readiness_port": 8545,
+        "note": "nethermind generates /configs/test.json from mkconfig.jq, and the generated JsonRpc section opens 8551 with JwtSecretFile=/jwt.secret."
+      }
+    ],
+    "explicit_blockers": [
+      {
+        "id": "P2-T02-B01",
+        "title": "Local Hive wrapper image is not built yet",
+        "details": "docker image inspect hive/clients/nethermind:latest returned 'No such image'. Build or let Hive build the wrapper in P2-T03 before runtime tests."
+      }
+    ]
+  }
+}

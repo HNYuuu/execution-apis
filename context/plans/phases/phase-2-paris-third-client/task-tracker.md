@@ -43,7 +43,7 @@ Status values:
 | Task ID | Task | Status |
 | --- | --- | --- |
 | `P2-T01` | Third-client scope freeze and comparison-discipline gate | `done` |
-| `P2-T02` | `nethermind` acquisition and startup contract | `todo` |
+| `P2-T02` | `nethermind` acquisition and startup contract | `done` |
 | `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `todo` |
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `todo` |
 | `P2-T05` | `nethermind` early runtime scenarios | `todo` |
@@ -114,7 +114,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -137,6 +137,28 @@ Status values:
 - `nethermind` startup contract
 - per-client parity notes against `geth` and `reth`
 - explicit blocker list if the image or startup path is not ready
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-nethermind-startup-contract.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-nethermind-startup-contract.js)
+- `script`
+  [run-engine-phase2-nethermind-startup-contract.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-nethermind-startup-contract.sh)
+- `config`
+  [paris-nethermind-startup-contract.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.config.json)
+- `test case`
+  [paris-nethermind-startup-contract.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.test-case.json)
+- `log format`
+  [paris-nethermind-startup-contract.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log-format.md)
+- `log output`
+  [paris-nethermind-startup-contract.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log.json)
+- `startup memo`
+  [paris-nethermind-startup-contract.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 
