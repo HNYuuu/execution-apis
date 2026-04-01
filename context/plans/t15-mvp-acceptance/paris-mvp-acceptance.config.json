@@ -1,0 +1,27 @@
+{
+  "task_id": "T15",
+  "required_artifacts": [
+    "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log.json",
+    "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json",
+    "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+    "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+    "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+    "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+    "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
+    "context/plans/t10-determinism-probe/paris-determinism-probe.report.json",
+    "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
+    "context/plans/paris-differential-insights.md"
+  ],
+  "inputs": {
+    "t01_log_file": "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log.json",
+    "t02_bootstrap_definitions_file": "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json",
+    "t03_log_file": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+    "t04_log_file": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+    "t06_report_file": "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+    "t07_log_file": "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+    "t09_log_file": "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
+    "t10_report_file": "context/plans/t10-determinism-probe/paris-determinism-probe.report.json",
+    "t14_log_file": "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
+    "insights_file": "context/plans/paris-differential-insights.md"
+  }
+}

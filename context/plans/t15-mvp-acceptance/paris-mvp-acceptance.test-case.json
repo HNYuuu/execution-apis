@@ -1,0 +1,53 @@
+{
+  "task_id": "T15",
+  "expected_decision": "go",
+  "criteria": [
+    {
+      "id": "provenance_gate_compliance",
+      "label": "approved hard invariants have known provenance"
+    },
+    {
+      "id": "bootstrap_reproducibility",
+      "label": "bootstrap artifacts reproduce the same observable pre-state across geth and reth"
+    },
+    {
+      "id": "chain_rlp_scope_is_limited",
+      "label": "chain.rlp is used only for persistent and client-comparable state"
+    },
+    {
+      "id": "runtime_only_state_uses_request_replay",
+      "label": "runtime-only Engine state is created by request replay rather than file injection"
+    },
+    {
+      "id": "normalization_noise_is_controlled",
+      "label": "normalization suppresses representation noise without erasing semantic differences"
+    },
+    {
+      "id": "determinism_is_sufficient",
+      "label": "bootstrap and early runtime scenarios are repeatable within one client"
+    },
+    {
+      "id": "stock_coverage_is_used_where_available",
+      "label": "stock Hive or EEST coverage is used where it already covers the path"
+    },
+    {
+      "id": "thin_driver_is_still_justified",
+      "label": "the MVP can remain on the thin HTTP-based driver shape"
+    },
+    {
+      "id": "custom_code_scope_is_limited",
+      "label": "custom code remains limited to scenario driving, normalization, and result recording"
+    }
+  ],
+  "go_next_steps": [
+    "Add one more EL client to the Paris pipeline using the existing T14 ResultEnvelope workflow.",
+    "Keep arbitrary DATA(8) payloadId inputs outside the PARIS-METHOD-GP-02 comparison bucket and track them as implementation-behavior observations.",
+    "Extend the determinism and offline diff pipeline before any multi-fork expansion.",
+    "Only expand beyond Paris after the third-client run preserves the same comparison discipline."
+  ],
+  "no_go_next_steps": [
+    "Stop client expansion and remediate the failed or blocked criteria first.",
+    "Regenerate T14 envelopes only after the failing evidence source is repaired.",
+    "Update the Paris differential insights note before retrying the acceptance review."
+  ]
+}

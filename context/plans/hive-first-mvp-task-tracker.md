@@ -52,7 +52,7 @@ Status values:
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `done` |
 | `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `done` |
 | `T14` | `ResultEnvelope` generation and offline differential comparison | `done` |
-| `T15` | MVP acceptance review and go/no-go checkpoint | `todo` |
+| `T15` | MVP acceptance review and go/no-go checkpoint | `done` |
 
 ## Tasks
 
@@ -1128,7 +1128,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -1149,6 +1149,38 @@ Status values:
 - MVP review summary
 - explicit go/no-go decision
 - next-step task list for client expansion or remediation
+
+**Current Progress**
+
+- Paris MVP acceptance review completed from `T01` through `T14` evidence.
+- Final decision is `go`.
+- All `9` acceptance criteria passed with `0` failed and `0` blocked.
+
+**Artifacts**
+
+- `code`
+  [engine-mvp-acceptance-review.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-mvp-acceptance-review.js)
+- `script`
+  [run-engine-mvp-acceptance-review.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-mvp-acceptance-review.sh)
+- `config`
+  [paris-mvp-acceptance.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.config.json)
+- `test case`
+  [paris-mvp-acceptance.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.test-case.json)
+- `log format`
+  [paris-mvp-acceptance.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.log-format.md)
+- `log output`
+  [paris-mvp-acceptance.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.log.json)
+- `decision`
+  [paris-mvp-acceptance.decision.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.decision.json)
+- `notes`
+  [paris-mvp-acceptance.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.notes.md)
+- `report`
+  [paris-mvp-acceptance.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

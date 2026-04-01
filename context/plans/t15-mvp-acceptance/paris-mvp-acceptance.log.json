@@ -1,0 +1,238 @@
+{
+  "taskId": "T15",
+  "generatedAt": "2026-04-01T13:44:35.159Z",
+  "status": "pass",
+  "executionMode": "offline-acceptance-review",
+  "inputs": {
+    "config_file": "context/plans/t15-mvp-acceptance/paris-mvp-acceptance.config.json",
+    "test_case_file": "context/plans/t15-mvp-acceptance/paris-mvp-acceptance.test-case.json",
+    "criteria_count": 9
+  },
+  "summary": {
+    "decision": "go",
+    "pass_count": 9,
+    "fail_count": 0,
+    "blocked_count": 0
+  },
+  "criteria": [
+    {
+      "id": "provenance_gate_compliance",
+      "label": "approved hard invariants have known provenance",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log.json"
+      ],
+      "details": {
+        "approved_hard_invariants": 7,
+        "unknown_hard_invariants": 0
+      }
+    },
+    {
+      "id": "bootstrap_reproducibility",
+      "label": "bootstrap artifacts reproduce the same observable pre-state across geth and reth",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+        "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+        "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "t03_bucket": "agree after normalization",
+        "t04_bucket": "agree after normalization"
+      }
+    },
+    {
+      "id": "chain_rlp_scope_is_limited",
+      "label": "chain.rlp is used only for persistent and client-comparable state",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json"
+      ],
+      "details": {
+        "persistent_bootstrap_modes": [
+          "rlp_import",
+          "rlp_import_plus_headfcu"
+        ],
+        "runtime_only_state_families": [
+          "B3",
+          "B4"
+        ]
+      }
+    },
+    {
+      "id": "runtime_only_state_uses_request_replay",
+      "label": "runtime-only Engine state is created by request replay rather than file injection",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json",
+        "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "check": "unknown-payloadid uses mutated real Paris V1 payloadId inputs"
+      }
+    },
+    {
+      "id": "normalization_noise_is_controlled",
+      "label": "normalization suppresses representation noise without erasing semantic differences",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
+        "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
+        "context/plans/paris-differential-insights.md"
+      ],
+      "details": {
+        "active_rules": [
+          "stable_object_key_order",
+          "canonical_hex_quantity"
+        ],
+        "deferred_rules": [
+          "null_vs_omitted_when_explicitly_allowed",
+          "non_semantic_error_text"
+        ],
+        "bucket_counts": {
+          "all agree": 2,
+          "agree after normalization": 4,
+          "diverge across clients": 0,
+          "violates hard invariant": 0
+        }
+      }
+    },
+    {
+      "id": "determinism_is_sufficient",
+      "label": "bootstrap and early runtime scenarios are repeatable within one client",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t10-determinism-probe/paris-determinism-probe.report.json"
+      ],
+      "details": {
+        "blocked_ids": [],
+        "rerun_count": 4,
+        "repeatable_ids": [
+          "rlp-bootstrap-smoke",
+          "headfcu-bootstrap-smoke",
+          "runtime-driver-early-scenarios",
+          "fcu-no-build",
+          "repeat-fcu-same-head"
+        ]
+      }
+    },
+    {
+      "id": "stock_coverage_is_used_where_available",
+      "label": "stock Hive or EEST coverage is used where it already covers the path",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+        "context/plans/t07-runtime-driver/paris-runtime-driver.log.json"
+      ],
+      "details": {
+        "stock_only_behaviors": [
+          "valid-newpayload",
+          "invalid-newpayload"
+        ]
+      }
+    },
+    {
+      "id": "thin_driver_is_still_justified",
+      "label": "the MVP can remain on the thin HTTP-based driver shape",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+        "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
+        "context/plans/paris-differential-insights.md"
+      ],
+      "details": {
+        "t07_scope": [
+          "custom_runtime"
+        ],
+        "t14_bucket_counts": {
+          "all agree": 2,
+          "agree after normalization": 4,
+          "diverge across clients": 0,
+          "violates hard invariant": 0
+        }
+      }
+    },
+    {
+      "id": "custom_code_scope_is_limited",
+      "label": "custom code remains limited to scenario driving, normalization, and result recording",
+      "status": "pass",
+      "evidence": [
+        "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+        "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
+        "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "custom_workstreams": [
+          "scenario driving",
+          "normalization",
+          "result recording"
+        ]
+      }
+    }
+  ],
+  "validations": [
+    {
+      "check": "every acceptance criterion is marked pass, fail, or blocked",
+      "status": "pass",
+      "details": [
+        {
+          "id": "provenance_gate_compliance",
+          "status": "pass"
+        },
+        {
+          "id": "bootstrap_reproducibility",
+          "status": "pass"
+        },
+        {
+          "id": "chain_rlp_scope_is_limited",
+          "status": "pass"
+        },
+        {
+          "id": "runtime_only_state_uses_request_replay",
+          "status": "pass"
+        },
+        {
+          "id": "normalization_noise_is_controlled",
+          "status": "pass"
+        },
+        {
+          "id": "determinism_is_sufficient",
+          "status": "pass"
+        },
+        {
+          "id": "stock_coverage_is_used_where_available",
+          "status": "pass"
+        },
+        {
+          "id": "thin_driver_is_still_justified",
+          "status": "pass"
+        },
+        {
+          "id": "custom_code_scope_is_limited",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "check": "any blocked criterion has concrete remediation",
+      "status": "pass",
+      "details": {
+        "blocked_criteria": [],
+        "next_steps": [
+          "Add one more EL client to the Paris pipeline using the existing T14 ResultEnvelope workflow.",
+          "Keep arbitrary DATA(8) payloadId inputs outside the PARIS-METHOD-GP-02 comparison bucket and track them as implementation-behavior observations.",
+          "Extend the determinism and offline diff pipeline before any multi-fork expansion.",
+          "Only expand beyond Paris after the third-client run preserves the same comparison discipline."
+        ]
+      }
+    },
+    {
+      "check": "go decision matches expected decision",
+      "status": "pass",
+      "details": {
+        "expected_decision": "go",
+        "actual_decision": "go"
+      }
+    }
+  ]
+}
