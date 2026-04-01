@@ -1,0 +1,50 @@
+{
+  "task_id": "T11",
+  "fork": "Paris",
+  "bootstrap_mode": "runtime_request_replay",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "genesis_file": "tests/genesis.json",
+  "chain_file": "tests/chain.rlp",
+  "fork_env_file": "tests/forkenv.json",
+  "bootstrap_headfcu_file": "tests/headfcu.json",
+  "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+  "scenario_file": "context/plans/t11-fcu-no-build/paris-fcu-no-build.scenario.json",
+  "startup_timeout_ms": 120000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 59545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 59551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 60545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 60551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.decision-log.md",
+    "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+    "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "context/plans/t11-fcu-no-build/paris-fcu-no-build.scenario.json"
+  ]
+}

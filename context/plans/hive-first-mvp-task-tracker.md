@@ -48,7 +48,7 @@ Status values:
 | `T08` | Response corpus collection for `geth` and `reth` | `done` |
 | `T09` | `NormalizationProfile` v0 | `done` |
 | `T10` | Repeated-run determinism probe | `done` |
-| `T11` | `fcu-no-build` runtime scenario | `todo` |
+| `T11` | `fcu-no-build` runtime scenario | `done` |
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `todo` |
 | `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `todo` |
 | `T14` | `ResultEnvelope` generation and offline differential comparison | `todo` |
@@ -795,7 +795,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -817,6 +817,54 @@ Status values:
 - scenario definition
 - per-client raw and normalized result records
 - invariant evaluation records
+
+**Current Progress**
+
+- The formal Paris scenario now runs `engine_forkchoiceUpdatedV1` with
+  `payloadAttributes: null` after `B2` bootstrap.
+- Both `geth` and `reth` returned the no-build branch with
+  `payloadStatus.status = VALID`, `latestValidHash = headBlockHash`,
+  `validationError = null`, and `payloadId = null`.
+- All three approved `T01` hard invariants passed on both clients:
+  `PARIS-METHOD-FCU-17`, `PARIS-METHOD-FCU-22`, `PARIS-METHOD-FCU-23`.
+
+**Artifacts**
+
+- `code`
+  [engine-fcu-no-build-scenario.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-fcu-no-build-scenario.js)
+- `script`
+  [run-engine-fcu-no-build-scenario.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-fcu-no-build-scenario.sh)
+- `config`
+  [paris-fcu-no-build.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.config.json)
+- `test case`
+  [paris-fcu-no-build.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.test-case.json)
+- `log format`
+  [paris-fcu-no-build.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.log-format.md)
+- `log output`
+  [paris-fcu-no-build.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.log.json)
+- `scenario`
+  [paris-fcu-no-build.scenario.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.scenario.json)
+- `notes`
+  [paris-fcu-no-build.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.notes.md)
+- `report`
+  [paris-fcu-no-build.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.report.md)
+- `raw log`
+  [paris-fcu-no-build.log.geth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.log.geth.raw.log)
+- `raw log`
+  [paris-fcu-no-build.log.reth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.log.reth.raw.log)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T11` intentionally diverges from `T07`: the formal scenario method is
+  `engine_forkchoiceUpdatedV1`, not `V3`, because `T11` is a Paris-spec
+  scenario rather than a generic runtime-driver prototype.
+- The bootstrap still reuses the repository-owned `headfcu.json` artifact to
+  establish `B2` before the `V1` scenario call.
 
 **Validation Method**
 

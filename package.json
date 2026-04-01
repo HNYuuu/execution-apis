@@ -19,6 +19,7 @@
     "engine:response-corpus": "bash scripts/run-engine-response-corpus.sh",
     "engine:normalization-profile": "bash scripts/run-engine-normalization-profile.sh",
     "engine:determinism-probe": "bash scripts/run-engine-determinism-probe.sh",
+    "engine:fcu-no-build-scenario": "bash scripts/run-engine-fcu-no-build-scenario.sh",
     "engine:hive-reality-check": "bash scripts/run-engine-hive-reality-check.sh",
     "engine:hive-engine-smoke": "bash scripts/run-engine-hive-engine-smoke.sh",
     "clean": "rm -rf build && mkdir -p build",

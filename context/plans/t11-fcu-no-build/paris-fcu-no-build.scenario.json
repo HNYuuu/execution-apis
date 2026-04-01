@@ -1,0 +1,34 @@
+{
+  "task_id": "T11",
+  "scenario_id": "fcu-no-build",
+  "fork": "Paris",
+  "pre_state": "B2",
+  "bootstrap": {
+    "mode": "runtime_request_replay",
+    "seed_request": "tests/headfcu.json"
+  },
+  "request_sequence": [
+    {
+      "request_id": "fcu_no_build_v1",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV1",
+      "params": [
+        {
+          "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+        },
+        null
+      ]
+    }
+  ],
+  "hard_invariants": [
+    "PARIS-METHOD-FCU-17",
+    "PARIS-METHOD-FCU-22",
+    "PARIS-METHOD-FCU-23"
+  ],
+  "normalization_rules": [
+    "stable_object_key_order",
+    "canonical_hex_quantity"
+  ]
+}

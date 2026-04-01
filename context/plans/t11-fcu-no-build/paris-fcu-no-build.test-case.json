@@ -1,0 +1,10 @@
+{
+  "task_id": "T11",
+  "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+  "expected_head_number": "0x2d",
+  "required_hard_invariants": [
+    "PARIS-METHOD-FCU-17",
+    "PARIS-METHOD-FCU-22",
+    "PARIS-METHOD-FCU-23"
+  ]
+}
