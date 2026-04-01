@@ -51,7 +51,7 @@ Status values:
 | `T11` | `fcu-no-build` runtime scenario | `done` |
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `done` |
 | `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `done` |
-| `T14` | `ResultEnvelope` generation and offline differential comparison | `todo` |
+| `T14` | `ResultEnvelope` generation and offline differential comparison | `done` |
 | `T15` | MVP acceptance review and go/no-go checkpoint | `todo` |
 
 ## Tasks
@@ -1043,7 +1043,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -1074,6 +1074,45 @@ Status values:
 - explicit runtime-write vs offline-finalization write model
 - offline diff output
 - first discrepancy list
+
+**Current Progress**
+
+- Offline `ResultEnvelope` generation completed for `6` scenarios and `12`
+  envelopes.
+- Final bucket distribution is:
+  `all agree = 2`, `agree after normalization = 4`,
+  `diverge across clients = 0`, `violates hard invariant = 0`.
+- `T14` intentionally excludes the superseded `T07` prototype from final
+  envelope generation and uses the formal Paris scenario outputs from
+  `T11` through `T13`.
+
+**Artifacts**
+
+- `code`
+  [engine-result-envelope-diff.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-result-envelope-diff.js)
+- `script`
+  [run-engine-result-envelope-diff.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-result-envelope-diff.sh)
+- `config`
+  [paris-result-envelope-diff.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.config.json)
+- `test case`
+  [paris-result-envelope-diff.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.test-case.json)
+- `log format`
+  [paris-result-envelope-diff.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log-format.md)
+- `log output`
+  [paris-result-envelope-diff.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json)
+- `envelopes`
+  [paris-result-envelopes.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelopes.json)
+- `offline diff`
+  [paris-result-envelope-diff.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.json)
+- `notes`
+  [paris-result-envelope-diff.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.notes.md)
+- `report`
+  [paris-result-envelope-diff.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t14-result-envelope-diff/paris-result-envelope-diff.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

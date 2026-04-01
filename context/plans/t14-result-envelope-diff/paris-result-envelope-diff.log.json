@@ -1,0 +1,169 @@
+{
+  "taskId": "T14",
+  "generatedAt": "2026-04-01T13:38:20.010Z",
+  "status": "pass",
+  "executionMode": "offline-artifact-diff",
+  "inputs": {
+    "config_file": "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.config.json",
+    "test_case_file": "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.test-case.json",
+    "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "insights_file": "context/plans/paris-differential-insights.md"
+  },
+  "summary": {
+    "scenario_count": 6,
+    "envelope_count": 12,
+    "bucket_counts": {
+      "all agree": 2,
+      "agree after normalization": 4,
+      "diverge across clients": 0,
+      "violates hard invariant": 0
+    },
+    "discrepancy_count": 0
+  },
+  "validations": [
+    {
+      "check": "every compared scenario produces complete ResultEnvelope records",
+      "status": "pass",
+      "details": {
+        "envelope_count": 12,
+        "expected_count": 12
+      }
+    },
+    {
+      "check": "unknown-payloadid uses mutated real Paris V1 payloadId inputs",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "seed_payload_id": "0x01cfcf20e1564469",
+          "mutated_payload_id": "0x01cfcf20e1564460"
+        },
+        {
+          "client": "reth",
+          "seed_payload_id": "0x71895ca0486f3246",
+          "mutated_payload_id": "0x71895ca0486f3240"
+        }
+      ]
+    },
+    {
+      "check": "all compared envelopes sharing a scenario also share bootstrap_digest",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_digests": [
+            "a1c35a8ab6d6fea9ee6bc12de5a4e2043cf416ea75b3daf34eb7fd2149afed4d"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_digests": [
+            "915ed4de617a684ddf902f644cd330745c093d26386b2852b7995be0b8c30a1f"
+          ]
+        },
+        {
+          "scenario_id": "fcu-no-build",
+          "bootstrap_digests": [
+            "92efeab976b39cd054ef60426d47757d31f6d0bc88207d4666aa6935931ce0aa"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "bootstrap_digests": [
+            "c65a2b0dc0b6c9fb921cef847652592b2d5b3522bae0b24666ffd195f20e1744"
+          ]
+        },
+        {
+          "scenario_id": "repeat-fcu-same-head",
+          "bootstrap_digests": [
+            "29841f63c96b534460d9b3dbb6f54aee05ba057673124c27f93c13cbf89cfd06"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "bootstrap_digests": [
+            "16c327195de19bce3c28fb59056c59ccf9097b9047b8be2d8ee4923f1c85c916"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "offline comparison assigns final cross-client buckets",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "final_bucket": "agree after normalization"
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "final_bucket": "agree after normalization"
+        },
+        {
+          "scenario_id": "fcu-no-build",
+          "final_bucket": "all agree"
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "final_bucket": "agree after normalization"
+        },
+        {
+          "scenario_id": "repeat-fcu-same-head",
+          "final_bucket": "all agree"
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "final_bucket": "agree after normalization"
+        }
+      ]
+    },
+    {
+      "check": "expected bucket for rlp-bootstrap-smoke",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected bucket for headfcu-bootstrap-smoke",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected bucket for fcu-no-build",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "all agree",
+        "actual_bucket": "all agree"
+      }
+    },
+    {
+      "check": "expected bucket for fcu-build-getpayload-newpayload",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected bucket for repeat-fcu-same-head",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "all agree",
+        "actual_bucket": "all agree"
+      }
+    },
+    {
+      "check": "expected bucket for unknown-payloadid",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "task_id": "T14",
+  "fork": "Paris",
+  "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+  "insights_file": "context/plans/paris-differential-insights.md",
+  "required_artifacts": [
+    "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+    "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json",
+    "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+    "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.config.json",
+    "context/plans/t11-fcu-no-build/paris-fcu-no-build.log.json",
+    "context/plans/t11-fcu-no-build/paris-fcu-no-build.config.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.config.json",
+    "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json",
+    "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.config.json",
+    "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "context/plans/paris-differential-insights.md"
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "source_task": "T03",
+      "source_kind": "t03_rlp_bootstrap",
+      "source_log_file": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+      "source_config_file": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json",
+      "startup_steps": [
+        "inject genesis.json",
+        "import chain.rlp",
+        "apply forkenv.json",
+        "wait for HTTP RPC readiness",
+        "query eth_blockNumber",
+        "query eth_getBlockByNumber(latest,false)"
+      ]
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "source_task": "T04",
+      "source_kind": "t04_headfcu_bootstrap",
+      "source_log_file": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+      "source_config_file": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.config.json",
+      "startup_steps": [
+        "inject genesis.json",
+        "import chain.rlp",
+        "apply forkenv.json",
+        "wait for HTTP RPC readiness",
+        "replay headfcu.json over authenticated Engine API",
+        "query eth_blockNumber",
+        "query eth_getBlockByNumber(latest,false)"
+      ]
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "source_task": "T11",
+      "source_kind": "t11_fcu_no_build",
+      "source_log_file": "context/plans/t11-fcu-no-build/paris-fcu-no-build.log.json",
+      "source_config_file": "context/plans/t11-fcu-no-build/paris-fcu-no-build.config.json",
+      "startup_steps": [
+        "inject genesis.json",
+        "import chain.rlp",
+        "apply forkenv.json",
+        "replay headfcu.json to establish B2",
+        "issue engine_forkchoiceUpdatedV1 with payloadAttributes null"
+      ]
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "source_task": "T12",
+      "source_kind": "t12_build_getpayload_newpayload",
+      "source_log_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log.json",
+      "source_config_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.config.json",
+      "startup_steps": [
+        "inject Paris-era genesis.json",
+        "import Paris-era chain.rlp",
+        "apply Paris-era forkenv.json",
+        "replay Paris-era headfcu.json to establish B2",
+        "issue engine_forkchoiceUpdatedV1 with valid payloadAttributes",
+        "store client-local payloadId",
+        "issue engine_getPayloadV1 with client-local payloadId",
+        "issue engine_newPayloadV1 with returned payload"
+      ]
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "source_task": "T13",
+      "source_kind": "t13_repeat_fcu",
+      "source_log_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json",
+      "source_config_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.config.json",
+      "startup_steps": [
+        "inject Paris-era genesis.json",
+        "import Paris-era chain.rlp",
+        "apply Paris-era forkenv.json",
+        "replay Paris-era headfcu.json to establish B2",
+        "issue repeated valid-ancestor engine_forkchoiceUpdatedV1 requests"
+      ]
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "source_task": "T13",
+      "source_kind": "t13_unknown_payloadid",
+      "source_log_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json",
+      "source_config_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.config.json",
+      "startup_steps": [
+        "inject Paris-era genesis.json",
+        "import Paris-era chain.rlp",
+        "apply Paris-era forkenv.json",
+        "replay Paris-era headfcu.json to establish B2",
+        "create a real Paris V1 build process",
+        "mutate the returned client-local payloadId",
+        "issue engine_getPayloadV1 with the mutated payloadId"
+      ]
+    }
+  ]
+}

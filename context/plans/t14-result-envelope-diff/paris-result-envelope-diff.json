@@ -1,0 +1,106 @@
+{
+  "taskId": "T14",
+  "generatedAt": "2026-04-01T13:38:20.009Z",
+  "scenarioComparisons": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "a1c35a8ab6d6fea9ee6bc12de5a4e2043cf416ea75b3daf34eb7fd2149afed4d"
+      ],
+      "raw_equal": false,
+      "normalized_equal": true,
+      "final_bucket": "agree after normalization",
+      "notes": [
+        "latest_header_object_field_order_only"
+      ],
+      "discrepancies": []
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "915ed4de617a684ddf902f644cd330745c093d26386b2852b7995be0b8c30a1f"
+      ],
+      "raw_equal": false,
+      "normalized_equal": true,
+      "final_bucket": "agree after normalization",
+      "notes": [
+        "latest_header_object_field_order_only"
+      ],
+      "discrepancies": []
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "92efeab976b39cd054ef60426d47757d31f6d0bc88207d4666aa6935931ce0aa"
+      ],
+      "raw_equal": true,
+      "normalized_equal": true,
+      "final_bucket": "all agree",
+      "notes": [],
+      "discrepancies": []
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "c65a2b0dc0b6c9fb921cef847652592b2d5b3522bae0b24666ffd195f20e1744"
+      ],
+      "raw_equal": false,
+      "normalized_equal": true,
+      "final_bucket": "agree after normalization",
+      "notes": [
+        "client_local_payload_runtime_values_excluded_from_cross_client_keys",
+        "newpayload_success_compared_as_structured_success_category"
+      ],
+      "discrepancies": []
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "29841f63c96b534460d9b3dbb6f54aee05ba057673124c27f93c13cbf89cfd06"
+      ],
+      "raw_equal": true,
+      "normalized_equal": true,
+      "final_bucket": "all agree",
+      "notes": [],
+      "discrepancies": []
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "clients": [
+        "geth",
+        "reth"
+      ],
+      "bootstrap_digests": [
+        "16c327195de19bce3c28fb59056c59ccf9097b9047b8be2d8ee4923f1c85c916"
+      ],
+      "raw_equal": false,
+      "normalized_equal": true,
+      "final_bucket": "agree after normalization",
+      "notes": [
+        "comparison_uses_mutated_real_v1_payload_id_inputs_only"
+      ],
+      "discrepancies": []
+    }
+  ],
+  "discrepancies": []
+}
