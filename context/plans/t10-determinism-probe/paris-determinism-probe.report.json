@@ -1,0 +1,76 @@
+{
+  "taskId": "T10",
+  "generatedAt": "2026-04-01T12:42:01.718Z",
+  "profile_id": "paris-v0",
+  "repeatable_ids": [
+    "rlp-bootstrap-smoke",
+    "headfcu-bootstrap-smoke",
+    "runtime-driver-early-scenarios",
+    "fcu-no-build",
+    "repeat-fcu-same-head"
+  ],
+  "blocked_ids": [],
+  "rerun_count": 4,
+  "records": [
+    {
+      "id": "rlp-bootstrap-smoke",
+      "client": "geth",
+      "run_count": 2,
+      "stable": true
+    },
+    {
+      "id": "rlp-bootstrap-smoke",
+      "client": "reth",
+      "run_count": 2,
+      "stable": true
+    },
+    {
+      "id": "headfcu-bootstrap-smoke",
+      "client": "geth",
+      "run_count": 2,
+      "stable": true
+    },
+    {
+      "id": "headfcu-bootstrap-smoke",
+      "client": "reth",
+      "run_count": 2,
+      "stable": true
+    },
+    {
+      "id": "runtime-driver-early-scenarios",
+      "client": "geth",
+      "run_count": 4,
+      "stable": true
+    },
+    {
+      "id": "runtime-driver-early-scenarios",
+      "client": "reth",
+      "run_count": 4,
+      "stable": true
+    },
+    {
+      "id": "fcu-no-build",
+      "client": "geth",
+      "run_count": 4,
+      "stable": true
+    },
+    {
+      "id": "repeat-fcu-same-head",
+      "client": "geth",
+      "run_count": 4,
+      "stable": true
+    },
+    {
+      "id": "fcu-no-build",
+      "client": "reth",
+      "run_count": 4,
+      "stable": true
+    },
+    {
+      "id": "repeat-fcu-same-head",
+      "client": "reth",
+      "run_count": 4,
+      "stable": true
+    }
+  ]
+}

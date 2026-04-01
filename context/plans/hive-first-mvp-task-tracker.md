@@ -47,7 +47,7 @@ Status values:
 | `T07` | Thin HTTP-based runtime scenario-driver prototype over Hive-built client images | `done` |
 | `T08` | Response corpus collection for `geth` and `reth` | `done` |
 | `T09` | `NormalizationProfile` v0 | `done` |
-| `T10` | Repeated-run determinism probe | `todo` |
+| `T10` | Repeated-run determinism probe | `done` |
 | `T11` | `fcu-no-build` runtime scenario | `todo` |
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `todo` |
 | `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `todo` |
@@ -709,7 +709,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -731,6 +731,59 @@ Status values:
 - repeated-run determinism report
 - list of repeatable scenarios
 - list of blocked or unstable scenarios
+
+**Current Progress**
+
+- The probe reused repeated real-runtime evidence from `T03` and `T04`.
+- It added `3` fresh reruns of the `T07` runtime driver, resulting in `4`
+  runtime observations per client when combined with the committed baseline.
+- All current early-surface ids were stable within each client after
+  normalization:
+  `rlp-bootstrap-smoke`, `headfcu-bootstrap-smoke`,
+  `runtime-driver-early-scenarios`, `fcu-no-build`,
+  `repeat-fcu-same-head`.
+- No scenario is currently blocked for MVP diffing at this early-scenario
+  surface.
+
+**Artifacts**
+
+- `code`
+  [engine-determinism-probe.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-determinism-probe.js)
+- `script`
+  [run-engine-determinism-probe.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-determinism-probe.sh)
+- `config`
+  [paris-determinism-probe.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.config.json)
+- `test case`
+  [paris-determinism-probe.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.test-case.json)
+- `log format`
+  [paris-determinism-probe.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.log-format.md)
+- `log output`
+  [paris-determinism-probe.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.log.json)
+- `report`
+  [paris-determinism-probe.report.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.report.json)
+- `notes`
+  [paris-determinism-probe.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.notes.md)
+- `report doc`
+  [paris-determinism-probe.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.report.md)
+- `runtime rerun`
+  [paris-runtime-driver.rerun1.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/runtime-reruns/paris-runtime-driver.rerun1.log.json)
+- `runtime rerun`
+  [paris-runtime-driver.rerun2.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/runtime-reruns/paris-runtime-driver.rerun2.log.json)
+- `runtime rerun`
+  [paris-runtime-driver.rerun3.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/runtime-reruns/paris-runtime-driver.rerun3.log.json)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T10` deliberately mixes existing repeated bootstrap evidence with fresh
+  runtime reruns. Re-running `T03` and `T04` again would add cost without
+  adding meaningful signal.
+- The determinism claim is currently limited to the early-scenario surface and
+  does not yet cover `fcu-build-getpayload-newpayload` or `unknown-payloadid`.
 
 **Validation Method**
 

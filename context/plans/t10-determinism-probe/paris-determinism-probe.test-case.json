@@ -1,0 +1,15 @@
+{
+  "task_id": "T10",
+  "required_clients": ["geth", "reth"],
+  "runtime_scenarios": [
+    "fcu-no-build",
+    "repeat-fcu-same-head"
+  ],
+  "expected_repeatable_ids": [
+    "rlp-bootstrap-smoke",
+    "headfcu-bootstrap-smoke",
+    "runtime-driver-early-scenarios",
+    "fcu-no-build",
+    "repeat-fcu-same-head"
+  ]
+}

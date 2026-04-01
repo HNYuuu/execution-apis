@@ -1,0 +1,146 @@
+{
+  "taskId": "T10",
+  "generatedAt": "2026-04-01T12:42:01.718Z",
+  "status": "pass",
+  "executionMode": "mixed-existing-and-real-rerun",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t10-determinism-probe/paris-determinism-probe.test-case.json",
+    "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "runtime_reruns": 3
+  },
+  "summary": {
+    "profile_id": "paris-v0",
+    "required_clients": [
+      "geth",
+      "reth"
+    ],
+    "repeatable_ids": [
+      "rlp-bootstrap-smoke",
+      "headfcu-bootstrap-smoke",
+      "runtime-driver-early-scenarios",
+      "fcu-no-build",
+      "repeat-fcu-same-head"
+    ],
+    "blocked_ids": [],
+    "runtime_rerun_dir": "context/plans/t10-determinism-probe/runtime-reruns"
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+          "bytes": 19750
+        },
+        {
+          "path": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+          "bytes": 26189
+        },
+        {
+          "path": "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+          "bytes": 19409
+        },
+        {
+          "path": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+          "bytes": 2580
+        },
+        {
+          "path": "context/plans/t07-runtime-driver/paris-runtime-driver.config.json",
+          "bytes": 1654
+        },
+        {
+          "path": "context/plans/t07-runtime-driver/paris-runtime-driver.test-case.json",
+          "bytes": 361
+        }
+      ]
+    },
+    {
+      "check": "bootstrap scenarios are stable within each client",
+      "status": "pass",
+      "details": [
+        {
+          "id": "rlp-bootstrap-smoke",
+          "client": "geth",
+          "run_count": 2,
+          "stable": true
+        },
+        {
+          "id": "rlp-bootstrap-smoke",
+          "client": "reth",
+          "run_count": 2,
+          "stable": true
+        },
+        {
+          "id": "headfcu-bootstrap-smoke",
+          "client": "geth",
+          "run_count": 2,
+          "stable": true
+        },
+        {
+          "id": "headfcu-bootstrap-smoke",
+          "client": "reth",
+          "run_count": 2,
+          "stable": true
+        }
+      ]
+    },
+    {
+      "check": "early runtime scenario set is stable within each client across reruns",
+      "status": "pass",
+      "details": [
+        {
+          "id": "runtime-driver-early-scenarios",
+          "client": "geth",
+          "run_count": 4,
+          "stable": true
+        },
+        {
+          "id": "runtime-driver-early-scenarios",
+          "client": "reth",
+          "run_count": 4,
+          "stable": true
+        },
+        {
+          "id": "fcu-no-build",
+          "client": "geth",
+          "run_count": 4,
+          "stable": true
+        },
+        {
+          "id": "repeat-fcu-same-head",
+          "client": "geth",
+          "run_count": 4,
+          "stable": true
+        },
+        {
+          "id": "fcu-no-build",
+          "client": "reth",
+          "run_count": 4,
+          "stable": true
+        },
+        {
+          "id": "repeat-fcu-same-head",
+          "client": "reth",
+          "run_count": 4,
+          "stable": true
+        }
+      ]
+    },
+    {
+      "check": "no scenario is blocked for MVP diffing at the current early-scenario surface",
+      "status": "pass",
+      "details": {
+        "repeatable_ids": [
+          "rlp-bootstrap-smoke",
+          "headfcu-bootstrap-smoke",
+          "runtime-driver-early-scenarios",
+          "fcu-no-build",
+          "repeat-fcu-same-head"
+        ],
+        "blocked_ids": []
+      }
+    }
+  ]
+}
