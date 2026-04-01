@@ -1,0 +1,135 @@
+{
+  "taskId": "T08",
+  "generatedAt": "2026-04-01T12:32:48.512Z",
+  "status": "pass",
+  "executionMode": "offline-from-real-runtime-logs",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.test-case.json",
+    "source_logs": [
+      {
+        "task_id": "T03",
+        "path": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json"
+      },
+      {
+        "task_id": "T04",
+        "path": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json"
+      },
+      {
+        "task_id": "T07",
+        "path": "context/plans/t07-runtime-driver/paris-runtime-driver.log.json"
+      }
+    ]
+  },
+  "summary": {
+    "source_tasks": [
+      "T03",
+      "T04",
+      "T07"
+    ],
+    "categories": [
+      "bootstrap",
+      "runtime"
+    ],
+    "sample_count": 7,
+    "order_only_samples": [
+      "t03-latest-header",
+      "t04-latest-header"
+    ]
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+          "bytes": 19750
+        },
+        {
+          "path": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+          "bytes": 26189
+        },
+        {
+          "path": "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+          "bytes": 19409
+        },
+        {
+          "path": "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+          "bytes": 5823
+        }
+      ]
+    },
+    {
+      "check": "corpus contains bootstrap and runtime samples from T03, T04, and T07",
+      "status": "pass",
+      "details": {
+        "source_tasks": [
+          "T03",
+          "T04",
+          "T07"
+        ],
+        "categories": [
+          "bootstrap",
+          "runtime"
+        ],
+        "sample_ids": [
+          "t03-block-number",
+          "t03-latest-header",
+          "t04-headfcu-response",
+          "t04-latest-header",
+          "t07-fcu-no-build",
+          "t07-repeat-fcu-same-head-first",
+          "t07-repeat-fcu-same-head-second"
+        ]
+      }
+    },
+    {
+      "check": "corpus includes legal representation-difference examples suitable for normalization",
+      "status": "pass",
+      "details": {
+        "order_only_samples": [
+          "t03-latest-header",
+          "t04-latest-header"
+        ],
+        "legal_representation_differences": [
+          {
+            "difference_id": "object-field-order",
+            "status": "observed",
+            "evidence_samples": [
+              "t03-latest-header",
+              "t04-latest-header"
+            ],
+            "description": "The latest-header objects are semantically equal across clients after stable-key normalization, but raw JSON field order differs."
+          },
+          {
+            "difference_id": "wrapper-metadata-variance",
+            "status": "observed",
+            "evidence_samples": [
+              "t03-block-number",
+              "t04-headfcu-response",
+              "t07-fcu-no-build"
+            ],
+            "description": "Container names, raw log file paths, and other execution metadata differ per run and are not comparison targets for response normalization."
+          }
+        ]
+      }
+    },
+    {
+      "check": "payloadId-dependent and error-shape gaps are explicitly deferred instead of being silently omitted",
+      "status": "pass",
+      "details": [
+        {
+          "input_id": "fcu-build-getpayload-newpayload",
+          "owner_task": "T12",
+          "reason": "payloadId-dependent build lifecycle responses are not collected before the dedicated runtime scenario task"
+        },
+        {
+          "input_id": "unknown-payloadid",
+          "owner_task": "T13",
+          "reason": "error-shape corpus is deferred until the dedicated unknown payloadId scenario exists"
+        }
+      ]
+    }
+  ]
+}

@@ -45,7 +45,7 @@ Status values:
 | `T05` | Runtime reality check plus Hive integration spike | `done` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `done` |
 | `T07` | Thin HTTP-based runtime scenario-driver prototype over Hive-built client images | `done` |
-| `T08` | Response corpus collection for `geth` and `reth` | `todo` |
+| `T08` | Response corpus collection for `geth` and `reth` | `done` |
 | `T09` | `NormalizationProfile` v0 | `todo` |
 | `T10` | Repeated-run determinism probe | `todo` |
 | `T11` | `fcu-no-build` runtime scenario | `todo` |
@@ -527,7 +527,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  `pending`
+  `384b848` - `Complete T07 runtime scenario driver prototype`
 
 **Adjustment**
 
@@ -548,7 +548,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -569,6 +569,52 @@ Status values:
 - sampled response corpus
 - preliminary list of legal representation differences
 - preliminary list of semantically meaningful comparison fields
+
+**Current Progress**
+
+- Corpus v0 was built from the completed real-runtime logs produced by `T03`,
+  `T04`, and `T07`.
+- The resulting corpus contains `7` sampled response pairs across bootstrap and
+  runtime categories.
+- The corpus already exposes one concrete normalization seed:
+  `object_field_order_only` on `eth_getBlockByNumber(latest, false)` latest
+  headers.
+- `payloadId`-dependent and error-shape samples were not silently skipped; they
+  are explicitly recorded as deferred inputs for `T12` and `T13`.
+
+**Artifacts**
+
+- `code`
+  [engine-response-corpus.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-response-corpus.js)
+- `script`
+  [run-engine-response-corpus.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-response-corpus.sh)
+- `config`
+  [paris-response-corpus.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.config.json)
+- `test case`
+  [paris-response-corpus.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.test-case.json)
+- `log format`
+  [paris-response-corpus.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.log-format.md)
+- `log output`
+  [paris-response-corpus.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.log.json)
+- `samples`
+  [paris-response-corpus.samples.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.samples.json)
+- `notes`
+  [paris-response-corpus.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.notes.md)
+- `report`
+  [paris-response-corpus.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t08-response-corpus/paris-response-corpus.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T08` now treats the response corpus as a `v0` artifact built from completed
+  runtime evidence, not as a promise that every future scenario family has
+  already been sampled.
+- `fcu-build-getpayload-newpayload` and `unknown-payloadid` remain explicit
+  deferred inputs, which keeps the corpus honest while still unblocking `T09`.
 
 **Validation Method**
 

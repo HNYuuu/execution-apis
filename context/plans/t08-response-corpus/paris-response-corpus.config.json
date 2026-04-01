@@ -1,0 +1,25 @@
+{
+  "task_id": "T08",
+  "fork": "Paris",
+  "corpus_version": "v0",
+  "source_logs": [
+    {
+      "task_id": "T03",
+      "path": "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json"
+    },
+    {
+      "task_id": "T04",
+      "path": "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json"
+    },
+    {
+      "task_id": "T07",
+      "path": "context/plans/t07-runtime-driver/paris-runtime-driver.log.json"
+    }
+  ],
+  "required_artifacts": [
+    "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+    "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+    "context/plans/t07-runtime-driver/paris-runtime-driver.log.json",
+    "context/plans/t06-stock-coverage/paris-stock-coverage-report.md"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "task_id": "T08",
+  "required_source_tasks": ["T03", "T04", "T07"],
+  "required_categories": ["bootstrap", "runtime"],
+  "required_deferred_inputs": [
+    "fcu-build-getpayload-newpayload",
+    "unknown-payloadid"
+  ],
+  "minimum_sample_count": 7,
+  "minimum_order_only_examples": 2
+}
