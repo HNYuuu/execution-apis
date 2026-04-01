@@ -1,0 +1,17 @@
+{
+  "task_id": "T07",
+  "scenario_id": "fcu-no-build",
+  "scope_classification": "custom_runtime",
+  "pre_state": "B2",
+  "description": "Replay the repository head forkchoice request with payloadAttributes null and assert the no-build branch remains VALID with payloadId null.",
+  "request_sequence": [
+    {
+      "request_id": "fcu_no_build",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV3",
+      "params": {
+        "$fixture": "headfcu.params"
+      }
+    }
+  ]
+}

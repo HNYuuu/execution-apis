@@ -1,0 +1,25 @@
+{
+  "task_id": "T07",
+  "scenario_id": "repeat-fcu-same-head",
+  "scope_classification": "custom_runtime",
+  "pre_state": "B2",
+  "description": "Send the same no-build forkchoice request twice against the same head and assert the response category stays stable within each client.",
+  "request_sequence": [
+    {
+      "request_id": "repeat_fcu_first",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV3",
+      "params": {
+        "$fixture": "headfcu.params"
+      }
+    },
+    {
+      "request_id": "repeat_fcu_second",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV3",
+      "params": {
+        "$fixture": "headfcu.params"
+      }
+    }
+  ]
+}

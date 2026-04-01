@@ -44,7 +44,7 @@ Status values:
 | `T04` | `headfcu-bootstrap-smoke` scenario | `done` |
 | `T05` | Runtime reality check plus Hive integration spike | `done` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `done` |
-| `T07` | Thin HTTP-based scenario-driver prototype in Hive | `todo` |
+| `T07` | Thin HTTP-based runtime scenario-driver prototype over Hive-built client images | `done` |
 | `T08` | Response corpus collection for `geth` and `reth` | `todo` |
 | `T09` | `NormalizationProfile` v0 | `todo` |
 | `T10` | Repeated-run determinism probe | `todo` |
@@ -463,23 +463,24 @@ Status values:
   stock coverage gap.
 - Confirm no stock-covered path is redundantly implemented in the custom layer.
 
-## `T07` Thin HTTP-Based Scenario-Driver Prototype In Hive
+## `T07` Thin HTTP-Based Runtime Scenario-Driver Prototype Over Hive-Built Client Images
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
-- Hive execution environment
+- Hive-built client images and Docker-backed runtime environment
 - bootstrap definitions from `T02`
 - integration memo from `T05`
 - coverage gap report from `T06`
 
 **Operation Steps**
 
-1. Build the thinnest runnable HTTP-based driver inside the Hive environment.
-2. Implement request execution against a Hive-provisioned EL client.
+1. Build the thinnest runnable HTTP-based driver over the already validated
+   Docker bootstrap path using Hive-built EL client images.
+2. Implement request execution against a bootstrapped EL client.
 3. Add scenario loading and raw response capture.
 4. Keep the driver scoped to gaps not already covered by stock Hive/EEST.
 
@@ -489,12 +490,58 @@ Status values:
 - request/response capture path
 - per-client invocation notes
 
+**Current Progress**
+
+- Real runtime driver completed for `geth` and `reth`.
+- The driver loaded only the current custom-runtime scope from `T06`:
+  `fcu-no-build` and `repeat-fcu-same-head`.
+- Both clients replayed the two MVP scenarios successfully after `B2`
+  bootstrap, with stable `VALID` plus `payloadId: null` results and unchanged
+  imported head state.
+
+**Artifacts**
+
+- `code`
+  [engine-runtime-scenario-driver.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-runtime-scenario-driver.js)
+- `script`
+  [run-engine-runtime-scenario-driver.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-runtime-scenario-driver.sh)
+- `config`
+  [paris-runtime-driver.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.config.json)
+- `test case`
+  [paris-runtime-driver.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.test-case.json)
+- `log format`
+  [paris-runtime-driver.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.log-format.md)
+- `log output`
+  [paris-runtime-driver.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.log.json)
+- `notes`
+  [paris-runtime-driver.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.notes.md)
+- `scenario`
+  [fcu-no-build.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/scenarios/fcu-no-build.json)
+- `scenario`
+  [repeat-fcu-same-head.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/scenarios/repeat-fcu-same-head.json)
+- `raw log`
+  [paris-runtime-driver.log.geth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.log.geth.raw.log)
+- `raw log`
+  [paris-runtime-driver.log.reth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t07-runtime-driver/paris-runtime-driver.log.reth.raw.log)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T07` should no longer be phrased as a full Hive simulator task.
+- `T07` should use the thin Docker-backed runtime path already validated by
+  `T03`, `T04`, and `T05`, while keeping Hive responsibility limited to client
+  image build provenance.
+
 **Validation Method**
 
 - Confirm the driver is scoped only to the remaining custom-runtime gaps from
   `T06`.
-- Confirm the driver does not own client lifecycle beyond what Hive already
-  provides.
+- Confirm the driver does not expand into a bespoke multi-client testbed or
+  attempt to replace stock Hive/EEST ownership for `newPayload` baseline paths.
 - Confirm the driver scope matches the gap report from `T06`.
 
 ## `T08` Response Corpus Collection For `geth` And `reth`

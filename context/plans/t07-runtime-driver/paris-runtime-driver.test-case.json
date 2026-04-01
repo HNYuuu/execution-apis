@@ -1,0 +1,16 @@
+{
+  "task_id": "T07",
+  "expected_scenarios": [
+    "fcu-no-build",
+    "repeat-fcu-same-head"
+  ],
+  "allowed_scope_ids": [
+    "custom_runtime"
+  ],
+  "excluded_stock_only": [
+    "valid-newpayload",
+    "invalid-newpayload"
+  ],
+  "expected_head_number": "0x2d",
+  "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+}

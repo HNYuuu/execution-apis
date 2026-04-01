@@ -1,0 +1,54 @@
+{
+  "task_id": "T07",
+  "fork": "Paris",
+  "driver_mode": "thin-docker-runtime-over-hive-images",
+  "bootstrap_mode": "rlp_import_plus_headfcu",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "genesis_file": "tests/genesis.json",
+  "chain_file": "tests/chain.rlp",
+  "fork_env_file": "tests/forkenv.json",
+  "headfcu_file": "tests/headfcu.json",
+  "startup_timeout_ms": 120000,
+  "auth_timeout_ms": 60000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "scenario_files": [
+    "context/plans/t07-runtime-driver/scenarios/fcu-no-build.json",
+    "context/plans/t07-runtime-driver/scenarios/repeat-fcu-same-head.json"
+  ],
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 39545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 39551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 49545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 49551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t05-hive-reality-check/paris-hive-integration-memo.md",
+    "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+    "context/plans/t07-runtime-driver/scenarios/fcu-no-build.json",
+    "context/plans/t07-runtime-driver/scenarios/repeat-fcu-same-head.json"
+  ]
+}

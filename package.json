@@ -15,6 +15,7 @@
     "engine:rlp-bootstrap-smoke": "bash scripts/run-engine-rlp-bootstrap-smoke.sh",
     "engine:headfcu-bootstrap-smoke": "bash scripts/run-engine-headfcu-bootstrap-smoke.sh",
     "engine:stock-coverage-map": "bash scripts/run-engine-stock-coverage-map.sh",
+    "engine:runtime-scenario-driver": "bash scripts/run-engine-runtime-scenario-driver.sh",
     "engine:hive-reality-check": "bash scripts/run-engine-hive-reality-check.sh",
     "engine:hive-engine-smoke": "bash scripts/run-engine-hive-engine-smoke.sh",
     "clean": "rm -rf build && mkdir -p build",
