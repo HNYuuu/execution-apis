@@ -10,6 +10,7 @@
     "build:docs": "npm run build:spec && npm run docs:copy && npm run build:docusaurus",
     "lint": "npm run graphql:validate",
     "engine:static-check": "node scripts/engine-static-check.js",
+    "engine:mvp-oracle-gate": "bash scripts/run-engine-mvp-oracle-gate.sh",
     "clean": "rm -rf build && mkdir -p build",
     "graphql:schema": "node scripts/graphql.js",
     "graphql:validate": "node scripts/graphql-validate.js",

@@ -1,0 +1,75 @@
+{
+  "taskId": "T01",
+  "scenarios": [
+    {
+      "scenarioId": "rlp-bootstrap-smoke",
+      "hardInvariants": [],
+      "deferredRules": [],
+      "notes": "Bootstrap-only scenario. No Paris runtime hard invariants are promoted in the MVP oracle for this path."
+    },
+    {
+      "scenarioId": "headfcu-bootstrap-smoke",
+      "hardInvariants": [],
+      "deferredRules": [],
+      "notes": "Bootstrap-only scenario. FCU replay is used to establish comparable state, not yet to enforce runtime branch semantics."
+    },
+    {
+      "scenarioId": "fcu-no-build",
+      "hardInvariants": [
+        "PARIS-METHOD-FCU-17",
+        "PARIS-METHOD-FCU-22",
+        "PARIS-METHOD-FCU-23"
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-10",
+          "reason": "Sequencing requirement is deferred to later runtime-driver and normalization work."
+        },
+        {
+          "ruleId": "PARIS-METHOD-FCU-13",
+          "reason": "Rollback behavior requires fuller runtime execution context than T01 provides."
+        }
+      ],
+      "notes": "No-build branch is gated only by explicit-null acceptance and null-bearing response shape."
+    },
+    {
+      "scenarioId": "fcu-build-getpayload-newpayload",
+      "hardInvariants": [
+        "PARIS-METHOD-FCU-18",
+        "PARIS-METHOD-GP-01"
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-12",
+          "reason": "Build-process creation semantics are deferred until runtime state control exists."
+        },
+        {
+          "ruleId": "PARIS-ROUTINE-PV-06",
+          "reason": "Payload validation success semantics are deferred until runtime scenarios and normalization are implemented."
+        }
+      ],
+      "notes": "The MVP oracle only asserts payloadId-bearing response shape and getPayload return semantics for a known local payloadId."
+    },
+    {
+      "scenarioId": "repeat-fcu-same-head",
+      "hardInvariants": [
+        "PARIS-METHOD-FCU-03"
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-02",
+          "reason": "Skip-update and do-not-build behavior are deferred until repeated-call runtime traces are available."
+        }
+      ],
+      "notes": "The MVP oracle keeps only the valid-ancestor shortcut response shape as a hard invariant."
+    },
+    {
+      "scenarioId": "unknown-payloadid",
+      "hardInvariants": [
+        "PARIS-METHOD-GP-02"
+      ],
+      "deferredRules": [],
+      "notes": "The MVP oracle asserts only the unknown payload error branch, with error-message text deferred to normalization."
+    }
+  ]
+}

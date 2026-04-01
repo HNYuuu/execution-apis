@@ -8,6 +8,25 @@ executable task list. Each task is implementation-ready and includes:
 - `expected outputs`
 - `validation method`
 
+Default artifact expectation for every task:
+
+- `code`
+- `script`
+- `config`
+- `test case`
+- `log format`
+
+If a task intentionally omits one of these artifact types, the omission should
+be recorded in that task's output notes.
+
+Git requirement for every task:
+
+- each completed task must end with a dedicated git commit
+- the task record should include the commit hash and commit message once the
+  task is done
+- batching multiple completed tasks into one commit is discouraged because it
+  weakens rollback and auditability
+
 Status values:
 
 - `todo`
@@ -19,7 +38,7 @@ Status values:
 
 | Task ID | Task | Status |
 | --- | --- | --- |
-| `T01` | MVP oracle surface freeze and provenance gate | `todo` |
+| `T01` | MVP oracle surface freeze and provenance gate | `done` |
 | `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `todo` |
 | `T03` | `rlp-bootstrap-smoke` scenario | `todo` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
@@ -41,7 +60,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -66,6 +85,28 @@ Status values:
 - MVP rule subset for `Paris`
 - explicit list of allowed `hard invariants`
 - explicit list of deferred rules blocked by `unknown` provenance
+
+**Artifacts**
+
+- `code`
+  [engine-mvp-oracle-gate.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-mvp-oracle-gate.js)
+- `script`
+  [run-engine-mvp-oracle-gate.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-mvp-oracle-gate.sh)
+- `config`
+  [paris-mvp-oracle-gate.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.config.json)
+- `test case`
+  [paris-mvp-oracle-gate.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.test-case.json)
+- `log format`
+  [paris-mvp-oracle-gate.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log-format.md)
+- `log output`
+  [paris-mvp-oracle-gate.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log.json)
+- `decision log`
+  [paris-mvp-oracle-gate.decision-log.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.decision-log.md)
+
+**Git Record**
+
+- `commit`
+  pending
 
 **Validation Method**
 

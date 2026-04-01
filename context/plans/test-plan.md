@@ -65,6 +65,34 @@ The repository's existing `tests/*.io` format only covers the second step. It
 does not replace the Hive-based stateful differential stack required for the
 third step.
 
+## Artifact Discipline
+
+Every implementation step in this testing program must produce durable
+artifacts. Work is not considered complete if it exists only as an interactive
+experiment or undocumented local state.
+
+Minimum artifact set for each executable step:
+
+- `code`
+  implementation code or helper library code
+- `script`
+  runnable entrypoint or automation wrapper
+- `config`
+  configuration or bootstrap definition used by the step
+- `test case`
+  concrete scenario, fixture, or comparison input for the step
+- `log format`
+  documented output schema or log record format so results can be inspected and
+  diffed later
+
+If a step does not naturally require one of these artifact types, the plan for
+that step must explicitly say why it is omitted. The default expectation is to
+produce all five.
+
+Every completed step must also end with a dedicated git commit so the work can
+be reviewed and rolled back independently later. The commit is part of the step
+record, not an optional cleanup action at the end of a larger batch.
+
 ## Test Axes
 
 Every rule or test case should be tagged against one or more of the following
@@ -254,6 +282,8 @@ exchange into executable conformance fixtures.
 
 - `Single-call conformance fixture set`
 - `Stateful-only rule list`
+- artifact set for each maintained fixture path:
+  `code`, `script`, `config`, `test case`, and `log format`
 
 ## Phase 5: Hive-First EL Differential MVP
 
@@ -323,6 +353,8 @@ see [el-differential-testing-plan.md](./el-differential-testing-plan.md).
 - fixed request-sequence scenarios
 - response normalization and offline pairwise differential comparison
 - first markdown-derived boundary scenario library
+- artifact set for every MVP step:
+  `code`, `script`, `config`, `test case`, and `log format`
 
 ## Phase 6: Client Expansion
 

@@ -1,0 +1,34 @@
+{
+  "taskId": "T01",
+  "rulesFile": "context/rules/paris-atomic-rules.md",
+  "provenanceByRuleId": {
+    "PARIS-METHOD-FCU-17": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines the valid-head no-build response branch in repository-owned markdown."
+    },
+    "PARIS-METHOD-FCU-18": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines the valid-head build-started response branch and payloadId-bearing shape."
+    },
+    "PARIS-METHOD-FCU-22": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines that the second positional parameter accepts explicit null."
+    },
+    "PARIS-METHOD-FCU-23": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines that payloadId accepts explicit null in the no-build branch."
+    },
+    "PARIS-METHOD-GP-01": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines the engine_getPayloadV1 return semantics for a known build process."
+    },
+    "PARIS-METHOD-GP-02": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines the unknown payload error branch for engine_getPayloadV1."
+    },
+    "PARIS-METHOD-FCU-03": {
+      "category": "repository-local",
+      "rationale": "The Paris Engine API specification directly defines the valid-ancestor shortcut response shape with payloadId null."
+    }
+  }
+}

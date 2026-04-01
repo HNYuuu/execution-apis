@@ -1,0 +1,169 @@
+{
+  "taskId": "T01",
+  "generatedAt": "2026-04-01T05:37:49.900Z",
+  "status": "pass",
+  "inputs": {
+    "rulesFile": "context/rules/paris-atomic-rules.md",
+    "configFile": "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.config.json",
+    "testCaseFile": "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.test-case.json"
+  },
+  "validations": {
+    "allHardInvariantsHaveKnownProvenance": true,
+    "allReferencedRulesExist": true
+  },
+  "summary": {
+    "scenarioCount": 6,
+    "approvedHardInvariantCount": 7,
+    "deferredRuleCount": 5
+  },
+  "scenarios": [
+    {
+      "scenarioId": "rlp-bootstrap-smoke",
+      "notes": "Bootstrap-only scenario. No Paris runtime hard invariants are promoted in the MVP oracle for this path.",
+      "approvedHardInvariants": [],
+      "deferredRules": []
+    },
+    {
+      "scenarioId": "headfcu-bootstrap-smoke",
+      "notes": "Bootstrap-only scenario. FCU replay is used to establish comparable state, not yet to enforce runtime branch semantics.",
+      "approvedHardInvariants": [],
+      "deferredRules": []
+    },
+    {
+      "scenarioId": "fcu-no-build",
+      "notes": "No-build branch is gated only by explicit-null acceptance and null-bearing response shape.",
+      "approvedHardInvariants": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-17",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines the valid-head no-build response branch in repository-owned markdown.",
+          "projection": "projected",
+          "testLayer": "single-call, stateful",
+          "ruleText": "A valid head without a started build process must yield `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`.",
+          "source": "paris.md:237"
+        },
+        {
+          "ruleId": "PARIS-METHOD-FCU-22",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines that the second positional parameter accepts explicit null.",
+          "projection": "projected",
+          "testLayer": "schema-static, single-call",
+          "ruleText": "The second positional parameter accepts explicit `null` as well as `PayloadAttributesV1`.",
+          "source": "paris.md:195-196"
+        },
+        {
+          "ruleId": "PARIS-METHOD-FCU-23",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines that payloadId accepts explicit null in the no-build branch.",
+          "projection": "projected",
+          "testLayer": "schema-static, single-call",
+          "ruleText": "`ForkchoiceUpdatedResponseV1.payloadId` accepts explicit `null`.",
+          "source": "paris.md:206"
+        }
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-10",
+          "deferReason": "Sequencing requirement is deferred to later runtime-driver and normalization work.",
+          "projection": "md-only",
+          "testLayer": "stateful",
+          "ruleText": "`payloadAttributes` must be processed only after successful forkchoice application and only when `headBlockHash` is `VALID`.",
+          "source": "paris.md:225"
+        },
+        {
+          "ruleId": "PARIS-METHOD-FCU-13",
+          "deferReason": "Rollback behavior requires fuller runtime execution context than T01 provides.",
+          "projection": "md-only",
+          "testLayer": "stateful",
+          "ruleText": "If `payloadAttributes` validation fails, the forkchoice update must not be rolled back.",
+          "source": "paris.md:231"
+        }
+      ]
+    },
+    {
+      "scenarioId": "fcu-build-getpayload-newpayload",
+      "notes": "The MVP oracle only asserts payloadId-bearing response shape and getPayload return semantics for a known local payloadId.",
+      "approvedHardInvariants": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-18",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines the valid-head build-started response branch and payloadId-bearing shape.",
+          "projection": "projected",
+          "testLayer": "single-call, stateful",
+          "ruleText": "A valid head with a started build process must yield `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: buildProcessId}`.",
+          "source": "paris.md:238"
+        },
+        {
+          "ruleId": "PARIS-METHOD-GP-01",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines the engine_getPayloadV1 return semantics for a known build process.",
+          "projection": "md-only",
+          "testLayer": "stateful",
+          "ruleText": "Given `payloadId`, the client must return the most recent payload version available in the corresponding build process at call time.",
+          "source": "paris.md:260"
+        }
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-12",
+          "deferReason": "Build-process creation semantics are deferred until runtime state control exists.",
+          "projection": "md-only",
+          "testLayer": "stateful",
+          "ruleText": "Valid `payloadAttributes` must start a build process on top of `headBlockHash` and produce `buildProcessId`.",
+          "source": "paris.md:229"
+        },
+        {
+          "ruleId": "PARIS-ROUTINE-PV-06",
+          "deferReason": "Payload validation success semantics are deferred until runtime scenarios and normalization are implemented.",
+          "projection": "md-only",
+          "testLayer": "single-call",
+          "ruleText": "If payload validation succeeds, the response must be `{status: VALID, latestValidHash: payload.blockHash}`.",
+          "source": "paris.md:103-104"
+        }
+      ]
+    },
+    {
+      "scenarioId": "repeat-fcu-same-head",
+      "notes": "The MVP oracle keeps only the valid-ancestor shortcut response shape as a hard invariant.",
+      "approvedHardInvariants": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-03",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines the valid-ancestor shortcut response shape with payloadId null.",
+          "projection": "projected",
+          "testLayer": "single-call, stateful",
+          "ruleText": "In the valid-ancestor shortcut case, the response must be `{payloadStatus: {status: VALID, latestValidHash: headBlockHash, validationError: null}, payloadId: null}`.",
+          "source": "paris.md:213"
+        }
+      ],
+      "deferredRules": [
+        {
+          "ruleId": "PARIS-METHOD-FCU-02",
+          "deferReason": "Skip-update and do-not-build behavior are deferred until repeated-call runtime traces are available.",
+          "projection": "md-only",
+          "testLayer": "stateful",
+          "ruleText": "If `headBlockHash` references a `VALID` ancestor of the canonical head, the client may skip the forkchoice update and must not start payload building.",
+          "source": "paris.md:213"
+        }
+      ]
+    },
+    {
+      "scenarioId": "unknown-payloadid",
+      "notes": "The MVP oracle asserts only the unknown payload error branch, with error-message text deferred to normalization.",
+      "approvedHardInvariants": [
+        {
+          "ruleId": "PARIS-METHOD-GP-02",
+          "provenanceCategory": "repository-local",
+          "provenanceRationale": "The Paris Engine API specification directly defines the unknown payload error branch for engine_getPayloadV1.",
+          "projection": "projected",
+          "testLayer": "single-call",
+          "ruleText": "Unknown `payloadId` must yield error `-38001 Unknown payload`.",
+          "source": "paris.md:262"
+        }
+      ],
+      "deferredRules": []
+    }
+  ],
+  "missingRules": [],
+  "unknownHardInvariants": []
+}

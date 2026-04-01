@@ -19,6 +19,24 @@ approach:
 The target remains `EL client Engine API server-side behavior`. The change is
 about implementation strategy and engineering cost, not about test intent.
 
+## Artifact Rule
+
+Every implementation step in the Hive-first MVP must emit durable artifacts.
+The minimum artifact set per step is:
+
+- `code`
+- `script`
+- `config`
+- `test case`
+- `log format`
+
+If a step omits one of these, the omission must be explicit and justified in
+the step output. The default expectation is to produce all five.
+
+Every completed step must also produce a dedicated git commit. The commit hash
+and commit message are part of the execution record for that step and serve as
+the rollback anchor for later iterations.
+
 ## Why Hive-First
 
 The repository already uses the same artifact model as Hive:
