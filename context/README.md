@@ -24,10 +24,11 @@ Top level is now intentionally small. Detailed material is grouped by purpose.
 
 Read in this order:
 
-1. `snapshots/2026-03-26-differential-testing-context.md`
+1. `snapshots/2026-04-01-hive-mvp-progress.md`
 2. `plans/el-differential-testing-plan.md`
 3. `plans/test-plan.md`
 4. `plans/hive-first-mvp-task-tracker.md`
+5. `snapshots/2026-03-26-differential-testing-context.md`
 
 Then pick one branch:
 
@@ -73,4 +74,4 @@ Then pick one branch:
 Older snapshots are kept under `snapshots/` for auditability, but new work
 should normally start from:
 
-- `snapshots/2026-03-26-differential-testing-context.md`
+- `snapshots/2026-04-01-hive-mvp-progress.md`

@@ -229,7 +229,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `ba15ce4` - `Complete T03 real runtime rlp bootstrap smoke`
 
 **Validation Method**
 
