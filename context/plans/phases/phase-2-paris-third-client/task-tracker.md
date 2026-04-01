@@ -42,7 +42,7 @@ Status values:
 
 | Task ID | Task | Status |
 | --- | --- | --- |
-| `P2-T01` | Third-client scope freeze and comparison-discipline gate | `todo` |
+| `P2-T01` | Third-client scope freeze and comparison-discipline gate | `done` |
 | `P2-T02` | `nethermind` acquisition and startup contract | `todo` |
 | `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `todo` |
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `todo` |
@@ -57,7 +57,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -81,6 +81,28 @@ Status values:
 - phase-2 scope memo
 - explicit list of reused phase-1 comparison-discipline rules
 - explicit list of phase-2-only open questions
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-scope-gate.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-scope-gate.js)
+- `script`
+  [run-engine-phase2-scope-gate.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-scope-gate.sh)
+- `config`
+  [paris-phase2-scope-gate.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.config.json)
+- `test case`
+  [paris-phase2-scope-gate.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.test-case.json)
+- `log format`
+  [paris-phase2-scope-gate.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.log-format.md)
+- `log output`
+  [paris-phase2-scope-gate.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.log.json)
+- `scope memo`
+  [paris-phase2-scope-gate.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

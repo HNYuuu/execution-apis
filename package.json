@@ -26,6 +26,7 @@
     "engine:mvp-acceptance-review": "bash scripts/run-engine-mvp-acceptance-review.sh",
     "engine:hive-reality-check": "bash scripts/run-engine-hive-reality-check.sh",
     "engine:hive-engine-smoke": "bash scripts/run-engine-hive-engine-smoke.sh",
+    "engine:phase2-scope-gate": "bash scripts/run-engine-phase2-scope-gate.sh",
     "clean": "rm -rf build && mkdir -p build",
     "graphql:schema": "node scripts/graphql.js",
     "graphql:validate": "node scripts/graphql-validate.js",

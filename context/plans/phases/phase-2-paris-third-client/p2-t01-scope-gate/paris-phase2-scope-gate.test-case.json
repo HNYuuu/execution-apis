@@ -1,0 +1,25 @@
+{
+  "task_id": "P2-T01",
+  "expected_phase": "phase-2",
+  "expected_fork": "Paris",
+  "expected_target_new_client": "nethermind",
+  "expected_scenarios": [
+    "rlp-bootstrap-smoke",
+    "headfcu-bootstrap-smoke",
+    "fcu-no-build",
+    "fcu-build-getpayload-newpayload",
+    "repeat-fcu-same-head",
+    "unknown-payloadid"
+  ],
+  "expected_constraint_ids": [
+    "P2-C01",
+    "P2-C02",
+    "P2-C03",
+    "P2-C04",
+    "P2-C05",
+    "P2-C06",
+    "P2-C07"
+  ],
+  "forbid_new_scenarios_before_full_surface": true,
+  "expected_phase1_acceptance_decision": "go"
+}

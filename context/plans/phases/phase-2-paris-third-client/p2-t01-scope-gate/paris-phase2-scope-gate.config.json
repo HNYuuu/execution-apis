@@ -1,0 +1,76 @@
+{
+  "task_id": "P2-T01",
+  "phase": "phase-2",
+  "fork": "Paris",
+  "target_new_client": "nethermind",
+  "phase1_readme_file": "context/plans/phases/phase-1-paris-mvp/README.md",
+  "phase1_tracker_file": "context/plans/phases/phase-1-paris-mvp/hive-first-mvp-task-tracker.md",
+  "phase1_insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+  "phase1_acceptance_decision_file": "context/plans/t15-mvp-acceptance/paris-mvp-acceptance.decision.json",
+  "accepted_phase1_scenarios": [
+    "rlp-bootstrap-smoke",
+    "headfcu-bootstrap-smoke",
+    "fcu-no-build",
+    "fcu-build-getpayload-newpayload",
+    "repeat-fcu-same-head",
+    "unknown-payloadid"
+  ],
+  "required_insight_ids": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07"
+  ],
+  "comparison_discipline_rules": [
+    {
+      "id": "P2-C01",
+      "insight_id": "I01",
+      "title": "Representation-only object-key order stays in normalization",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C02",
+      "insight_id": "I02",
+      "title": "Null-vs-omitted equivalence stays deferred unless phase-2 collects evidence",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C03",
+      "insight_id": "I03",
+      "title": "Paris scenarios must keep fork-era fixture alignment",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C04",
+      "insight_id": "I04",
+      "title": "Client-local runtime values must not become cross-client diff keys",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C05",
+      "insight_id": "I05",
+      "title": "newPayload success is compared as a structured success category",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C06",
+      "insight_id": "I06",
+      "title": "feeRecipient remains outside hard equality unless a later fork narrows it",
+      "hard_constraint": true
+    },
+    {
+      "id": "P2-C07",
+      "insight_id": "I07",
+      "title": "unknown-payloadid keeps the provenance-aware mutated-real-payloadId input class",
+      "hard_constraint": true
+    }
+  ],
+  "phase2_open_questions": [
+    "Which concrete nethermind image tag or build path should become the pinned phase-2 runtime target?",
+    "Does nethermind require any client-specific chain-import or startup contract beyond the accepted geth/reth baseline?",
+    "Do nethermind runtime outputs expose any new representation-only differences that should extend normalization without relaxing semantics?"
+  ]
+}
