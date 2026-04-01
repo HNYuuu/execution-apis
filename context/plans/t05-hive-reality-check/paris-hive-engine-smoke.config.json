@@ -1,0 +1,31 @@
+{
+  "task_id": "T05",
+  "hive_root": "/tmp/hive",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "simulator": "ethereum/engine",
+  "sim_limit": "engine-exchange-capabilities/",
+  "sim_parallelism": 1,
+  "client_check_timeout": "10m",
+  "sim_timeout": "30m",
+  "required_artifacts": [
+    "/tmp/hive/hive",
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json"
+  ],
+  "clients": [
+    {
+      "client": "go-ethereum",
+      "results_root": "/tmp/hive-results-goethereum-2"
+    },
+    {
+      "client": "reth",
+      "results_root": "/tmp/hive-results-reth"
+    }
+  ],
+  "notes": [
+    "This smoke run depends on a local compatibility patch applied to /tmp/hive for Docker Desktop IP discovery.",
+    "The smoke suite proves a real authenticated Engine API request path for both go-ethereum and reth."
+  ]
+}

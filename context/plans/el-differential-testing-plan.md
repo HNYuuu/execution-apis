@@ -159,6 +159,21 @@ This spike exists to reduce hidden integration cost. Its output should be a
 short per-client startup memo and one proven request path, not a polished
 framework.
 
+## Runtime Reality Check
+
+Before treating any bootstrap scenario as complete, run a small environment
+probe that answers three concrete questions:
+
+- is Docker installed and is the daemon actually reachable
+- is there a workable path to invoke or install Hive
+- is there a concrete acquisition path for runnable `geth` and `reth`
+  targets in the controlled environment
+
+This step is intentionally earlier than full Hive integration. Its purpose is
+to prevent offline assumptions from accumulating into later scenario, driver,
+and normalization work. A blocked result is acceptable if it clearly records
+the missing prerequisite and the next action needed to unblock it.
+
 ## State Bootstrap Model
 
 Use file-based bootstrap only for persistent, client-comparable state. Use
@@ -392,15 +407,16 @@ The first implementation explicitly does not cover:
 
 The first implementation should proceed in this order:
 
-1. bootstrap validation with `rlp-bootstrap-smoke` and
+1. runtime reality check for Docker, Hive, and client acquisition
+2. bootstrap validation with `rlp-bootstrap-smoke` and
    `headfcu-bootstrap-smoke`
-2. Hive integration spike for JWT wiring, artifact injection, and startup flags
-3. stock Hive or EEST coverage mapping and gap report
-4. thin HTTP-based scenario-driver prototype inside the Hive environment
-5. normalization prototype on sampled `geth` and `reth` responses
-6. repeated-run determinism probe on the bootstrap and early scenario set
-7. thin custom runtime scenarios
-8. offline cross-client differential comparison
+3. Hive integration spike for JWT wiring, artifact injection, and startup flags
+4. stock Hive or EEST coverage mapping and gap report
+5. thin HTTP-based scenario-driver prototype inside the Hive environment
+6. normalization prototype on sampled `geth` and `reth` responses
+7. repeated-run determinism probe on the bootstrap and early scenario set
+8. thin custom runtime scenarios
+9. offline cross-client differential comparison
 
 This ordering is intentional. It reduces the risk of building a complete custom
 scenario layer before knowing whether the comparison model is stable enough to
@@ -416,6 +432,8 @@ produce useful signals.
 - verify expected head number and head hash
 - verify the same artifacts produce the same observable pre-state across
   `geth` and `reth`
+- treat offline fixture-derived baselines only as preparation, not as final
+  completion evidence
 
 #### `headfcu-bootstrap-smoke`
 

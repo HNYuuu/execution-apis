@@ -13,6 +13,8 @@
     "engine:mvp-oracle-gate": "bash scripts/run-engine-mvp-oracle-gate.sh",
     "engine:bootstrap-contract-check": "bash scripts/run-engine-bootstrap-contract-check.sh",
     "engine:rlp-bootstrap-smoke": "bash scripts/run-engine-rlp-bootstrap-smoke.sh",
+    "engine:hive-reality-check": "bash scripts/run-engine-hive-reality-check.sh",
+    "engine:hive-engine-smoke": "bash scripts/run-engine-hive-engine-smoke.sh",
     "clean": "rm -rf build && mkdir -p build",
     "graphql:schema": "node scripts/graphql.js",
     "graphql:validate": "node scripts/graphql-validate.js",

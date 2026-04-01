@@ -1,0 +1,13 @@
+{
+  "task_id": "T05",
+  "fork": "Paris",
+  "clients": ["geth", "reth"],
+  "required_tools": ["docker", "hive", "brew"],
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json"
+  ]
+}

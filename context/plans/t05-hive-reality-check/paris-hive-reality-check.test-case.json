@@ -1,0 +1,5 @@
+{
+  "task_id": "T05",
+  "required_tools": ["docker", "hive", "brew"],
+  "acceptable_runtime_states": ["ready", "blocked"]
+}

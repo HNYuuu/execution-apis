@@ -314,18 +314,25 @@ that Hive already solves.
 
 ### Additional entry criteria
 
-Before full Phase 5 implementation, complete two targeted validation steps:
+Before full Phase 5 implementation, complete a runtime reality check plus two
+targeted validation steps:
 
-1. `Normalization prototype`
+1. `Runtime reality check`
+   Prove that a controlled runtime environment is available for real client
+   experiments. At minimum, confirm Docker daemon access, a workable path to
+   Hive installation or invocation, and a concrete plan for acquiring runnable
+   `geth` and `reth` targets.
+2. `Normalization prototype`
    Build a small response corpus from `geth` and `reth` for the planned MVP
    scenarios and validate the first normalization rules against real outputs.
-2. `Determinism probe`
+3. `Determinism probe`
    Re-run the same `rlp_import_plus_headfcu` bootstrap and early scenario set
    multiple times per client to confirm stable within-client outcomes before
    relying on offline cross-client artifact diff.
 
 Phase 5 should not proceed directly from plan to full simulator work without
-these two checks.
+these checks. Offline baselines are allowed as preparation artifacts, but they
+do not replace a real runtime gate.
 
 ### Oracle policy
 

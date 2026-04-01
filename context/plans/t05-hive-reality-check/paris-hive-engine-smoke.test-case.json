@@ -1,0 +1,9 @@
+{
+  "task_id": "T05",
+  "expected_clients": ["go-ethereum", "reth"],
+  "expected_result": {
+    "suites": 1,
+    "tests": 5,
+    "failed": 0
+  }
+}

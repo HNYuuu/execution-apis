@@ -42,7 +42,7 @@ Status values:
 | `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `done` |
 | `T03` | `rlp-bootstrap-smoke` scenario | `in_progress` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
-| `T05` | Hive integration spike for JWT wiring and artifact injection | `todo` |
+| `T05` | Runtime reality check plus Hive integration spike | `done` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `todo` |
 | `T07` | Thin HTTP-based scenario-driver prototype in Hive | `todo` |
 | `T08` | Response corpus collection for `geth` and `reth` | `todo` |
@@ -199,7 +199,7 @@ Status values:
 
 - MVP baseline checker implemented.
 - Imported-head reference fixed from repository fixtures.
-- Real per-client execution remains pending `T05` and `T07`.
+- Real per-client execution now depends on the scenario-driver path in `T07`.
 
 **Artifacts**
 
@@ -217,6 +217,11 @@ Status values:
   [paris-rlp-bootstrap-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json)
 - `notes`
   [paris-rlp-bootstrap-smoke.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.notes.md)
+
+**Git Record**
+
+- `commit`
+  `c738763` - `Add T03 rlp bootstrap smoke baseline artifacts`
 
 **Validation Method**
 
@@ -256,11 +261,11 @@ Status values:
 - Confirm both clients land in a comparable `B2` state according to the
   bootstrap confirmation rule.
 
-## `T05` Hive Integration Spike For JWT Wiring And Artifact Injection
+## `T05` Runtime Reality Check Plus Hive Integration Spike
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -268,25 +273,82 @@ Status values:
 - bootstrap definitions from `T02`
 - Hive documentation and local invocation notes
 - client startup requirements for `geth` and `reth`
+- local Docker environment state
 
 **Operation Steps**
 
-1. Confirm how Hive passes `chain.rlp` and related artifacts to the target
+1. Probe whether Docker is installed and whether the daemon is reachable.
+2. Probe whether `Hive` is already installed or whether a concrete install
+   path exists.
+3. Confirm how Hive passes `chain.rlp` and related artifacts to the target
    client environment.
-2. Confirm JWT-authenticated Engine API access for `geth`.
-3. Confirm JWT-authenticated Engine API access for `reth`.
-4. Record per-client startup flags, artifact locations, and one proven Engine
+4. Confirm JWT-authenticated Engine API access for `geth`.
+5. Confirm JWT-authenticated Engine API access for `reth`.
+6. Record per-client startup flags, artifact locations, and one proven Engine
    API request path.
 
 **Expected Outputs**
 
+- runtime reality-check log for Docker and Hive prerequisites
 - Hive integration memo for `geth`
 - Hive integration memo for `reth`
 - one known-good Engine API request path per client
 - explicit list of unresolved integration blockers, if any
 
+**Current Progress**
+
+- Docker CLI found locally.
+- Docker Desktop app found locally.
+- Docker endpoint identified as `unix:///Users/ningyuhe/.docker/run/docker.sock`.
+- Official Hive repository cloned to `/tmp/hive`.
+- Hive binary built successfully with `CGO_ENABLED=0`.
+- Minimal real `ethereum/engine` smoke runs succeeded for both
+  `go-ethereum` and `reth`.
+- Local Docker Desktop compatibility patch captured as a repository artifact.
+- `hive` is runnable from the cloned workspace, but not installed on `$PATH`.
+
+**Artifacts**
+
+- `code`
+  [engine-hive-reality-check.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-hive-reality-check.js)
+- `script`
+  [run-engine-hive-reality-check.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-hive-reality-check.sh)
+- `config`
+  [paris-hive-reality-check.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-reality-check.config.json)
+- `test case`
+  [paris-hive-reality-check.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-reality-check.test-case.json)
+- `log format`
+  [paris-hive-reality-check.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-reality-check.log-format.md)
+- `log output`
+  [paris-hive-reality-check.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-reality-check.log.json)
+- `notes`
+  [paris-hive-reality-check.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-reality-check.notes.md)
+- `code`
+  [engine-hive-engine-smoke.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-hive-engine-smoke.js)
+- `script`
+  [run-engine-hive-engine-smoke.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-hive-engine-smoke.sh)
+- `config`
+  [paris-hive-engine-smoke.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.config.json)
+- `test case`
+  [paris-hive-engine-smoke.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.test-case.json)
+- `log format`
+  [paris-hive-engine-smoke.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log-format.md)
+- `log output`
+  [paris-hive-engine-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log.json)
+- `memo`
+  [paris-hive-integration-memo.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-integration-memo.md)
+- `patch`
+  [hive-docker-desktop-compat.patch](/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/hive-docker-desktop-compat.patch)
+
+**Git Record**
+
+- `commit`
+  pending
+
 **Validation Method**
 
+- Confirm the probe identifies whether Docker and Hive are genuinely usable,
+  not just present on `$PATH`.
 - Confirm the memo names concrete JWT wiring and artifact injection details.
 - Confirm at least one authenticated Engine API request succeeds per client in
   the target environment.

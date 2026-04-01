@@ -1,0 +1,73 @@
+{
+  "taskId": "T05",
+  "generatedAt": "2026-04-01T07:17:03.784Z",
+  "status": "pass",
+  "executionMode": "real-runtime",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.test-case.json"
+  },
+  "summary": {
+    "simulator": "ethereum/engine",
+    "sim_limit": "engine-exchange-capabilities/",
+    "clients": [
+      "go-ethereum",
+      "reth"
+    ],
+    "expected_result": {
+      "suites": 1,
+      "tests": 5,
+      "failed": 0
+    }
+  },
+  "validations": [
+    {
+      "check": "patched local Hive root is available",
+      "status": "pass",
+      "details": {
+        "hive_root": "/tmp/hive",
+        "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock"
+      }
+    },
+    {
+      "check": "go-ethereum and reth minimal engine smoke runs passed",
+      "status": "pass",
+      "details": [
+        {
+          "client": "go-ethereum",
+          "summary": {
+            "suites": 1,
+            "tests": 5,
+            "failed": 0,
+            "summaryLine": "Apr  1 15:16:56.079 INF simulation ethereum/engine finished suites=1 tests=5 failed=0"
+          },
+          "results_root": "/tmp/hive-results-goethereum-2",
+          "log_files": [
+            "/tmp/hive-results-goethereum-2/1775025269-simulator-ae0d46380e60c624a4c09e981b4496a537d77ef03dbe470a73a1e947f362ec9c.log",
+            "/tmp/hive-results-goethereum-2/1775025711-simulator-166b1b9466b45835940a18b43cfd11934db4306ab42b197237c3522fc0a7ef87.log",
+            "/tmp/hive-results-goethereum-2/1775027808-simulator-d2ecc0721363ac158b417f7ad638a8e55d554e6b093b5e398bab49eb84515070.log"
+          ]
+        },
+        {
+          "client": "reth",
+          "summary": {
+            "suites": 1,
+            "tests": 5,
+            "failed": 0,
+            "summaryLine": "Apr  1 15:17:03.783 INF simulation ethereum/engine finished suites=1 tests=5 failed=0"
+          },
+          "results_root": "/tmp/hive-results-reth",
+          "log_files": [
+            "/tmp/hive-results-reth/1775025526-simulator-cab3ba29468b0dd661fd3f1ed4d90478707b6e1b4339af983701efe045cae674.log",
+            "/tmp/hive-results-reth/1775025718-simulator-94a88a715a5ca591391edd3363d26720bee3a25ea07c93d4aa8b50183fc6b700.log",
+            "/tmp/hive-results-reth/1775027816-simulator-cd46815918830d5bbfe30dfeba855af0400f9d0a559853cfaa0a34042d23633e.log"
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "This smoke run depends on a local compatibility patch applied to /tmp/hive for Docker Desktop IP discovery.",
+    "The smoke suite proves a real authenticated Engine API request path for both go-ethereum and reth."
+  ]
+}
