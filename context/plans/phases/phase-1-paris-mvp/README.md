@@ -45,7 +45,7 @@ Phase 1 is accepted only if:
 ## Canonical Artifacts
 
 - [test-plan.md](/Users/ningyuhe/Documents/execution-apis/context/plans/test-plan.md)
-- [el-differential-testing-plan.md](/Users/ningyuhe/Documents/execution-apis/context/plans/el-differential-testing-plan.md)
-- [hive-first-mvp-task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/hive-first-mvp-task-tracker.md)
-- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/paris-differential-insights.md)
+- [el-differential-testing-plan.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/el-differential-testing-plan.md)
+- [hive-first-mvp-task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/hive-first-mvp-task-tracker.md)
+- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md)
 - [paris-mvp-acceptance.decision.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.decision.json)

@@ -10,7 +10,7 @@
     "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
     "context/plans/t10-determinism-probe/paris-determinism-probe.report.json",
     "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
-    "context/plans/paris-differential-insights.md"
+    "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
   ],
   "inputs": {
     "t01_log_file": "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.log.json",
@@ -22,6 +22,6 @@
     "t09_log_file": "context/plans/t09-normalization-profile/paris-normalization-profile.log.json",
     "t10_report_file": "context/plans/t10-determinism-probe/paris-determinism-probe.report.json",
     "t14_log_file": "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.log.json",
-    "insights_file": "context/plans/paris-differential-insights.md"
+    "insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
   }
 }

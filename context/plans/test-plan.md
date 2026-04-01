@@ -351,7 +351,8 @@ do not replace a real runtime gate.
   testing.
 
 For concrete architecture, interfaces, state recipes, and scenario definitions,
-see [el-differential-testing-plan.md](./el-differential-testing-plan.md).
+see
+[phase-1-paris-mvp/el-differential-testing-plan.md](./phases/phase-1-paris-mvp/el-differential-testing-plan.md).
 
 ### Deliverables
 

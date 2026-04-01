@@ -2,7 +2,7 @@
   "task_id": "T14",
   "fork": "Paris",
   "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
-  "insights_file": "context/plans/paris-differential-insights.md",
+  "insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
   "required_artifacts": [
     "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
     "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json",
@@ -15,7 +15,7 @@
     "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json",
     "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.config.json",
     "context/plans/t09-normalization-profile/paris-normalization-profile.json",
-    "context/plans/paris-differential-insights.md"
+    "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
   ],
   "scenarios": [
     {

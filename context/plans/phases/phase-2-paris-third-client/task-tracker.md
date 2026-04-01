@@ -63,8 +63,8 @@ Status values:
 
 - [phase-2 README.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/README.md)
 - [phase-1 README.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/README.md)
-- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/paris-differential-insights.md)
-- [hive-first-mvp-task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/hive-first-mvp-task-tracker.md)
+- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md)
+- [hive-first-mvp-task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/hive-first-mvp-task-tracker.md)
 
 **Operation Steps**
 
@@ -198,7 +198,7 @@ Status values:
 - accepted phase-1 runtime scenarios for:
   `fcu-no-build`,
   `repeat-fcu-same-head`
-- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/paris-differential-insights.md)
+- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md)
 - outputs of `P2-T04`
 
 **Operation Steps**
@@ -266,7 +266,7 @@ Status values:
 
 - outputs of `P2-T04` through `P2-T06`
 - [paris-normalization-profile.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.json)
-- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/paris-differential-insights.md)
+- [paris-differential-insights.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md)
 
 **Operation Steps**
 

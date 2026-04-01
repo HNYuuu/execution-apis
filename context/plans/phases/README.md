@@ -25,6 +25,8 @@ in `context/plans/t01-*` through `context/plans/t15-*`.
 ## File-Architecture Rule
 
 - phase-level goal and acceptance live under `plans/phases/`
+- phase-owned source-of-truth plan documents should live under the owning phase
+  directory rather than under `plans/`
 - phase-local future task trackers should live under the corresponding phase
   directory
 - implementation artifacts remain under task-specific directories unless a

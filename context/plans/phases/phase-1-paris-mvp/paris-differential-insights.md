@@ -38,7 +38,7 @@ Observed in:
 
 - [T11 no-build notes](/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.notes.md)
 - [T12 build/getPayload/newPayload notes](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.notes.md)
-- [task tracker T12 section](/Users/ningyuhe/Documents/execution-apis/context/plans/hive-first-mvp-task-tracker.md#L957)
+- [task tracker T12 section](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/hive-first-mvp-task-tracker.md#L957)
 
 Insight:
 

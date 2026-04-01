@@ -64,9 +64,9 @@ Status values:
 
 **Inputs**
 
-- [test-plan.md](./test-plan.md)
+- [test-plan.md](../../test-plan.md)
 - [el-differential-testing-plan.md](./el-differential-testing-plan.md)
-- [paris-atomic-rules.md](../rules/paris-atomic-rules.md)
+- [paris-atomic-rules.md](../../../rules/paris-atomic-rules.md)
 - `Paris` MVP scenario surface:
   `rlp-bootstrap-smoke`, `headfcu-bootstrap-smoke`, `fcu-no-build`,
   `fcu-build-getpayload-newpayload`, `repeat-fcu-same-head`,
