@@ -363,6 +363,52 @@ see [el-differential-testing-plan.md](./el-differential-testing-plan.md).
 - artifact set for every MVP step:
   `code`, `script`, `config`, `test case`, and `log format`
 
+### Current status
+
+The `Paris + geth/reth` Hive-first MVP is now complete and has passed the
+explicit go/no-go checkpoint in
+[paris-mvp-acceptance.decision.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t15-mvp-acceptance/paris-mvp-acceptance.decision.json).
+
+What is complete:
+
+- provenance-gated Paris MVP oracle subset
+- reusable bootstrap definitions for `B0` through `B4`
+- real runtime `rlp-bootstrap-smoke` and `headfcu-bootstrap-smoke`
+- real runtime custom scenarios for:
+  `fcu-no-build`,
+  `fcu-build-getpayload-newpayload`,
+  `repeat-fcu-same-head`,
+  `unknown-payloadid`
+- normalization profile `v0`
+- repeated-run determinism probe for the early bootstrap and scenario set
+- offline `ResultEnvelope` generation and pairwise diff for the Paris
+  `geth/reth` surface
+- explicit `go` decision for the Paris MVP
+
+### Remaining gap after the MVP
+
+The main gap is no longer “can the Hive-first design work?”. That question is
+answered. The remaining gap is between the accepted Paris MVP and the broader
+original program:
+
+- only `geth` and `reth` are in the differential matrix today
+- only `Paris` is in the runtime differential matrix today
+- stock Hive or EEST ownership for `valid-newpayload` and `invalid-newpayload`
+  is mapped, but those stock-owned paths are not yet serialized into the local
+  `ResultEnvelope` pipeline
+- normalization remains intentionally conservative:
+  `null_vs_omitted_when_explicitly_allowed` and
+  `non_semantic_error_text` are still deferred until more corpus evidence
+  exists
+- `unknown-payloadid` currently covers only the provenance-aware
+  “mutated real Paris V1 payloadId” class; arbitrary `DATA(8)` inputs are
+  tracked as implementation-behavior observations rather than part of the
+  normative comparison bucket
+- the MVP still uses a thin HTTP-based custom runtime layer rather than a
+  packaged custom Hive simulator, which is acceptable for the current scope but
+  remains an engineering gap if the surface grows
+- no blob, payload-bodies, or generated-state-machine coverage is in the MVP
+
 ## Phase 6: Client Expansion
 
 ### Purpose
@@ -386,20 +432,27 @@ and the MVP result buckets are trustworthy.
 - `Expanded fork matrix`
 - `Differential discrepancy report`
 
+### Entry condition
+
+Phase 6 is now unblocked because the `Paris + geth/reth` MVP has a `go`
+decision and a stable offline diff path. Expansion should still remain
+incremental:
+
+1. add one new client to the existing Paris pipeline
+2. rerun the same normalization, determinism, and offline diff discipline
+3. only then widen fork coverage or scenario families
+
 ## Immediate Next Step
 
-Design and review the Hive-first MVP under
-[el-differential-testing-plan.md](./el-differential-testing-plan.md)
-with these concrete requirements:
+Begin Phase 6 by adding a third EL client to the accepted Paris pipeline.
 
-- `Paris` first
-- `geth + reth` first
-- no MVP `hard invariant` may depend on `unknown` provenance
-- `chain.rlp` and `headfcu.json` used only for persistent comparable state
-- one normalization prototype pass before custom simulator expansion
-- one repeated-run determinism probe before offline differential comparison
-- one bootstrap sanity scenario first
-- one deterministic build-lifecycle sequence first
-- one markdown-derived boundary sequence first
-- current `7` static checker findings treated as parallel `shape-oracle debt`,
-  not as a blocking prerequisite
+Recommended order:
+
+1. add `nethermind`
+2. reuse the existing `T14` `ResultEnvelope` workflow without widening fork
+   scope
+3. preserve the current comparison-discipline constraints, especially:
+   client-local runtime identifiers, conservative normalization, and the
+   provenance-aware `unknown-payloadid` input class
+4. only after the third-client Paris run remains stable, expand to `besu`,
+   `erigon`, or later forks

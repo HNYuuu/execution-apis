@@ -429,6 +429,57 @@ The first implementation explicitly does not cover:
 - fuzzing or generated state machines
 - replacing all custom logic with stock Hive simulators
 
+## Current MVP Status
+
+The original Paris MVP objective has now been met for `geth` and `reth`.
+
+Completed scope:
+
+- real runtime bootstrap validation for `rlp-bootstrap-smoke` and
+  `headfcu-bootstrap-smoke`
+- real runtime custom scenarios for:
+  `fcu-no-build`,
+  `fcu-build-getpayload-newpayload`,
+  `repeat-fcu-same-head`,
+  `unknown-payloadid`
+- conservative normalization profile and sampled response corpus
+- repeated-run determinism probe for the early bootstrap and scenario set
+- offline `ResultEnvelope` generation and pairwise diff
+- explicit MVP acceptance review with final decision `go`
+
+The accepted Paris MVP therefore answers the original feasibility question:
+the Hive-first stack is sufficient for a real EL Engine API differential
+pipeline without first building a bespoke standalone testbed.
+
+## Remaining Gap To The Broader Plan
+
+The residual gap is not inside the accepted Paris `geth/reth` MVP itself. The
+gap is between that accepted MVP and the broader multi-client, multi-fork
+program that was originally envisioned.
+
+Still missing:
+
+- third and later EL clients:
+  `nethermind`, `besu`, `erigon`
+- later forks beyond `Paris`
+- blob and payload-bodies families
+- generated state-machine exploration
+- unified local `ResultEnvelope` coverage for stock-owned `valid-newpayload`
+  and `invalid-newpayload` paths
+- evidence-driven activation of deferred normalization rules:
+  `null_vs_omitted_when_explicitly_allowed` and
+  `non_semantic_error_text`
+- a formal comparison lane for arbitrary `DATA(8)` `payloadId` inputs, which
+  currently remain implementation-behavior observations rather than part of the
+  normative `PARIS-METHOD-GP-02` bucket
+
+Accepted residual risk in the current MVP:
+
+- the custom runtime layer is still a thin HTTP-based driver rather than a
+  packaged custom Hive simulator
+- the determinism probe covers the early bootstrap and scenario set; broader
+  determinism evidence should be extended before widening client or fork scope
+
 ## MVP Implementation Sequence
 
 The first implementation should proceed in this order:
@@ -532,23 +583,24 @@ this order:
 6. add `engine_getBlobs*`
 7. revisit generated state-machine exploration
 
+Given the current accepted state, the practical next expansion step is:
+
+1. add `nethermind` on the existing Paris pipeline
+2. rerun normalization, determinism, and offline diff before changing fork
+   scope
+3. only then add `besu`
+4. only then add `erigon`
+5. expand beyond `Paris` after the third-client discipline remains stable
+
 ## Immediate Next Step
 
-Produce the implementation design for the Hive-first MVP with concrete
-definitions for:
+Execute the first post-MVP expansion step:
 
-- `StateBootstrap`
-- `NormalizationProfile`
-- `HiveScenario`
-- `ResultEnvelope`
-- `Paris`
-- `geth`
-- `reth`
-- the provenance gate for MVP hard invariants
-- the thin HTTP-based scenario-driver prototype
-- the normalization prototype plan
-- the repeated-run determinism probe
-- `rlp-bootstrap-smoke`
-- `headfcu-bootstrap-smoke`
-- `fcu-no-build`
-- `fcu-build-getpayload-newpayload`
+- keep fork scope fixed at `Paris`
+- add `nethermind` as the third EL client
+- reuse the accepted `ResultEnvelope` and offline diff workflow from `T14`
+- preserve current comparison discipline from
+  [paris-differential-insights.md](./paris-differential-insights.md)
+- do not activate deferred normalization rules without new corpus evidence
+- do not widen to later forks until the `Paris + 3 clients` path remains
+  stable
