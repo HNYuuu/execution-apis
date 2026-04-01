@@ -1,0 +1,32 @@
+{
+  "task_id": "T03",
+  "scenario_id": "rlp-bootstrap-smoke",
+  "fork": "Paris",
+  "bootstrap_mode": "rlp_import",
+  "clients": ["geth", "reth"],
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/eth_blockNumber/simple-test.io",
+    "tests/eth_getBlockByNumber/get-latest.io",
+    "tests/headfcu.json"
+  ],
+  "reference_fixtures": {
+    "eth_blockNumber": "tests/eth_blockNumber/simple-test.io",
+    "eth_getBlockByNumber_latest": "tests/eth_getBlockByNumber/get-latest.io",
+    "headfcu": "tests/headfcu.json"
+  },
+  "request_sequence": [
+    {
+      "method": "eth_blockNumber",
+      "params": [],
+      "observable": "latest imported block number"
+    },
+    {
+      "method": "eth_getBlockByNumber",
+      "params": ["latest", false],
+      "observable": "latest imported block hash"
+    }
+  ]
+}

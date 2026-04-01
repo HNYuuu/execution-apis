@@ -1,0 +1,12 @@
+{
+  "task_id": "T03",
+  "expected_clients": ["geth", "reth"],
+  "expected_request_methods": [
+    "eth_blockNumber",
+    "eth_getBlockByNumber"
+  ],
+  "expected_observation": {
+    "head_number": "0x2d",
+    "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+  }
+}

@@ -40,7 +40,7 @@ Status values:
 | --- | --- | --- |
 | `T01` | MVP oracle surface freeze and provenance gate | `done` |
 | `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `done` |
-| `T03` | `rlp-bootstrap-smoke` scenario | `todo` |
+| `T03` | `rlp-bootstrap-smoke` scenario | `in_progress` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
 | `T05` | Hive integration spike for JWT wiring and artifact injection | `todo` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `todo` |
@@ -163,7 +163,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `5ce313c` - `Implement T02 bootstrap contract artifacts`
 
 **Validation Method**
 
@@ -174,7 +174,7 @@ Status values:
 
 **Status**
 
-`todo`
+`in_progress`
 
 **Inputs**
 
@@ -194,6 +194,29 @@ Status values:
 - one scenario definition
 - raw boot logs and head observations per client
 - initial scenario result records
+
+**Current Progress**
+
+- MVP baseline checker implemented.
+- Imported-head reference fixed from repository fixtures.
+- Real per-client execution remains pending `T05` and `T07`.
+
+**Artifacts**
+
+- `code`
+  [engine-rlp-bootstrap-smoke.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-rlp-bootstrap-smoke.js)
+- `script`
+  [run-engine-rlp-bootstrap-smoke.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-rlp-bootstrap-smoke.sh)
+- `config`
+  [paris-rlp-bootstrap-smoke.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json)
+- `test case`
+  [paris-rlp-bootstrap-smoke.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.test-case.json)
+- `log format`
+  [paris-rlp-bootstrap-smoke.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log-format.md)
+- `log output`
+  [paris-rlp-bootstrap-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json)
+- `notes`
+  [paris-rlp-bootstrap-smoke.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.notes.md)
 
 **Validation Method**
 

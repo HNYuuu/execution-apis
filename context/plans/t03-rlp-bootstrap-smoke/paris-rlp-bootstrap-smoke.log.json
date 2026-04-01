@@ -1,0 +1,125 @@
+{
+  "taskId": "T03",
+  "generatedAt": "2026-04-01T07:09:48.437Z",
+  "status": "pass",
+  "executionMode": "offline-baseline",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.test-case.json",
+    "bootstrapDefinitionFile": "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json"
+  },
+  "summary": {
+    "scenario_id": "rlp-bootstrap-smoke",
+    "fork": "Paris",
+    "bootstrap_mode": "rlp_import",
+    "expected_head_number": "0x2d",
+    "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+    "planned_client_count": 2
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "tests/genesis.json",
+          "bytes": 6871
+        },
+        {
+          "path": "tests/chain.rlp",
+          "bytes": 54615
+        },
+        {
+          "path": "tests/forkenv.json",
+          "bytes": 886
+        },
+        {
+          "path": "tests/eth_blockNumber/simple-test.io",
+          "bytes": 146
+        },
+        {
+          "path": "tests/eth_getBlockByNumber/get-latest.io",
+          "bytes": 6454
+        },
+        {
+          "path": "tests/headfcu.json",
+          "bytes": 405
+        }
+      ]
+    },
+    {
+      "check": "reference fixtures agree on the latest imported head",
+      "status": "pass",
+      "details": {
+        "eth_blockNumber": "0x2d",
+        "latest_block_number": "0x2d",
+        "latest_block_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
+    },
+    {
+      "check": "headfcu head hashes are aligned with the imported latest head",
+      "status": "pass",
+      "details": {
+        "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+        "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+        "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
+    },
+    {
+      "check": "request sequence matches the smoke scenario contract",
+      "status": "pass",
+      "details": [
+        "eth_blockNumber",
+        "eth_getBlockByNumber"
+      ]
+    }
+  ],
+  "referenceObservation": {
+    "head_number": "0x2d",
+    "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+  },
+  "clientPlans": [
+    {
+      "client": "geth",
+      "status": "planned",
+      "bootstrap_mode": "rlp_import",
+      "request_sequence": [
+        {
+          "method": "eth_blockNumber",
+          "params": [],
+          "observable": "latest imported block number"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "params": [
+            "latest",
+            false
+          ],
+          "observable": "latest imported block hash"
+        }
+      ],
+      "execution_blocker": "Awaiting Hive/client runtime wiring from T05 and T07."
+    },
+    {
+      "client": "reth",
+      "status": "planned",
+      "bootstrap_mode": "rlp_import",
+      "request_sequence": [
+        {
+          "method": "eth_blockNumber",
+          "params": [],
+          "observable": "latest imported block number"
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "params": [
+            "latest",
+            false
+          ],
+          "observable": "latest imported block hash"
+        }
+      ],
+      "execution_blocker": "Awaiting Hive/client runtime wiring from T05 and T07."
+    }
+  ]
+}
