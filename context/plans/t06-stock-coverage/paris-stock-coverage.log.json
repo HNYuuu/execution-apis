@@ -1,0 +1,378 @@
+{
+  "taskId": "T06",
+  "generatedAt": "2026-04-01T10:20:09.028Z",
+  "status": "pass",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.test-case.json",
+    "reportFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage-report.md"
+  },
+  "summary": {
+    "fork": "Paris",
+    "behavior_count": 8,
+    "stock_only_count": 2,
+    "hybrid_count": 2,
+    "custom_runtime_count": 4,
+    "deferred_count": 4
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+          "bytes": 19750
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+          "bytes": 26189
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log.json",
+          "bytes": 2821
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-integration-memo.md",
+          "bytes": 2244
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md",
+          "bytes": 12872
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/forkchoice.go",
+          "bytes": 6577
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_attributes.go",
+          "bytes": 2994
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_execution.go",
+          "bytes": 18572
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_id.go",
+          "bytes": 4277
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/invalid_payload.go",
+          "bytes": 19318
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/bad_hash.go",
+          "bytes": 7348
+        },
+        {
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/exchange_capabilities/tests.go",
+          "bytes": 2377
+        }
+      ]
+    },
+    {
+      "check": "every custom runtime behavior is backed by a documented stock gap",
+      "status": "pass",
+      "details": [
+        {
+          "behavior": "fcu-no-build",
+          "stock_coverage_level": "partial",
+          "rationale": "Stock suites cover forkchoiceUpdated error and syncing branches plus invalid payload attributes, but they do not clearly pin the exact markdown-derived no-build branch for payloadAttributes null and payloadId null using the repository artifact contract."
+        },
+        {
+          "behavior": "fcu-build-getpayload-newpayload",
+          "stock_coverage_level": "partial",
+          "rationale": "Stock suites already exercise payload build and payload execution mechanics, but the exact differential sequence with per-client payloadId tracking and normalization remains MVP-specific custom work."
+        },
+        {
+          "behavior": "repeat-fcu-same-head",
+          "stock_coverage_level": "none",
+          "rationale": "Current stock materials do not expose a dedicated repeated same-head forkchoiceUpdated stability scenario for the MVP shape."
+        },
+        {
+          "behavior": "unknown-payloadid",
+          "stock_coverage_level": "none",
+          "rationale": "The stock suite covers payload ID uniqueness but does not present a dedicated unknown payloadId error-branch scenario for the MVP comparison target."
+        }
+      ]
+    },
+    {
+      "check": "stock-only scope is removed from custom driver ownership",
+      "status": "pass",
+      "details": [
+        {
+          "behavior": "valid-newpayload",
+          "reason": "Do not build a separate MVP custom scenario for baseline valid newPayload acceptance because stock Hive engine coverage already owns that path."
+        },
+        {
+          "behavior": "invalid-newpayload",
+          "reason": "Do not allocate custom MVP driver scope to baseline invalid newPayload acceptance or rejection branches already covered by stock Hive suites."
+        }
+      ]
+    },
+    {
+      "check": "recommended T07 scope is limited to remaining custom runtime scenarios",
+      "status": "pass",
+      "details": [
+        "fcu-no-build",
+        "fcu-build-getpayload-newpayload",
+        "repeat-fcu-same-head",
+        "unknown-payloadid"
+      ]
+    }
+  ],
+  "behaviorMatrix": [
+    {
+      "behavior": "rlp-bootstrap-smoke",
+      "stock_coverage_level": "partial",
+      "recommended_owner": "hybrid_keep_custom",
+      "primary_stock_paths": [
+        {
+          "name": "EEST consume-rlp simulator",
+          "url": "https://eest.ethereum.org/main/running_tests/consume/simulators/"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "doc_url",
+          "url": "https://eest.ethereum.org/main/running_tests/consume/simulators/"
+        },
+        {
+          "kind": "local_file",
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json"
+        }
+      ],
+      "rationale": "Stock consume-rlp covers generic imported-chain bootstrap, but the repository-specific genesis plus chain assets, repeated-run determinism, and fixed observable head checks are still owned by the custom bootstrap script.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": ""
+    },
+    {
+      "behavior": "headfcu-bootstrap-smoke",
+      "stock_coverage_level": "partial",
+      "recommended_owner": "hybrid_keep_custom",
+      "primary_stock_paths": [
+        {
+          "name": "Hive ethereum/engine forkchoice coverage",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/forkchoice.go"
+        },
+        {
+          "kind": "local_file",
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json"
+        }
+      ],
+      "rationale": "Stock Hive engine coverage already exercises forkchoiceUpdated head establishment and related Eth RPC effects, but replaying the exact repository headfcu artifact and asserting the resulting B2 bootstrap state remains custom.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": ""
+    },
+    {
+      "behavior": "valid-newpayload",
+      "stock_coverage_level": "full",
+      "recommended_owner": "stock_only",
+      "primary_stock_paths": [
+        {
+          "name": "Hive ethereum/engine payload execution suites",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_execution.go"
+        }
+      ],
+      "rationale": "Generic valid newPayload acceptance and execution are already first-class stock engine-suite concerns.",
+      "reason_remove_from_custom": "Do not build a separate MVP custom scenario for baseline valid newPayload acceptance because stock Hive engine coverage already owns that path.",
+      "reason_custom_runtime": ""
+    },
+    {
+      "behavior": "invalid-newpayload",
+      "stock_coverage_level": "full",
+      "recommended_owner": "stock_only",
+      "primary_stock_paths": [
+        {
+          "name": "Hive ethereum/engine invalid payload suites",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/invalid_payload.go"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/bad_hash.go"
+        }
+      ],
+      "rationale": "Negative newPayload handling is already deeply covered by stock invalid-payload and bad-hash suites.",
+      "reason_remove_from_custom": "Do not allocate custom MVP driver scope to baseline invalid newPayload acceptance or rejection branches already covered by stock Hive suites.",
+      "reason_custom_runtime": ""
+    },
+    {
+      "behavior": "fcu-no-build",
+      "stock_coverage_level": "partial",
+      "recommended_owner": "custom_runtime",
+      "primary_stock_paths": [
+        {
+          "name": "Hive engine forkchoice and payload-attributes suites",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/forkchoice.go"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_attributes.go"
+        }
+      ],
+      "rationale": "Stock suites cover forkchoiceUpdated error and syncing branches plus invalid payload attributes, but they do not clearly pin the exact markdown-derived no-build branch for payloadAttributes null and payloadId null using the repository artifact contract.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": "Keep a thin custom runtime scenario for the exact no-build null-semantics branch and response-shape assertions."
+    },
+    {
+      "behavior": "fcu-build-getpayload-newpayload",
+      "stock_coverage_level": "partial",
+      "recommended_owner": "custom_runtime",
+      "primary_stock_paths": [
+        {
+          "name": "Hive payload ID and payload execution suites",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_id.go"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_execution.go"
+        }
+      ],
+      "rationale": "Stock suites already exercise payload build and payload execution mechanics, but the exact differential sequence with per-client payloadId tracking and normalization remains MVP-specific custom work.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": "Keep a custom scenario for the exact forkchoiceUpdated -> getPayload -> newPayload chain and client-local payloadId handling."
+    },
+    {
+      "behavior": "repeat-fcu-same-head",
+      "stock_coverage_level": "none",
+      "recommended_owner": "custom_runtime",
+      "primary_stock_paths": [
+        {
+          "name": "No explicit stock same-head idempotence scenario",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/forkchoice.go"
+        }
+      ],
+      "rationale": "Current stock materials do not expose a dedicated repeated same-head forkchoiceUpdated stability scenario for the MVP shape.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": "Keep a custom runtime scenario for repeated same-head requests and stable response-category checks."
+    },
+    {
+      "behavior": "unknown-payloadid",
+      "stock_coverage_level": "none",
+      "recommended_owner": "custom_runtime",
+      "primary_stock_paths": [
+        {
+          "name": "No explicit stock unknown payloadId suite",
+          "url": "https://github.com/ethereum/hive/blob/master/simulators/ethereum/engine/README.md"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/README.md"
+        },
+        {
+          "kind": "local_file",
+          "path": "/tmp/hive/simulators/ethereum/engine/suites/engine/payload_id.go"
+        }
+      ],
+      "rationale": "The stock suite covers payload ID uniqueness but does not present a dedicated unknown payloadId error-branch scenario for the MVP comparison target.",
+      "reason_remove_from_custom": "",
+      "reason_custom_runtime": "Keep a custom runtime scenario for unknown payloadId error shape and normalization."
+    }
+  ],
+  "removeFromCustomScope": [
+    {
+      "behavior": "valid-newpayload",
+      "reason": "Do not build a separate MVP custom scenario for baseline valid newPayload acceptance because stock Hive engine coverage already owns that path."
+    },
+    {
+      "behavior": "invalid-newpayload",
+      "reason": "Do not allocate custom MVP driver scope to baseline invalid newPayload acceptance or rejection branches already covered by stock Hive suites."
+    }
+  ],
+  "customRuntimeScope": [
+    {
+      "behavior": "fcu-no-build",
+      "reason": "Keep a thin custom runtime scenario for the exact no-build null-semantics branch and response-shape assertions."
+    },
+    {
+      "behavior": "fcu-build-getpayload-newpayload",
+      "reason": "Keep a custom scenario for the exact forkchoiceUpdated -> getPayload -> newPayload chain and client-local payloadId handling."
+    },
+    {
+      "behavior": "repeat-fcu-same-head",
+      "reason": "Keep a custom runtime scenario for repeated same-head requests and stable response-category checks."
+    },
+    {
+      "behavior": "unknown-payloadid",
+      "reason": "Keep a custom runtime scenario for unknown payloadId error shape and normalization."
+    }
+  ],
+  "deferredBehaviors": [
+    {
+      "behavior": "jwt-auth-negative-variants",
+      "reason": "Stock auth coverage exists in Hive, but these variants are outside the current Paris MVP scenario set."
+    },
+    {
+      "behavior": "engine_getPayloadBodies*",
+      "reason": "Explicitly deferred by the current MVP plan."
+    },
+    {
+      "behavior": "engine_getBlobs*",
+      "reason": "Explicitly deferred by the current MVP plan."
+    },
+    {
+      "behavior": "full multi-fork and multi-client expansion",
+      "reason": "Planned only after the Paris geth/reth MVP stabilizes."
+    }
+  ],
+  "recommendedT07Scope": [
+    "fcu-no-build",
+    "fcu-build-getpayload-newpayload",
+    "repeat-fcu-same-head",
+    "unknown-payloadid"
+  ]
+}

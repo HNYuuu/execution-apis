@@ -43,7 +43,7 @@ Status values:
 | `T03` | `rlp-bootstrap-smoke` scenario | `done` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `done` |
 | `T05` | Runtime reality check plus Hive integration spike | `done` |
-| `T06` | Stock Hive/EEST coverage mapping and gap report | `todo` |
+| `T06` | Stock Hive/EEST coverage mapping and gap report | `done` |
 | `T07` | Thin HTTP-based scenario-driver prototype in Hive | `todo` |
 | `T08` | Response corpus collection for `geth` and `reth` | `todo` |
 | `T09` | `NormalizationProfile` v0 | `todo` |
@@ -403,7 +403,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -423,6 +423,39 @@ Status values:
 - stock-coverage matrix
 - custom-layer gap report
 - deferred behavior list
+
+**Current Progress**
+
+- Stock-only coverage retained for baseline `valid-newpayload` and
+  `invalid-newpayload`.
+- Hybrid bootstrap ownership retained for `rlp-bootstrap-smoke` and
+  `headfcu-bootstrap-smoke`.
+- Remaining custom-runtime scope narrowed to:
+  `fcu-no-build`, `fcu-build-getpayload-newpayload`,
+  `repeat-fcu-same-head`, `unknown-payloadid`.
+- `T07` scope should no longer include `T03` or `T04`.
+
+**Artifacts**
+
+- `code`
+  [engine-stock-coverage-map.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-stock-coverage-map.js)
+- `script`
+  [run-engine-stock-coverage-map.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-stock-coverage-map.sh)
+- `config`
+  [paris-stock-coverage.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.config.json)
+- `test case`
+  [paris-stock-coverage.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.test-case.json)
+- `log format`
+  [paris-stock-coverage.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.log-format.md)
+- `log output`
+  [paris-stock-coverage.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage.log.json)
+- `report`
+  [paris-stock-coverage-report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t06-stock-coverage/paris-stock-coverage-report.md)
+
+**Git Record**
+
+- `commit`
+  pending
 
 **Validation Method**
 
@@ -458,7 +491,8 @@ Status values:
 
 **Validation Method**
 
-- Confirm the driver can execute `T03` and `T04` end to end.
+- Confirm the driver is scoped only to the remaining custom-runtime gaps from
+  `T06`.
 - Confirm the driver does not own client lifecycle beyond what Hive already
   provides.
 - Confirm the driver scope matches the gap report from `T06`.

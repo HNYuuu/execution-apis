@@ -1,0 +1,14 @@
+{
+  "task_id": "T06",
+  "expected_stock_only_scope": [
+    "valid-newpayload",
+    "invalid-newpayload"
+  ],
+  "expected_custom_runtime_scope": [
+    "fcu-no-build",
+    "fcu-build-getpayload-newpayload",
+    "repeat-fcu-same-head",
+    "unknown-payloadid"
+  ],
+  "expected_deferred_count": 4
+}
