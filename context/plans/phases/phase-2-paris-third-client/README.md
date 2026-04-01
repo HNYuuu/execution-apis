@@ -35,3 +35,8 @@ Phase 2 is accepted only if:
   implementation-behavior observation
 - an explicit phase-2 go/no-go review decides whether the project can expand to
   the broader Paris client matrix
+
+## Execution Tracker
+
+- [task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/task-tracker.md)
+  Executable phase-2 task list.

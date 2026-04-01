@@ -12,6 +12,8 @@ in `context/plans/t01-*` through `context/plans/t15-*`.
    Accepted baseline. Paris `geth/reth` Hive-first MVP.
 2. [phase-2-paris-third-client/README.md](./phase-2-paris-third-client/README.md)
    Add the third EL client on the existing Paris pipeline.
+   Tracker:
+   [phase-2-paris-third-client/task-tracker.md](./phase-2-paris-third-client/task-tracker.md)
 3. [phase-3-paris-full-client-matrix/README.md](./phase-3-paris-full-client-matrix/README.md)
    Complete the Paris primary-client matrix and fold stock-owned paths into the
    local envelope workflow.
@@ -27,3 +29,9 @@ in `context/plans/t01-*` through `context/plans/t15-*`.
   directory
 - implementation artifacts remain under task-specific directories unless a
   later migration is explicitly justified
+
+## Execution Rule
+
+- after a task is completed, create the dedicated git commit by default
+- stop for user confirmation only when the task outcome leaves a real decision
+  that should not be auto-resolved by the agent
