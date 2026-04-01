@@ -49,7 +49,7 @@ Status values:
 | `T09` | `NormalizationProfile` v0 | `done` |
 | `T10` | Repeated-run determinism probe | `done` |
 | `T11` | `fcu-no-build` runtime scenario | `done` |
-| `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `todo` |
+| `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `done` |
 | `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `todo` |
 | `T14` | `ResultEnvelope` generation and offline differential comparison | `todo` |
 | `T15` | MVP acceptance review and go/no-go checkpoint | `todo` |
@@ -876,7 +876,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -898,6 +898,67 @@ Status values:
 - scenario definition
 - per-client `client_runtime_state` holding `payloadId`
 - per-step raw and normalized responses
+
+**Current Progress**
+
+- The Paris three-call runtime chain now runs end-to-end on `geth` and `reth`
+  using task-local Paris-era fixtures generated with `hivechain` and
+  `lastfork=merge`.
+- Both clients returned `VALID` plus non-null `payloadId` from
+  `engine_forkchoiceUpdatedV1`, then returned a payload from
+  `engine_getPayloadV1`, and finally returned `VALID` from
+  `engine_newPayloadV1`.
+- Both approved `T01` hard invariants passed on both clients:
+  `PARIS-METHOD-FCU-18` and `PARIS-METHOD-GP-01`.
+- `payloadId` and built `blockHash` differ across clients as expected and are
+  therefore kept out of cross-client equality checks.
+
+**Artifacts**
+
+- `code`
+  [engine-fcu-build-getpayload-newpayload.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-fcu-build-getpayload-newpayload.js)
+- `script`
+  [run-engine-fcu-build-getpayload-newpayload.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-fcu-build-getpayload-newpayload.sh)
+- `config`
+  [paris-fcu-build-getpayload-newpayload.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.config.json)
+- `test case`
+  [paris-fcu-build-getpayload-newpayload.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.test-case.json)
+- `log format`
+  [paris-fcu-build-getpayload-newpayload.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log-format.md)
+- `log output`
+  [paris-fcu-build-getpayload-newpayload.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log.json)
+- `scenario`
+  [paris-fcu-build-getpayload-newpayload.scenario.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.scenario.json)
+- `notes`
+  [paris-fcu-build-getpayload-newpayload.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.notes.md)
+- `report`
+  [paris-fcu-build-getpayload-newpayload.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.report.md)
+- `fixture`
+  [genesis.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json)
+- `fixture`
+  [chain.rlp](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp)
+- `fixture`
+  [forkenv.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json)
+- `fixture`
+  [headfcu.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json)
+- `raw log`
+  [paris-fcu-build-getpayload-newpayload.log.geth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log.geth.raw.log)
+- `raw log`
+  [paris-fcu-build-getpayload-newpayload.log.reth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fcu-build-getpayload-newpayload.log.reth.raw.log)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T12` required a fixture correction before implementation could succeed.
+- The repository-level `tests/*` assets are post-Shanghai and reject
+  `engine_forkchoiceUpdatedV1` build attributes with
+  `fcuV1 called post-shanghai`.
+- The task therefore uses task-local Paris fixtures instead of mutating the
+  repository-wide shared fixtures.
 
 **Validation Method**
 
