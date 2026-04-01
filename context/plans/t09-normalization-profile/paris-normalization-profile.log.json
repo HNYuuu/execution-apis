@@ -1,0 +1,130 @@
+{
+  "taskId": "T09",
+  "generatedAt": "2026-04-01T12:37:25.292Z",
+  "status": "pass",
+  "executionMode": "offline-from-real-runtime-corpus",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.test-case.json",
+    "corpusFile": "context/plans/t08-response-corpus/paris-response-corpus.samples.json"
+  },
+  "summary": {
+    "profile_id": "paris-v0",
+    "active_rules": [
+      "stable_object_key_order",
+      "canonical_hex_quantity"
+    ],
+    "deferred_rules": [
+      "null_vs_omitted_when_explicitly_allowed",
+      "non_semantic_error_text"
+    ],
+    "ignored_fields": [
+      "container_name",
+      "docker_image",
+      "raw_log_file",
+      "rpc_host",
+      "rpc_port",
+      "http_host",
+      "http_port",
+      "auth_host",
+      "auth_port",
+      "run"
+    ],
+    "example_count": 4,
+    "order_example_ids": [
+      "t03-latest-header",
+      "t04-latest-header"
+    ]
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "context/plans/t08-response-corpus/paris-response-corpus.samples.json",
+          "bytes": 18313
+        },
+        {
+          "path": "context/plans/t08-response-corpus/paris-response-corpus.log.json",
+          "bytes": 4152
+        },
+        {
+          "path": "context/plans/t08-response-corpus/paris-response-corpus.report.md",
+          "bytes": 785
+        },
+        {
+          "path": "context/plans/t06-stock-coverage/paris-stock-coverage-report.md",
+          "bytes": 5823
+        }
+      ]
+    },
+    {
+      "check": "profile suppresses representation noise in observed order-only samples",
+      "status": "pass",
+      "details": [
+        {
+          "example_id": "t03-latest-header",
+          "raw_equal": false,
+          "normalized_equal": true
+        },
+        {
+          "example_id": "t04-latest-header",
+          "raw_equal": false,
+          "normalized_equal": true
+        }
+      ]
+    },
+    {
+      "check": "profile preserves semantic fields and non-normalizable fields",
+      "status": "pass",
+      "details": {
+        "comparison_fields": [
+          "result",
+          "result.payloadStatus.status",
+          "result.payloadStatus.latestValidHash",
+          "result.payloadId",
+          "number",
+          "hash",
+          "parentHash",
+          "transactions",
+          "withdrawals"
+        ],
+        "non_normalizable_fields": [
+          "result.payloadStatus.status",
+          "result.payloadStatus.latestValidHash",
+          "result.payloadId",
+          "error.code",
+          "error.message",
+          "number",
+          "hash",
+          "parentHash",
+          "transactions",
+          "withdrawals"
+        ]
+      }
+    },
+    {
+      "check": "deferred rules are explicit where corpus v0 lacks evidence",
+      "status": "pass",
+      "details": [
+        {
+          "rule_id": "null_vs_omitted_when_explicitly_allowed",
+          "status": "deferred",
+          "applies_to": [
+            "future payload-attribute and payload-body branches"
+          ],
+          "rationale": "No sample in corpus v0 demonstrates a scenario-approved null-vs-omitted pair, so the rule is recorded but not active."
+        },
+        {
+          "rule_id": "non_semantic_error_text",
+          "status": "deferred",
+          "applies_to": [
+            "future unknown-payloadid and error-shape scenarios"
+          ],
+          "rationale": "No error-text sample exists in corpus v0. Error code and field presence remain non-normalizable until dedicated evidence is collected."
+        }
+      ]
+    }
+  ]
+}

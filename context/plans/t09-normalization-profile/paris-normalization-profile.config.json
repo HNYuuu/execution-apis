@@ -1,0 +1,11 @@
+{
+  "task_id": "T09",
+  "fork": "Paris",
+  "corpus_file": "context/plans/t08-response-corpus/paris-response-corpus.samples.json",
+  "required_artifacts": [
+    "context/plans/t08-response-corpus/paris-response-corpus.samples.json",
+    "context/plans/t08-response-corpus/paris-response-corpus.log.json",
+    "context/plans/t08-response-corpus/paris-response-corpus.report.md",
+    "context/plans/t06-stock-coverage/paris-stock-coverage-report.md"
+  ]
+}

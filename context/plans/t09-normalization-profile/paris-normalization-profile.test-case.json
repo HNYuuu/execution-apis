@@ -1,0 +1,36 @@
+{
+  "task_id": "T09",
+  "required_active_rules": [
+    "stable_object_key_order",
+    "canonical_hex_quantity"
+  ],
+  "required_deferred_rules": [
+    "null_vs_omitted_when_explicitly_allowed",
+    "non_semantic_error_text"
+  ],
+  "required_semantic_fields": [
+    "result.payloadStatus.status",
+    "result.payloadStatus.latestValidHash",
+    "result.payloadId",
+    "number",
+    "hash",
+    "parentHash",
+    "transactions",
+    "withdrawals"
+  ],
+  "required_non_normalizable_fields": [
+    "result.payloadStatus.status",
+    "result.payloadStatus.latestValidHash",
+    "result.payloadId",
+    "error.code",
+    "error.message"
+  ],
+  "required_example_ids": [
+    "t03-latest-header",
+    "t04-latest-header",
+    "t04-headfcu-response",
+    "t07-fcu-no-build"
+  ],
+  "minimum_example_count": 4,
+  "minimum_order_examples": 2
+}

@@ -1,0 +1,86 @@
+{
+  "profile_id": "paris-v0",
+  "comparison_fields": [
+    "result",
+    "result.payloadStatus.status",
+    "result.payloadStatus.latestValidHash",
+    "result.payloadId",
+    "number",
+    "hash",
+    "parentHash",
+    "transactions",
+    "withdrawals"
+  ],
+  "equivalence_rules": [
+    {
+      "rule_id": "stable_object_key_order",
+      "status": "active",
+      "applies_to": [
+        "eth_getBlockByNumber.latest_header",
+        "generic_json_objects"
+      ],
+      "rationale": "Observed geth/reth latest-header responses differ in raw key order but become equal after stable key sorting."
+    },
+    {
+      "rule_id": "canonical_hex_quantity",
+      "status": "active",
+      "applies_to": [
+        "eth_blockNumber.result",
+        "block_header.number",
+        "block_header.gasLimit",
+        "block_header.gasUsed"
+      ],
+      "rationale": "Hex quantities remain comparison fields and are compared after canonical JSON normalization. No alternate representation has been observed yet, but the rule is active because quantities are first-class comparison targets."
+    },
+    {
+      "rule_id": "null_vs_omitted_when_explicitly_allowed",
+      "status": "deferred",
+      "applies_to": [
+        "future payload-attribute and payload-body branches"
+      ],
+      "rationale": "No sample in corpus v0 demonstrates a scenario-approved null-vs-omitted pair, so the rule is recorded but not active."
+    },
+    {
+      "rule_id": "non_semantic_error_text",
+      "status": "deferred",
+      "applies_to": [
+        "future unknown-payloadid and error-shape scenarios"
+      ],
+      "rationale": "No error-text sample exists in corpus v0. Error code and field presence remain non-normalizable until dedicated evidence is collected."
+    }
+  ],
+  "ignored_fields": [
+    "container_name",
+    "docker_image",
+    "raw_log_file",
+    "rpc_host",
+    "rpc_port",
+    "http_host",
+    "http_port",
+    "auth_host",
+    "auth_port",
+    "run"
+  ],
+  "client_notes": [
+    {
+      "client": "geth",
+      "note": "Latest-header field order differs from reth in raw JSON, but semantic fields align after stable-key normalization."
+    },
+    {
+      "client": "reth",
+      "note": "Latest-header field order differs from geth in raw JSON, but semantic fields align after stable-key normalization."
+    }
+  ],
+  "non_normalizable_fields": [
+    "result.payloadStatus.status",
+    "result.payloadStatus.latestValidHash",
+    "result.payloadId",
+    "error.code",
+    "error.message",
+    "number",
+    "hash",
+    "parentHash",
+    "transactions",
+    "withdrawals"
+  ]
+}

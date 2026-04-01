@@ -46,7 +46,7 @@ Status values:
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `done` |
 | `T07` | Thin HTTP-based runtime scenario-driver prototype over Hive-built client images | `done` |
 | `T08` | Response corpus collection for `geth` and `reth` | `done` |
-| `T09` | `NormalizationProfile` v0 | `todo` |
+| `T09` | `NormalizationProfile` v0 | `done` |
 | `T10` | Repeated-run determinism probe | `todo` |
 | `T11` | `fcu-no-build` runtime scenario | `todo` |
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `todo` |
@@ -625,7 +625,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -648,6 +648,54 @@ Status values:
 - documented normalization examples
 - 3-5 concrete sample pairs showing accepted normalization cases
 - explicit non-normalizable field list
+
+**Current Progress**
+
+- `NormalizationProfile v0` was generated from the `T08` corpus and validated
+  against real sample pairs.
+- The profile currently activates two rules:
+  `stable_object_key_order` and `canonical_hex_quantity`.
+- Two additional rules are recorded but remain deferred:
+  `null_vs_omitted_when_explicitly_allowed` and
+  `non_semantic_error_text`.
+- The examples set contains `4` concrete sample pairs, including two accepted
+  order-only normalization cases and two exact-match semantic examples.
+
+**Artifacts**
+
+- `code`
+  [engine-normalization-profile.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-normalization-profile.js)
+- `script`
+  [run-engine-normalization-profile.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-normalization-profile.sh)
+- `config`
+  [paris-normalization-profile.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.config.json)
+- `test case`
+  [paris-normalization-profile.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.test-case.json)
+- `log format`
+  [paris-normalization-profile.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.log-format.md)
+- `log output`
+  [paris-normalization-profile.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.log.json)
+- `profile`
+  [paris-normalization-profile.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.json)
+- `examples`
+  [paris-normalization-profile.examples.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.examples.json)
+- `notes`
+  [paris-normalization-profile.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.notes.md)
+- `report`
+  [paris-normalization-profile.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.report.md)
+
+**Git Record**
+
+- `commit`
+  `pending`
+
+**Adjustment**
+
+- `T09` is intentionally conservative: it only activates rules that are either
+  directly observed in the corpus or required to keep quantity comparisons
+  stable.
+- Error-text normalization and null-vs-omitted normalization remain deferred
+  until `T12` and `T13` contribute the needed evidence.
 
 **Validation Method**
 
