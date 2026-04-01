@@ -3,20 +3,42 @@
   "scenario_id": "rlp-bootstrap-smoke",
   "fork": "Paris",
   "bootstrap_mode": "rlp_import",
-  "clients": ["geth", "reth"],
+  "runtime_source": "hive-client-images-from-T05",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "genesis_file": "tests/genesis.json",
+  "chain_file": "tests/chain.rlp",
+  "fork_env_file": "tests/forkenv.json",
+  "runs_per_client": 2,
+  "startup_timeout_ms": 120000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 18545,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 28545,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
   "required_artifacts": [
     "tests/genesis.json",
     "tests/chain.rlp",
     "tests/forkenv.json",
-    "tests/eth_blockNumber/simple-test.io",
-    "tests/eth_getBlockByNumber/get-latest.io",
-    "tests/headfcu.json"
+    "context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log.json"
   ],
-  "reference_fixtures": {
-    "eth_blockNumber": "tests/eth_blockNumber/simple-test.io",
-    "eth_getBlockByNumber_latest": "tests/eth_getBlockByNumber/get-latest.io",
-    "headfcu": "tests/headfcu.json"
-  },
   "request_sequence": [
     {
       "method": "eth_blockNumber",

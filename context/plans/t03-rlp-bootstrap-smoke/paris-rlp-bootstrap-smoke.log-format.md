@@ -1,10 +1,14 @@
 # T03 RLP Bootstrap Smoke Log Format
 
-The `T03` MVP writes a single JSON log file at:
+The `T03` runtime writes:
 
 - [paris-rlp-bootstrap-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json)
+- [paris-rlp-bootstrap-smoke.log.geth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run1.raw.log)
+- [paris-rlp-bootstrap-smoke.log.geth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run2.raw.log)
+- [paris-rlp-bootstrap-smoke.log.reth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run1.raw.log)
+- [paris-rlp-bootstrap-smoke.log.reth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run2.raw.log)
 
-Required top-level fields:
+Required JSON top-level fields:
 
 - `taskId`
 - `generatedAt`
@@ -14,7 +18,7 @@ Required top-level fields:
 - `summary`
 - `validations`
 - `referenceObservation`
-- `clientPlans`
+- `clientRuns`
 
 Validation record fields:
 
@@ -22,17 +26,17 @@ Validation record fields:
 - `status`
 - `details`
 
-Client plan fields:
+Client run fields:
 
 - `client`
-- `status`
-- `bootstrap_mode`
-- `request_sequence`
-- `execution_blocker`
+- `run`
+- `container_name`
+- `docker_image`
+- `rpc_host`
+- `rpc_port`
+- `raw_log_file`
+- `requests`
+- `observation`
 
-This log format is intentionally split in two layers:
-
-- `referenceObservation` captures the imported-head baseline derived from local
-  chain fixtures
-- `clientPlans` records the exact per-client requests that later runtime
-  wiring must execute against `geth` and `reth`
+The JSON log carries normalized per-run observations. The `.raw.log` files
+preserve the original client boot output for later debugging.

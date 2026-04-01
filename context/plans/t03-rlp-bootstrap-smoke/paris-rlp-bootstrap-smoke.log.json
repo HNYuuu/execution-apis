@@ -1,20 +1,25 @@
 {
   "taskId": "T03",
-  "generatedAt": "2026-04-01T07:09:48.437Z",
+  "generatedAt": "2026-04-01T07:31:54.654Z",
   "status": "pass",
-  "executionMode": "offline-baseline",
+  "executionMode": "real-runtime",
   "inputs": {
     "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.config.json",
     "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.test-case.json",
-    "bootstrapDefinitionFile": "context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json"
+    "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+    "runtime_source": "hive-client-images-from-T05"
   },
   "summary": {
     "scenario_id": "rlp-bootstrap-smoke",
     "fork": "Paris",
     "bootstrap_mode": "rlp_import",
+    "clients": [
+      "geth",
+      "reth"
+    ],
+    "runs_per_client": 2,
     "expected_head_number": "0x2d",
-    "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
-    "planned_client_count": 2
+    "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
   },
   "validations": [
     {
@@ -22,55 +27,135 @@
       "status": "pass",
       "details": [
         {
-          "path": "tests/genesis.json",
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/genesis.json",
           "bytes": 6871
         },
         {
-          "path": "tests/chain.rlp",
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/chain.rlp",
           "bytes": 54615
         },
         {
-          "path": "tests/forkenv.json",
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/forkenv.json",
           "bytes": 886
         },
         {
-          "path": "tests/eth_blockNumber/simple-test.io",
-          "bytes": 146
-        },
-        {
-          "path": "tests/eth_getBlockByNumber/get-latest.io",
-          "bytes": 6454
-        },
-        {
-          "path": "tests/headfcu.json",
-          "bytes": 405
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log.json",
+          "bytes": 2821
         }
       ]
     },
     {
-      "check": "reference fixtures agree on the latest imported head",
-      "status": "pass",
-      "details": {
-        "eth_blockNumber": "0x2d",
-        "latest_block_number": "0x2d",
-        "latest_block_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
-      }
-    },
-    {
-      "check": "headfcu head hashes are aligned with the imported latest head",
-      "status": "pass",
-      "details": {
-        "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
-        "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
-        "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
-      }
-    },
-    {
-      "check": "request sequence matches the smoke scenario contract",
+      "check": "required Hive client images exist locally",
       "status": "pass",
       "details": [
-        "eth_blockNumber",
-        "eth_getBlockByNumber"
+        {
+          "client": "geth",
+          "image": "hive/clients/go-ethereum:latest"
+        },
+        {
+          "client": "reth",
+          "image": "hive/clients/reth:latest"
+        }
+      ]
+    },
+    {
+      "check": "all runtime runs observed the expected imported head",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "run": 1,
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "client": "geth",
+          "run": 2,
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "client": "reth",
+          "run": 1,
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "client": "reth",
+          "run": 2,
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        }
+      ]
+    },
+    {
+      "check": "repeated runs are stable within each client",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "runs": [
+            {
+              "head_number": "0x2d",
+              "latest_block_number": "0x2d",
+              "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            },
+            {
+              "head_number": "0x2d",
+              "latest_block_number": "0x2d",
+              "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            }
+          ]
+        },
+        {
+          "client": "reth",
+          "runs": [
+            {
+              "head_number": "0x2d",
+              "latest_block_number": "0x2d",
+              "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            },
+            {
+              "head_number": "0x2d",
+              "latest_block_number": "0x2d",
+              "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "check": "cross-client observations agree after rlp import",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "client": "reth",
+          "observation": {
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        }
       ]
     }
   ],
@@ -78,16 +163,23 @@
     "head_number": "0x2d",
     "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
   },
-  "clientPlans": [
+  "clientRuns": [
     {
       "client": "geth",
-      "status": "planned",
-      "bootstrap_mode": "rlp_import",
-      "request_sequence": [
+      "run": 1,
+      "container_name": "t03-rlp-geth-run1-1775028705029",
+      "docker_image": "hive/clients/go-ethereum:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 18545,
+      "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run1.raw.log",
+      "requests": [
         {
           "method": "eth_blockNumber",
-          "params": [],
-          "observable": "latest imported block number"
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": "0x2d"
+          }
         },
         {
           "method": "eth_getBlockByNumber",
@@ -95,20 +187,139 @@
             "latest",
             false
           ],
-          "observable": "latest imported block hash"
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "baseFeePerGas": "0x5763d64",
+              "blobGasUsed": "0x0",
+              "difficulty": "0x0",
+              "excessBlobGas": "0x0",
+              "extraData": "0x",
+              "gasLimit": "0x47e7c40",
+              "gasUsed": "0x54a92",
+              "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "miner": "0x0000000000000000000000000000000000000000",
+              "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "nonce": "0x0000000000000000",
+              "number": "0x2d",
+              "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+              "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+              "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+              "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+              "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "size": "0x633",
+              "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+              "timestamp": "0x1c2",
+              "transactions": [
+                "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+              ],
+              "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+              "uncles": [],
+              "withdrawals": [],
+              "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+            }
+          }
         }
       ],
-      "execution_blocker": "Awaiting Hive/client runtime wiring from T05 and T07."
+      "observation": {
+        "head_number": "0x2d",
+        "latest_block_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
+    },
+    {
+      "client": "geth",
+      "run": 2,
+      "container_name": "t03-rlp-geth-run2-1775028707472",
+      "docker_image": "hive/clients/go-ethereum:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 18545,
+      "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run2.raw.log",
+      "requests": [
+        {
+          "method": "eth_blockNumber",
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": "0x2d"
+          }
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "params": [
+            "latest",
+            false
+          ],
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "baseFeePerGas": "0x5763d64",
+              "blobGasUsed": "0x0",
+              "difficulty": "0x0",
+              "excessBlobGas": "0x0",
+              "extraData": "0x",
+              "gasLimit": "0x47e7c40",
+              "gasUsed": "0x54a92",
+              "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "miner": "0x0000000000000000000000000000000000000000",
+              "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "nonce": "0x0000000000000000",
+              "number": "0x2d",
+              "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+              "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+              "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+              "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+              "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "size": "0x633",
+              "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+              "timestamp": "0x1c2",
+              "transactions": [
+                "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+              ],
+              "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+              "uncles": [],
+              "withdrawals": [],
+              "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+            }
+          }
+        }
+      ],
+      "observation": {
+        "head_number": "0x2d",
+        "latest_block_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
     },
     {
       "client": "reth",
-      "status": "planned",
-      "bootstrap_mode": "rlp_import",
-      "request_sequence": [
+      "run": 1,
+      "container_name": "t03-rlp-reth-run1-1775028709888",
+      "docker_image": "hive/clients/reth:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 28545,
+      "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run1.raw.log",
+      "requests": [
         {
           "method": "eth_blockNumber",
-          "params": [],
-          "observable": "latest imported block number"
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": "0x2d"
+          }
         },
         {
           "method": "eth_getBlockByNumber",
@@ -116,10 +327,122 @@
             "latest",
             false
           ],
-          "observable": "latest imported block hash"
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+              "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "miner": "0x0000000000000000000000000000000000000000",
+              "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+              "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+              "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+              "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "difficulty": "0x0",
+              "number": "0x2d",
+              "gasLimit": "0x47e7c40",
+              "gasUsed": "0x54a92",
+              "timestamp": "0x1c2",
+              "extraData": "0x",
+              "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "nonce": "0x0000000000000000",
+              "baseFeePerGas": "0x5763d64",
+              "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+              "blobGasUsed": "0x0",
+              "excessBlobGas": "0x0",
+              "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+              "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+              "size": "0x633",
+              "uncles": [],
+              "transactions": [
+                "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+              ],
+              "withdrawals": []
+            }
+          }
         }
       ],
-      "execution_blocker": "Awaiting Hive/client runtime wiring from T05 and T07."
+      "observation": {
+        "head_number": "0x2d",
+        "latest_block_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
+    },
+    {
+      "client": "reth",
+      "run": 2,
+      "container_name": "t03-rlp-reth-run2-1775028712271",
+      "docker_image": "hive/clients/reth:latest",
+      "rpc_host": "127.0.0.1",
+      "rpc_port": 28545,
+      "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run2.raw.log",
+      "requests": [
+        {
+          "method": "eth_blockNumber",
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": "0x2d"
+          }
+        },
+        {
+          "method": "eth_getBlockByNumber",
+          "params": [
+            "latest",
+            false
+          ],
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+              "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+              "miner": "0x0000000000000000000000000000000000000000",
+              "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+              "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+              "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+              "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "difficulty": "0x0",
+              "number": "0x2d",
+              "gasLimit": "0x47e7c40",
+              "gasUsed": "0x54a92",
+              "timestamp": "0x1c2",
+              "extraData": "0x",
+              "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "nonce": "0x0000000000000000",
+              "baseFeePerGas": "0x5763d64",
+              "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+              "blobGasUsed": "0x0",
+              "excessBlobGas": "0x0",
+              "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+              "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+              "size": "0x633",
+              "uncles": [],
+              "transactions": [
+                "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+              ],
+              "withdrawals": []
+            }
+          }
+        }
+      ],
+      "observation": {
+        "head_number": "0x2d",
+        "latest_block_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      }
     }
   ]
 }

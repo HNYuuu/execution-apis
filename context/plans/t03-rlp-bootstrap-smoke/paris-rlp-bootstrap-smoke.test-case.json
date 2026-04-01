@@ -1,6 +1,7 @@
 {
   "task_id": "T03",
   "expected_clients": ["geth", "reth"],
+  "repeated_runs_per_client": 2,
   "expected_request_methods": [
     "eth_blockNumber",
     "eth_getBlockByNumber"

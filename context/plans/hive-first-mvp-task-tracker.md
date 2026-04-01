@@ -40,7 +40,7 @@ Status values:
 | --- | --- | --- |
 | `T01` | MVP oracle surface freeze and provenance gate | `done` |
 | `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `done` |
-| `T03` | `rlp-bootstrap-smoke` scenario | `in_progress` |
+| `T03` | `rlp-bootstrap-smoke` scenario | `done` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
 | `T05` | Runtime reality check plus Hive integration spike | `done` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `todo` |
@@ -174,7 +174,7 @@ Status values:
 
 **Status**
 
-`in_progress`
+`done`
 
 **Inputs**
 
@@ -197,9 +197,9 @@ Status values:
 
 **Current Progress**
 
-- MVP baseline checker implemented.
-- Imported-head reference fixed from repository fixtures.
-- Real per-client execution now depends on the scenario-driver path in `T07`.
+- Real runtime bootstrap completed for `geth` and `reth`.
+- Both clients imported `genesis + chain.rlp` and exposed RPC successfully.
+- Two runs per client observed the same head number and head hash.
 
 **Artifacts**
 
@@ -217,11 +217,19 @@ Status values:
   [paris-rlp-bootstrap-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json)
 - `notes`
   [paris-rlp-bootstrap-smoke.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.notes.md)
+- `raw log`
+  [paris-rlp-bootstrap-smoke.log.geth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run1.raw.log)
+- `raw log`
+  [paris-rlp-bootstrap-smoke.log.geth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run2.raw.log)
+- `raw log`
+  [paris-rlp-bootstrap-smoke.log.reth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run1.raw.log)
+- `raw log`
+  [paris-rlp-bootstrap-smoke.log.reth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run2.raw.log)
 
 **Git Record**
 
 - `commit`
-  `c738763` - `Add T03 rlp bootstrap smoke baseline artifacts`
+  pending
 
 **Validation Method**
 
