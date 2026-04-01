@@ -39,7 +39,7 @@ Status values:
 | Task ID | Task | Status |
 | --- | --- | --- |
 | `T01` | MVP oracle surface freeze and provenance gate | `done` |
-| `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `todo` |
+| `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `done` |
 | `T03` | `rlp-bootstrap-smoke` scenario | `todo` |
 | `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
 | `T05` | Hive integration spike for JWT wiring and artifact injection | `todo` |
@@ -106,7 +106,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `07ddaf1` - `Implement T01 MVP oracle gate artifacts`
 
 **Validation Method**
 
@@ -118,7 +118,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -142,6 +142,28 @@ Status values:
 - reusable `StateBootstrap` definitions
 - per-client bootstrap notes for `geth` and `reth`
 - observable confirmation checklist for `B0`, `B1`, and `B2`
+
+**Artifacts**
+
+- `code`
+  [engine-bootstrap-contract-check.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-bootstrap-contract-check.js)
+- `script`
+  [run-engine-bootstrap-contract-check.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-bootstrap-contract-check.sh)
+- `config`
+  [paris-mvp-bootstrap-definitions.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json)
+- `test case`
+  [paris-mvp-bootstrap-contract.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-contract.test-case.json)
+- `log format`
+  [paris-mvp-bootstrap-contract.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-contract.log-format.md)
+- `log output`
+  [paris-mvp-bootstrap-contract.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-contract.log.json)
+- `notes`
+  [paris-mvp-bootstrap-contract.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-contract.notes.md)
+
+**Git Record**
+
+- `commit`
+  pending
 
 **Validation Method**
 

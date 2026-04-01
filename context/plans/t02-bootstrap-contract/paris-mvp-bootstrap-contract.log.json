@@ -1,0 +1,116 @@
+{
+  "taskId": "T02",
+  "generatedAt": "2026-04-01T05:46:31.809Z",
+  "status": "pass",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-definitions.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/t02-bootstrap-contract/paris-mvp-bootstrap-contract.test-case.json"
+  },
+  "summary": {
+    "fork": "Paris",
+    "bootstrapModeCount": 4,
+    "clientCount": 2,
+    "validatedStateFamilyCount": 5
+  },
+  "validations": [
+    {
+      "check": "expected bootstrap modes exist",
+      "status": "pass",
+      "details": [
+        "genesis_only",
+        "rlp_import",
+        "rlp_import_plus_headfcu",
+        "runtime_request_replay"
+      ]
+    },
+    {
+      "check": "artifacts and per-client notes exist",
+      "status": "pass",
+      "details": [
+        "geth",
+        "reth"
+      ]
+    },
+    {
+      "check": "state family mapping matches the contract",
+      "status": "pass",
+      "details": [
+        {
+          "state_family": "B0",
+          "bootstrap_mode": "genesis_only"
+        },
+        {
+          "state_family": "B1",
+          "bootstrap_mode": "rlp_import"
+        },
+        {
+          "state_family": "B2",
+          "bootstrap_mode": "rlp_import_plus_headfcu"
+        },
+        {
+          "state_family": "B3",
+          "bootstrap_mode": "runtime_request_replay"
+        },
+        {
+          "state_family": "B4",
+          "bootstrap_mode": "runtime_request_replay"
+        }
+      ]
+    },
+    {
+      "check": "B3/B4 remain runtime_request_replay-only",
+      "status": "pass",
+      "details": [
+        "B3",
+        "B4"
+      ]
+    }
+  ],
+  "bootstrapDefinitions": [
+    {
+      "bootstrap_mode": "genesis_only",
+      "state_families": [
+        "B0"
+      ],
+      "required_artifact_count": 2,
+      "observable_confirmation": [
+        "engine_exchangeCapabilities succeeds over authenticated RPC.",
+        "eth_blockNumber returns 0x0."
+      ]
+    },
+    {
+      "bootstrap_mode": "rlp_import",
+      "state_families": [
+        "B1"
+      ],
+      "required_artifact_count": 3,
+      "observable_confirmation": [
+        "eth_blockNumber is greater than 0x0 after import.",
+        "eth_getBlockByNumber('latest', false) returns a non-null block."
+      ]
+    },
+    {
+      "bootstrap_mode": "rlp_import_plus_headfcu",
+      "state_families": [
+        "B2"
+      ],
+      "required_artifact_count": 4,
+      "observable_confirmation": [
+        "The replayed forkchoiceUpdated request returns a successful payloadStatus branch.",
+        "The latest block hash matches the head hash referenced in tests/headfcu.json."
+      ]
+    },
+    {
+      "bootstrap_mode": "runtime_request_replay",
+      "state_families": [
+        "B3",
+        "B4"
+      ],
+      "required_artifact_count": 4,
+      "observable_confirmation": [
+        "A scenario-specific runtime response proves the transient state exists.",
+        "The transient state is never assumed to be restorable from file injection alone."
+      ]
+    }
+  ]
+}

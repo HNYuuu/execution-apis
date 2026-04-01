@@ -1,0 +1,18 @@
+{
+  "task_id": "T02",
+  "expected_bootstrap_modes": [
+    "genesis_only",
+    "rlp_import",
+    "rlp_import_plus_headfcu",
+    "runtime_request_replay"
+  ],
+  "expected_clients": ["geth", "reth"],
+  "expected_state_family_bootstrap_modes": [
+    { "state_family": "B0", "bootstrap_mode": "genesis_only" },
+    { "state_family": "B1", "bootstrap_mode": "rlp_import" },
+    { "state_family": "B2", "bootstrap_mode": "rlp_import_plus_headfcu" },
+    { "state_family": "B3", "bootstrap_mode": "runtime_request_replay" },
+    { "state_family": "B4", "bootstrap_mode": "runtime_request_replay" }
+  ],
+  "expected_runtime_request_replay_only_families": ["B3", "B4"]
+}

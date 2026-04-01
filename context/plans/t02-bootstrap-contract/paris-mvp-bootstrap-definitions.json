@@ -1,0 +1,127 @@
+{
+  "task_id": "T02",
+  "fork": "Paris",
+  "bootstrap_definitions": [
+    {
+      "bootstrap_mode": "genesis_only",
+      "state_families": ["B0"],
+      "required_artifacts": [
+        "tests/genesis.json",
+        "tests/forkenv.json"
+      ],
+      "startup_steps": [
+        "Start the EL client with tests/genesis.json as the chain root.",
+        "Inject tests/forkenv.json into the Hive environment before the client starts.",
+        "Wait for the authenticated Engine RPC port to accept requests."
+      ],
+      "observable_confirmation": [
+        "engine_exchangeCapabilities succeeds over authenticated RPC.",
+        "eth_blockNumber returns 0x0."
+      ],
+      "client_bootstrap_notes": {
+        "geth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--nodiscover"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount genesis.json and forkenv.json via Hive input artifacts."
+        },
+        "reth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--disable-discovery"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount genesis.json and forkenv.json via Hive input artifacts."
+        }
+      }
+    },
+    {
+      "bootstrap_mode": "rlp_import",
+      "state_families": ["B1"],
+      "required_artifacts": [
+        "tests/genesis.json",
+        "tests/chain.rlp",
+        "tests/forkenv.json"
+      ],
+      "startup_steps": [
+        "Start the EL client from tests/genesis.json.",
+        "Import tests/chain.rlp before runtime scenarios begin.",
+        "Apply tests/forkenv.json to keep fork scheduling aligned with the imported chain."
+      ],
+      "observable_confirmation": [
+        "eth_blockNumber is greater than 0x0 after import.",
+        "eth_getBlockByNumber('latest', false) returns a non-null block."
+      ],
+      "client_bootstrap_notes": {
+        "geth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--nodiscover"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount chain.rlp and trigger the import path before scenario execution."
+        },
+        "reth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--disable-discovery"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount chain.rlp and trigger the import path before scenario execution."
+        }
+      }
+    },
+    {
+      "bootstrap_mode": "rlp_import_plus_headfcu",
+      "state_families": ["B2"],
+      "required_artifacts": [
+        "tests/genesis.json",
+        "tests/chain.rlp",
+        "tests/forkenv.json",
+        "tests/headfcu.json"
+      ],
+      "startup_steps": [
+        "Start the EL client from tests/genesis.json.",
+        "Import tests/chain.rlp.",
+        "Replay tests/headfcu.json over authenticated Engine API after import completes."
+      ],
+      "observable_confirmation": [
+        "The replayed forkchoiceUpdated request returns a successful payloadStatus branch.",
+        "The latest block hash matches the head hash referenced in tests/headfcu.json."
+      ],
+      "client_bootstrap_notes": {
+        "geth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--nodiscover"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount headfcu.json and replay it after chain import."
+        },
+        "reth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--disable-discovery"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Mount headfcu.json and replay it after chain import."
+        }
+      }
+    },
+    {
+      "bootstrap_mode": "runtime_request_replay",
+      "state_families": ["B3", "B4"],
+      "required_artifacts": [
+        "tests/genesis.json",
+        "tests/chain.rlp",
+        "tests/forkenv.json",
+        "tests/headfcu.json"
+      ],
+      "startup_steps": [
+        "Bootstrap the client into B2 via chain import and headfcu replay.",
+        "Issue runtime Engine API requests to create scenario-specific transient state.",
+        "Store per-client runtime outputs such as payloadId in client-local runtime state."
+      ],
+      "observable_confirmation": [
+        "A scenario-specific runtime response proves the transient state exists.",
+        "The transient state is never assumed to be restorable from file injection alone."
+      ],
+      "client_bootstrap_notes": {
+        "geth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--nodiscover"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Do not inject payloadId-bearing state; build it by request replay."
+        },
+        "reth": {
+          "startup_flags": ["--authrpc.jwtsecret", "--http", "--disable-discovery"],
+          "auth_rpc": "JWT-authenticated Engine API endpoint exposed by Hive",
+          "artifact_injection": "Do not inject payloadId-bearing state; build it by request replay."
+        }
+      }
+    }
+  ]
+}
