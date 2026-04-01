@@ -19,6 +19,10 @@ approach:
 The target remains `EL client Engine API server-side behavior`. The change is
 about implementation strategy and engineering cost, not about test intent.
 
+Forward rollout after the accepted Paris MVP is now organized under
+[phases/README.md](./phases/README.md), where the current accepted Paris
+`geth/reth` implementation is treated as `phase-1`.
+
 ## Artifact Rule
 
 Every implementation step in the Hive-first MVP must emit durable artifacts.

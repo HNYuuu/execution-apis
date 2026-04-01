@@ -65,6 +65,10 @@ The repository's existing `tests/*.io` format only covers the second step. It
 does not replace the Hive-based stateful differential stack required for the
 third step.
 
+Forward execution after the accepted Paris MVP is now organized under
+[plans/phases/README.md](./phases/README.md). The current accepted MVP is
+treated as `phase-1`.
+
 ## Artifact Discipline
 
 Every implementation step in this testing program must produce durable

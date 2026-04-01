@@ -24,11 +24,13 @@ Top level is now intentionally small. Detailed material is grouped by purpose.
 
 Read in this order:
 
-1. `snapshots/2026-04-01-hive-mvp-progress.md`
-2. `plans/el-differential-testing-plan.md`
-3. `plans/test-plan.md`
-4. `plans/hive-first-mvp-task-tracker.md`
-5. `snapshots/2026-03-26-differential-testing-context.md`
+1. `plans/phases/README.md`
+2. `plans/phases/phase-1-paris-mvp/README.md`
+3. `snapshots/2026-04-01-hive-mvp-progress.md`
+4. `plans/el-differential-testing-plan.md`
+5. `plans/test-plan.md`
+6. `plans/hive-first-mvp-task-tracker.md`
+7. `snapshots/2026-03-26-differential-testing-context.md`
 
 Then pick one branch:
 
@@ -45,6 +47,8 @@ Then pick one branch:
   Cross-fork roadmap from `Paris` through `Amsterdam`.
 - `plans/el-differential-testing-plan.md`
   Current execution-facing plan for the EL differential-testing phase.
+- `plans/phases/README.md`
+  Phase-oriented execution roadmap for work after the accepted Paris MVP.
 - `plans/hive-first-mvp-task-tracker.md`
   Executable task tracker for the current Hive-first MVP.
 - `methods/markdown-openrpc-static-check-method.md`
