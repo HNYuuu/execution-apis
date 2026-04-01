@@ -299,7 +299,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `426235a` - `Complete T04 headfcu bootstrap smoke`
 
 **Validation Method**
 
@@ -389,7 +389,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `4879f9c` - `Implement T05 Hive runtime reality check artifacts`
 
 **Validation Method**
 
@@ -455,7 +455,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  pending
+  `78e4178` - `Complete T06 stock coverage mapping`
 
 **Validation Method**
 
