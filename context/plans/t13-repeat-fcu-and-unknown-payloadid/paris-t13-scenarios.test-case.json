@@ -1,0 +1,9 @@
+{
+  "task_id": "T13",
+  "required_repeat_invariants": [
+    "PARIS-METHOD-FCU-03"
+  ],
+  "required_unknown_invariants": [
+    "PARIS-METHOD-GP-02"
+  ]
+}

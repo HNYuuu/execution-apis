@@ -50,7 +50,7 @@ Status values:
 | `T10` | Repeated-run determinism probe | `done` |
 | `T11` | `fcu-no-build` runtime scenario | `done` |
 | `T12` | `fcu-build-getpayload-newpayload` runtime scenario | `done` |
-| `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `todo` |
+| `T13` | `repeat-fcu-same-head` and `unknown-payloadid` scenarios | `done` |
 | `T14` | `ResultEnvelope` generation and offline differential comparison | `todo` |
 | `T15` | MVP acceptance review and go/no-go checkpoint | `todo` |
 
@@ -970,7 +970,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -990,6 +990,48 @@ Status values:
 - two scenario definitions
 - per-client result records
 - comparison-ready normalized outputs
+
+**Current Progress**
+
+- Real runtime execution completed for `geth` and `reth`.
+- The repeated FCU branch is implemented as a repeated valid-ancestor shortcut
+  request so that the scenario matches approved invariant
+  `PARIS-METHOD-FCU-03`.
+- The unknown-payload branch uses a mutated real `payloadId` returned by
+  `engine_forkchoiceUpdatedV1`, which avoids false classification as
+  `Unsupported fork`.
+
+**Artifacts**
+
+- `code`
+  [engine-t13-scenarios.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-t13-scenarios.js)
+- `script`
+  [run-engine-t13-scenarios.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-t13-scenarios.sh)
+- `config`
+  [paris-t13-scenarios.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.config.json)
+- `test case`
+  [paris-t13-scenarios.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.test-case.json)
+- `log format`
+  [paris-t13-scenarios.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log-format.md)
+- `log output`
+  [paris-t13-scenarios.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json)
+- `notes`
+  [paris-t13-scenarios.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.notes.md)
+- `report`
+  [paris-t13-scenarios.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.report.md)
+- `scenario`
+  [paris-repeat-fcu-same-head.scenario.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-repeat-fcu-same-head.scenario.json)
+- `scenario`
+  [paris-unknown-payloadid.scenario.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-unknown-payloadid.scenario.json)
+- `raw log`
+  [paris-t13-scenarios.log.geth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.geth.raw.log)
+- `raw log`
+  [paris-t13-scenarios.log.reth.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.reth.raw.log)
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

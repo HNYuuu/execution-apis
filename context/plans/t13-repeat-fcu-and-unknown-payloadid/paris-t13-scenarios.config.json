@@ -1,0 +1,51 @@
+{
+  "task_id": "T13",
+  "fork": "Paris",
+  "bootstrap_mode": "runtime_request_replay",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "genesis_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json",
+  "chain_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp",
+  "fork_env_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json",
+  "bootstrap_headfcu_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json",
+  "normalization_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+  "repeat_scenario_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-repeat-fcu-same-head.scenario.json",
+  "unknown_scenario_file": "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-unknown-payloadid.scenario.json",
+  "startup_timeout_ms": 120000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 63545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 63551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 64545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 64551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
+  "required_artifacts": [
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json",
+    "context/plans/t01-mvp-oracle-gate/paris-mvp-oracle-gate.decision-log.md",
+    "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-repeat-fcu-same-head.scenario.json",
+    "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-unknown-payloadid.scenario.json"
+  ]
+}

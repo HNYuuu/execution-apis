@@ -1,0 +1,26 @@
+{
+  "task_id": "T13",
+  "scenario_id": "repeat-fcu-same-head",
+  "fork": "Paris",
+  "pre_state": "B2",
+  "semantic_mode": "valid_ancestor_shortcut_repeated",
+  "request_sequence": [
+    {
+      "request_id": "repeat_fcu_first",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV1"
+    },
+    {
+      "request_id": "repeat_fcu_second",
+      "endpoint": "engine",
+      "method": "engine_forkchoiceUpdatedV1"
+    }
+  ],
+  "hard_invariants": [
+    "PARIS-METHOD-FCU-03"
+  ],
+  "normalization_rules": [
+    "stable_object_key_order",
+    "canonical_hex_quantity"
+  ]
+}

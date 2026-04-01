@@ -1,0 +1,28 @@
+{
+  "task_id": "T13",
+  "scenario_id": "unknown-payloadid",
+  "fork": "Paris",
+  "pre_state": "B2",
+  "payload_id_strategy": "mutate_known_v1_payload_id",
+  "seed_build_request": {
+    "method": "engine_forkchoiceUpdatedV1",
+    "payloadAttributes": {
+      "timestamp": "0x1c4",
+      "prevRandao": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "suggestedFeeRecipient": "0x0000000000000000000000000000000000005678"
+    }
+  },
+  "request_sequence": [
+    {
+      "request_id": "unknown_payload_v1",
+      "endpoint": "engine",
+      "method": "engine_getPayloadV1"
+    }
+  ],
+  "hard_invariants": [
+    "PARIS-METHOD-GP-02"
+  ],
+  "normalization_rules": [
+    "non_semantic_error_text"
+  ]
+}

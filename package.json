@@ -21,6 +21,7 @@
     "engine:determinism-probe": "bash scripts/run-engine-determinism-probe.sh",
     "engine:fcu-no-build-scenario": "bash scripts/run-engine-fcu-no-build-scenario.sh",
     "engine:fcu-build-getpayload-newpayload": "bash scripts/run-engine-fcu-build-getpayload-newpayload.sh",
+    "engine:t13-scenarios": "bash scripts/run-engine-t13-scenarios.sh",
     "engine:hive-reality-check": "bash scripts/run-engine-hive-reality-check.sh",
     "engine:hive-engine-smoke": "bash scripts/run-engine-hive-engine-smoke.sh",
     "clean": "rm -rf build && mkdir -p build",
