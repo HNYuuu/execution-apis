@@ -1050,6 +1050,8 @@ Status values:
 - normalized outputs from `T03` through `T13`
 - `ResultEnvelope` contract from
   [el-differential-testing-plan.md](./el-differential-testing-plan.md)
+- observed comparison-discipline note from
+  [paris-differential-insights.md](./paris-differential-insights.md)
 
 **Operation Steps**
 
@@ -1059,7 +1061,10 @@ Status values:
 3. Write scenario-runtime fields first, including `violates hard invariant`
    when applicable.
 4. Diff normalized envelopes offline across `geth` and `reth`.
-5. Assign the final comparison buckets:
+5. Preserve the `T13` distinction between:
+   unknown-by-mutation Paris V1 `payloadId` inputs and arbitrary `DATA(8)`
+   inputs that may trigger version or fork classification branches.
+6. Assign the final comparison buckets:
    `all agree`, `agree after normalization`, or `diverge across clients`.
 
 **Expected Outputs**
@@ -1073,6 +1078,8 @@ Status values:
 **Validation Method**
 
 - Confirm every compared scenario produces a complete `ResultEnvelope`.
+- Confirm `unknown-payloadid` comparisons only use mutated real Paris V1
+  `payloadId` inputs for the `PARIS-METHOD-GP-02` bucket.
 - Confirm all compared envelopes sharing a comparison set also share the same
   `bootstrap_digest`.
 - Confirm offline comparison, not scenario-runtime code, assigns the final

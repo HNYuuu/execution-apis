@@ -20,3 +20,16 @@
   `engine_getPayloadV1` with the mutated id.
 - Raw error-message text is recorded, but classification is based on the
   normalized category `unknown_payload`.
+
+## Differential Testing Caution
+
+- For later offline differential comparison, do not collapse the following two
+  input classes into one bucket:
+  - arbitrary `DATA(8)` values with no demonstrated Paris V1 provenance
+  - mutated client-local `payloadId` values derived from a real Paris V1 build
+    process
+- Only the second class is currently treated as valid evidence for
+  `PARIS-METHOD-GP-02`.
+- The first class should be tracked separately as an implementation-behavior
+  observation until the spec stance on fork or version classification is made
+  explicit.

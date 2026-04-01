@@ -364,6 +364,17 @@ The MVP must not normalize away:
 - presence or absence of semantically meaningful fields
 - state-transition differences
 
+The MVP must also preserve one specific input-class distinction for
+`engine_getPayloadV1`:
+
+- arbitrary `DATA(8)` values are not automatically equivalent to an unknown but
+  otherwise valid Paris V1 `payloadId`
+- the `unknown-payloadid` differential scenario should use a mutated
+  client-local `payloadId` derived from a real Paris V1 build process
+- any `Unsupported fork` or similar classification observed for arbitrary
+  `DATA(8)` inputs should be tracked as a separate implementation-behavior
+  observation, not normalized into the `-38001 Unknown payload` bucket
+
 Before custom simulator work expands, build a small sampled response corpus from
 `geth` and `reth` and validate the initial `NormalizationProfile` against that
 corpus.
@@ -381,6 +392,21 @@ Before enabling cross-client diff as the main signal:
 
 If a scenario is not repeatable within one client, it is not eligible for the
 first offline differential MVP.
+
+## Observed Paris MVP Comparison Insights
+
+Implementation-level comparison insights discovered during `T03` through `T13`
+are tracked in
+[paris-differential-insights.md](./paris-differential-insights.md).
+
+`T14` and later offline diff work should treat that note as a comparison
+discipline supplement, especially for:
+
+- representation-only JSON differences
+- fork-era fixture alignment
+- client-local runtime identifiers
+- success-category comparisons
+- provenance-aware unknown-payload inputs
 
 ## MVP Scope
 
@@ -473,6 +499,8 @@ produce useful signals.
 #### `unknown-payloadid`
 
 - call `engine_getPayloadV1` with an unknown `payloadId`
+- derive that unknown value by mutating a real client-local Paris V1
+  `payloadId`, not by inventing an arbitrary `DATA(8)` literal
 - compare error category and shape after normalization
 
 ## Acceptance Criteria
