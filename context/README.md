@@ -27,6 +27,7 @@ Read in this order:
 1. `snapshots/2026-03-26-differential-testing-context.md`
 2. `plans/el-differential-testing-plan.md`
 3. `plans/test-plan.md`
+4. `plans/hive-first-mvp-task-tracker.md`
 
 Then pick one branch:
 
@@ -43,6 +44,8 @@ Then pick one branch:
   Cross-fork roadmap from `Paris` through `Amsterdam`.
 - `plans/el-differential-testing-plan.md`
   Current execution-facing plan for the EL differential-testing phase.
+- `plans/hive-first-mvp-task-tracker.md`
+  Executable task tracker for the current Hive-first MVP.
 - `methods/markdown-openrpc-static-check-method.md`
   Reusable method for markdown vs OpenRPC static review.
 - `seeds/null-seed-inventory-paris-amsterdam.md`

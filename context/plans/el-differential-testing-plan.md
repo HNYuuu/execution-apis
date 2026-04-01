@@ -127,6 +127,20 @@ Recommended first shape:
 The first version should not require a single coordinator process to hold
 multiple EL clients open at once.
 
+## Hive Integration Spike
+
+Before building the first reusable runtime scenario layer, complete a small
+integration spike focused on Hive-specific operational details:
+
+- JWT-authenticated Engine API wiring
+- `chain.rlp` and related artifact injection path
+- per-client startup flag differences relevant to `geth` and `reth`
+- the minimal invocation shape for the thin HTTP-based scenario driver
+
+This spike exists to reduce hidden integration cost. Its output should be a
+short per-client startup memo and one proven request path, not a polished
+framework.
+
 ## State Bootstrap Model
 
 Use file-based bootstrap only for persistent, client-comparable state. Use
@@ -217,12 +231,34 @@ Additional runtime-only state fields:
 `payloadId`. These values must be tracked and consumed per client run. They are
 not valid cross-client comparison targets.
 
+`bootstrap_digest` must be computed from the normalized bootstrap definition
+used for the run:
+
+- `bootstrap_mode`
+- ordered list of required artifact paths
+- cryptographic hash of each referenced artifact file
+- ordered `startup_steps`
+
+The purpose of `bootstrap_digest` is to prove that compared runs used the same
+bootstrap contract, not merely the same scenario id.
+
 Allowed `outcome_bucket` values:
 
 - `all agree`
 - `agree after normalization`
 - `diverge across clients`
 - `violates hard invariant`
+
+Assignment timing:
+
+- `violates hard invariant` may be assigned during scenario execution once the
+  scenario-local oracle fails
+- `all agree`, `agree after normalization`, and `diverge across clients` must
+  be assigned by the offline comparison stage after normalized envelopes are
+  available from all compared clients
+
+Therefore `ResultEnvelope` must support partial filling at scenario-runtime
+write time, followed by final bucket completion during offline diff.
 
 ## Specification Inputs And Oracle Policy
 
@@ -340,11 +376,13 @@ The first implementation should proceed in this order:
 
 1. bootstrap validation with `rlp-bootstrap-smoke` and
    `headfcu-bootstrap-smoke`
-2. thin HTTP-based scenario-driver prototype inside the Hive environment
-3. normalization prototype on sampled `geth` and `reth` responses
-4. repeated-run determinism probe on the bootstrap and early scenario set
-5. thin custom runtime scenarios
-6. offline cross-client differential comparison
+2. Hive integration spike for JWT wiring, artifact injection, and startup flags
+3. stock Hive or EEST coverage mapping and gap report
+4. thin HTTP-based scenario-driver prototype inside the Hive environment
+5. normalization prototype on sampled `geth` and `reth` responses
+6. repeated-run determinism probe on the bootstrap and early scenario set
+7. thin custom runtime scenarios
+8. offline cross-client differential comparison
 
 This ordering is intentional. It reduces the risk of building a complete custom
 scenario layer before knowing whether the comparison model is stable enough to
