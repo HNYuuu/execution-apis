@@ -41,7 +41,7 @@ Status values:
 | `T01` | MVP oracle surface freeze and provenance gate | `done` |
 | `T02` | Bootstrap artifact contract and reusable bootstrap definitions | `done` |
 | `T03` | `rlp-bootstrap-smoke` scenario | `done` |
-| `T04` | `headfcu-bootstrap-smoke` scenario | `todo` |
+| `T04` | `headfcu-bootstrap-smoke` scenario | `done` |
 | `T05` | Runtime reality check plus Hive integration spike | `done` |
 | `T06` | Stock Hive/EEST coverage mapping and gap report | `todo` |
 | `T07` | Thin HTTP-based scenario-driver prototype in Hive | `todo` |
@@ -240,7 +240,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -262,6 +262,44 @@ Status values:
 - one scenario definition
 - per-client replay records for `headfcu.json`
 - comparable `B2` state confirmation records
+
+**Current Progress**
+
+- Real runtime replay completed for `geth` and `reth`.
+- Both clients accepted `engine_forkchoiceUpdatedV3` from `tests/headfcu.json`.
+- Two runs per client returned `payloadStatus.status = VALID`.
+- All observed `payloadId` values were `null`, as expected for
+  `payloadAttributes: null`.
+
+**Artifacts**
+
+- `code`
+  [engine-headfcu-bootstrap-smoke.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-headfcu-bootstrap-smoke.js)
+- `script`
+  [run-engine-headfcu-bootstrap-smoke.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-headfcu-bootstrap-smoke.sh)
+- `config`
+  [paris-headfcu-bootstrap-smoke.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.config.json)
+- `test case`
+  [paris-headfcu-bootstrap-smoke.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.test-case.json)
+- `log format`
+  [paris-headfcu-bootstrap-smoke.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log-format.md)
+- `log output`
+  [paris-headfcu-bootstrap-smoke.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json)
+- `notes`
+  [paris-headfcu-bootstrap-smoke.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.notes.md)
+- `raw log`
+  [paris-headfcu-bootstrap-smoke.log.geth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.geth.run1.raw.log)
+- `raw log`
+  [paris-headfcu-bootstrap-smoke.log.geth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.geth.run2.raw.log)
+- `raw log`
+  [paris-headfcu-bootstrap-smoke.log.reth.run1.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.reth.run1.raw.log)
+- `raw log`
+  [paris-headfcu-bootstrap-smoke.log.reth.run2.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.reth.run2.raw.log)
+
+**Git Record**
+
+- `commit`
+  pending
 
 **Validation Method**
 

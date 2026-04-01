@@ -1,0 +1,11 @@
+{
+  "task_id": "T04",
+  "expected_clients": ["geth", "reth"],
+  "repeated_runs_per_client": 2,
+  "expected_fcu_method": "engine_forkchoiceUpdatedV3",
+  "expected_payload_status": "VALID",
+  "expected_observation": {
+    "head_number": "0x2d",
+    "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+  }
+}
