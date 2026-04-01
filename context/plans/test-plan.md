@@ -2,13 +2,19 @@
 
 ## Goal
 
-Build a complete test strategy for the Engine API across all fork-scoped specs in this repository, from `Paris` through `Amsterdam`, with three complementary objectives:
+Build a complete test strategy for the Engine API across all fork-scoped specs
+in this repository, from `Paris` through `Amsterdam`, with three complementary
+objectives:
 
 1. Verify consistency between Engine API rules and their higher-level sources.
-2. Detect inconsistencies introduced by the "new spec modifies old spec" evolution model.
-3. Verify that different execution clients implement the Engine API consistently.
+2. Detect inconsistencies introduced by the "new spec modifies old spec"
+   evolution model.
+3. Verify that different execution clients implement the Engine API
+   consistently.
 
-This document is the persistent high-level plan for subsequent work.
+This document is the durable high-level roadmap. Historical session context
+remains under `context/snapshots/`, but the current source of truth is the
+`context/plans/` directory.
 
 ## Scope
 
@@ -27,12 +33,14 @@ Covered artifact types:
 - OpenRPC method definitions under `src/engine/openrpc/methods/`
 - OpenRPC schema definitions under `src/engine/openrpc/schemas/`
 - Repository test fixtures under `tests/`
+- Dynamic differential harness inputs derived from repository fixtures and
+  fork-scoped specs
 - Downstream conformance execution in Hive `rpc-compat`
 
-Out of scope for the initial phase:
+Out of scope for the initial execution phases:
 
 - Full fuzzing infrastructure
-- Full stateful differential execution against all clients
+- Full stateful differential execution against all five clients at once
 - Performance benchmarking
 
 ## Guiding Model
@@ -40,55 +48,65 @@ Out of scope for the initial phase:
 Treat the Engine API as a layered specification surface:
 
 1. `High-level provenance layer`
-   Map each Engine API rule to a source such as prior Engine API specs, consensus-layer specs, EIPs, or explicit repository design decisions.
+   Map each Engine API rule to a source such as prior Engine API specs,
+   consensus-layer specs, EIPs, or explicit repository design decisions.
 2. `Spec evolution layer`
-   Check whether fork-to-fork modifications preserve consistency when a newer document extends, overrides, or deprecates earlier rules.
+   Check whether fork-to-fork modifications preserve consistency when a newer
+   document extends, overrides, or deprecates earlier rules.
 3. `Implementation layer`
-   Check whether execution clients expose equivalent observable behavior for the same Engine API inputs and protocol sequences.
+   Check whether execution clients expose equivalent observable behavior for the
+   same Engine API inputs and protocol sequences.
+
+The execution path for those layers is intentionally linear:
+
+`Static review -> Fixture-level single-call checks -> Hive-first EL differential MVP -> Client expansion`
+
+The repository's existing `tests/*.io` format only covers the second step. It
+does not replace the Hive-based stateful differential stack required for the
+third step.
 
 ## Test Axes
 
-Every rule or test case should be tagged against one or more of the following axes:
+Every rule or test case should be tagged against one or more of the following
+axes:
 
 - `Structure`
-  Fields, types, optionality, nullability, presence semantics, versioned schemas, enum values, and object composition.
+  Fields, types, optionality, nullability, presence semantics, versioned
+  schemas, enum values, and object composition.
 - `Routine`
-  Validation steps, required ordering of checks, derived values, and preconditions.
+  Validation steps, required ordering of checks, derived values, and
+  preconditions.
 - `Error behavior`
   Error codes, error grouping, rejection conditions, and deprecation behavior.
 - `State behavior`
-  Protocol state transitions such as payload building lifecycle, forkchoice progression, and blob retrieval behavior.
+  Protocol state transitions such as payload building lifecycle, forkchoice
+  progression, and blob retrieval behavior.
 - `Cross-fork delta`
-  What changed, what was inherited, and what was overridden from one fork spec to the next.
+  What changed, what was inherited, and what was overridden from one fork spec
+  to the next.
 
 ## Phase 0: Specification Surface Inventory
 
 ### Purpose
 
-Define the full Engine API testing surface precisely before writing automated checks.
-The initial inventory must cover not only callable methods, but also the data
+Define the full Engine API testing surface precisely before writing automated
+checks. The inventory must cover not only callable methods, but also the data
 structures they consume and produce, and the routines that define their
 validation and stateful behavior.
 
 ### Tasks
 
-1. Build a `method/version matrix` covering all Engine API methods from `Paris` through `Amsterdam`.
-2. Build a `data structure inventory` for all payload, forkchoice, blob, transition, and capability-related structures.
-3. Build a `routine inventory` for all validation and behavioral procedures described in the markdown specs.
-4. For each method, structure, or routine, mark where it is:
-   - introduced
-   - extended
-   - overridden
-   - deprecated
-5. Record where each artifact lives:
-   - markdown spec
-   - OpenRPC method YAML
-   - OpenRPC schema YAML
-   - generated documentation
-6. Record cross-links:
-   - which methods reference which structures
-   - which methods or versions invoke which routines
-   - which routines depend on which structures
+1. Build a `method/version matrix` covering all Engine API methods from
+   `Paris` through `Amsterdam`.
+2. Build a `data structure inventory` for payload, forkchoice, blob,
+   transition, and capability-related structures.
+3. Build a `routine inventory` for validation and behavioral procedures
+   described in the markdown specs.
+4. For each method, structure, or routine, mark where it is introduced,
+   extended, overridden, or deprecated.
+5. Record where each artifact lives across markdown, OpenRPC YAML, and
+   generated docs.
+6. Record cross-links between methods, structures, and routines.
 
 ### Deliverables
 
@@ -102,64 +120,59 @@ validation and stateful behavior.
 
 ### Purpose
 
-Verify that Engine API requirements are justified by higher-level sources and that no rule exists without traceable provenance.
+Verify that Engine API requirements are justified by higher-level sources and
+that no rule exists without traceable provenance.
 
 ### Working assumption
 
-There is not necessarily one single top-level EIP covering the entire Engine API. Provenance may be distributed across consensus specs, fork-specific protocol changes, EIPs, and prior Engine API versions.
+There is not necessarily one single top-level EIP covering the entire Engine
+API. Provenance may be distributed across consensus specs, fork-specific
+protocol changes, EIPs, and prior Engine API versions.
 
 ### Tasks
 
 1. Create a traceability matrix for atomic rules.
-2. Decompose each spec section into atomic rules such as:
-   - required field constraints
-   - validation predicates
-   - check ordering requirements
-   - response obligations
-   - error obligations
-   - capability negotiation requirements
+2. Decompose each spec section into atomic rules such as required field
+   constraints, validation predicates, check ordering requirements, response
+   obligations, error obligations, and capability negotiation requirements.
 3. Assign each rule a provenance category:
-   - inherited from previous Engine API spec
-   - derived from consensus spec
-   - derived from EIP
-   - repository-local design decision
-   - unknown provenance
-4. Identify:
-   - `Missing provenance`
-   - `Stale projection`
-   - `Over-specification`
+   `inherited`, `consensus-derived`, `EIP-derived`, `repository-local`, or
+   `unknown`.
+4. Identify `Missing provenance`, `Stale projection`, and
+   `Over-specification`.
 
 ### Deliverables
 
 - `Traceability matrix`
 - `Provenance gap report`
 
+### Phase 1 exit rule
+
+Phase 5 may not promote an atomic rule into a `hard invariant` if that rule is
+still classified as `unknown`.
+
+Allowed temporary state:
+
+- `unknown` provenance may still exist outside the MVP target surface
+- `unknown` provenance may not remain in the `Paris + geth/reth` MVP scenario
+  set
+
 ## Phase 2: Cross-Fork Spec Evolution Consistency
 
 ### Purpose
 
-Check whether the incremental spec-writing style introduces contradictions or hidden drift from `Paris` to `Amsterdam`.
+Check whether the incremental spec-writing style introduces contradictions or
+hidden drift from `Paris` to `Amsterdam`.
 
 ### Tasks
 
 1. For every method and type, classify each fork-to-fork delta as:
-   - `inherits`
-   - `extends`
-   - `overrides`
-   - `deprecates`
-2. Detect these inconsistency classes:
-   - newer text modifies old behavior but does not fully restate the affected constraints
-   - constants or constraints conflict across forks
-   - validation order changes without clearly updating dependent text
-   - examples and routines drift apart
-   - markdown and OpenRPC definitions diverge
-   - deprecated methods remain ambiguously specified
-3. Build a fork-delta ledger from:
-   - `Paris -> Shanghai`
-   - `Shanghai -> Cancun`
-   - `Cancun -> Prague`
-   - `Prague -> Osaka`
-   - `Osaka -> Amsterdam`
+   `inherits`, `extends`, `overrides`, or `deprecates`.
+2. Detect inconsistency classes such as partially restated overrides,
+   conflicting constants, validation-order drift, example drift, markdown vs
+   OpenRPC divergence, and ambiguous deprecations.
+3. Build a fork-delta ledger for:
+   `Paris -> Shanghai -> Cancun -> Prague -> Osaka -> Amsterdam`.
 
 ### Deliverables
 
@@ -170,17 +183,16 @@ Check whether the incremental spec-writing style introduces contradictions or hi
 
 ### Purpose
 
-Automate detection of the most important spec-level mismatches before involving live clients.
+Automate detection of the most important spec-level mismatches before involving
+live clients.
 
 ### Candidate checkers
 
 1. `Delta checker`
    Compare inherited and modified definitions across fork documents.
 2. `Markdown vs OpenRPC checker`
-   Compare markdown-described method behavior and schemas against:
-   - `src/engine/openrpc/methods/`
-   - `src/engine/openrpc/schemas/`
-   Explicitly detect required vs optional vs nullable drift.
+   Compare markdown-described method behavior and schemas against
+   `src/engine/openrpc/methods/` and `src/engine/openrpc/schemas/`.
 3. `Rule coverage checker`
    Check which atomic rules currently have no corresponding test intent.
 
@@ -189,192 +201,166 @@ Automate detection of the most important spec-level mismatches before involving 
 - Initial checker scripts
 - Checker output reports
 
-Current implementation:
+### Current baseline
 
-- `scripts/engine-static-check.js` is now a fork-aware generic runner.
-- `scripts/engine-static-check-data.js` holds issue-group definitions so future
-  forks can extend coverage by adding data rather than rewriting the runner.
-- Current checker findings are intentionally restricted to `static artifact
-  inconsistencies` between fork-scoped markdown and OpenRPC methods/schemas.
-  Generated docs are treated as downstream manifestations of YAML and are not a
-  primary findings surface in the current phase. Dynamic method behavior,
-  stateful routines, and client execution differences remain deferred to later
-  phases.
-- Current nullable-field convention accepts two equivalent YAML projections for
-  a markdown `...|null` field: explicit null support, or omission from
-  `required` so field absence is treated as null-equivalent. The same
-  `optional-as-null` convention can also be applied to positional parameters
-  when the review rule explicitly allows it.
-- Method metadata such as markdown timeout annotations is currently treated as
-  out of scope for the Markdown/OpenRPC inconsistency checker unless the
-  repository establishes that such metadata must be represented in YAML.
-- Current implemented coverage now spans `Paris -> Amsterdam`.
-- The checker currently supports both `fork-local` and `cumulative` review
-  modes.
-- Current implemented rule coverage targets:
-  - nullability and presence semantics
-  - versioned-union parameter projection
-  - result-array null-item projection
-  - top-level result nullability
-  - static method error-code presence and absence
+- `scripts/engine-static-check.js` is the current fork-aware generic runner.
+- `scripts/engine-static-check-data.js` stores issue-group definitions so
+  coverage can be extended by data rather than runner rewrites.
+- Current checker findings are intentionally limited to static artifact
+  inconsistencies between fork-scoped markdown and OpenRPC methods or schemas.
+- Generated docs are treated as downstream manifestations of YAML, not a
+  primary findings surface for this phase.
+- Dynamic method behavior, stateful routines, and client execution differences
+  are explicitly deferred to later phases.
+- Current implemented coverage spans `Paris -> Amsterdam`.
+- Current checker coverage targets:
+  `nullability/presence`, `versioned-union parameter projection`,
+  `result-array null items`, `top-level result nullability`, and
+  `static error-code presence`.
 
-## Phase 4: EL Differential Testing
+The current checker baseline still reports `7` findings across `5` issue
+groups. Those findings are important oracle-hygiene debt, but they do not block
+the stateful differential MVP. They must be tracked in parallel as
+`shape-oracle debt`.
+
+## Phase 4: Fixture-Level Single-Call Checks
 
 ### Purpose
 
-Move from static spec consistency into live behavioral comparison across major
-execution clients while keeping the test environment highly controlled.
+Convert the subset of Engine API behavior that fits a single request-response
+exchange into executable conformance fixtures.
 
-### Testing target
+### Responsibilities
 
-The primary target is `EL client Engine API server-side behavior`.
-
-The CL side is initially treated as a lightweight test driver rather than as a
-system under test.
-
-### Covered client set
-
-- `geth`
-- `nethermind`
-- `erigon`
-- `besu`
-- `reth`
-
-### Working model
-
-The first dynamic phase should avoid a naturally evolving multi-node network.
-Instead it should use:
-
-1. one isolated sandbox per EL client
-2. a state controller that pushes every EL client into the same abstract state
-3. a lightweight CL-side driver that replays the same Engine API sequence to
-   every client
-4. a normalizer and comparator for differential analysis
-
-### Spec input policy
-
-- OpenRPC YAML is used for request skeletons, shape validation, and method
-  discovery.
-- Fork-scoped markdown is used for semantic edge enrichment, high-value
-  mutations, and hard invariants.
-- YAML must not be treated as a complete oracle where the static review has
-  already shown markdown-only semantics.
-
-### Initial deliverables
-
-- harness MVP for at least two clients
-- deterministic state fixtures
-- fixed request-sequence scenarios
-- normalized differential comparison
-- first markdown-derived mutation library
-
-See `context/plans/el-differential-testing-plan.md` for the concrete architecture and
-phase breakdown.
-
-## Phase 4: Fixture-Level Conformance Tests
-
-### Purpose
-
-Convert high-value rules into executable tests.
-
-### Tasks
-
-1. Identify which Engine API behaviors can be tested as single request-response fixtures.
-2. Add or generate fixture candidates for:
-   - schema conformance
-   - version negotiation
-   - error code behavior
-   - invalid input rejection
-3. Record which behaviors cannot be captured in a single round-trip and must be deferred to stateful testing.
+- Use `tests/*.io` for single-round-trip shape and conformance checks only.
+- Keep this layer compatible with `speccheck` and downstream Hive
+  `rpc-compat`.
+- Reuse chain assets such as `genesis.json`, `chain.rlp`, `forkenv.json`, and
+  `headfcu.json` when useful, but do not treat them as a complete Engine API
+  harness design.
 
 ### Notes
 
-The repository test format under `tests/` is primarily single round-trip `.io` data. This is useful but insufficient for the full Engine API because many behaviors are sequence-sensitive.
+- The repository test format is valuable for schema conformance, invalid input
+  rejection, and simple error-code expectations.
+- It is insufficient for payload-build lifecycle, repeated
+  `forkchoiceUpdated*`, `getPayload*` sequencing, or cross-client differential
+  comparison.
+- `rpctestgen` remains a reference tool for single-client, fixed-chain,
+  recording-style fixture generation. It is not the foundational abstraction
+  for Engine API stateful differential testing.
 
 ### Deliverables
 
 - `Single-call conformance fixture set`
 - `Stateful-only rule list`
 
-## Phase 5: Stateful Protocol Testing
+## Phase 5: Hive-First EL Differential MVP
 
 ### Purpose
 
-Test Engine API behavior that depends on protocol state, ordering, and history.
+Move from static consistency and single-call conformance into controlled,
+stateful differential testing of `EL client Engine API server-side behavior`
+using Hive as the orchestration substrate.
 
-### Tasks
+### MVP boundary
 
-1. Build a minimal Engine API state model including:
-   - forkchoice state
-   - payload build lifecycle
-   - payload retrieval lifecycle
-   - blob availability and retrieval state
-   - deprecated vs supported method behavior by fork version
-2. Define legal and illegal call sequences.
-3. Encode high-value stateful scenarios such as:
-   - repeated `forkchoiceUpdated`
-   - `getPayload` before and after build completion
-   - wrong versioned payload attributes
-   - blob-related sequence constraints
-   - deprecated transition configuration behavior
+The first implementation is intentionally narrow:
+
+- first fork: `Paris`
+- first client pair: `geth` and `reth`
+- use `Hive` for lifecycle, isolation, networking, and artifact injection
+- use `chain.rlp`-style bootstrap where state is persistent and comparable
+- keep a thin custom Engine API driver only for runtime-only state such as
+  `payloadId` and `getPayload` lifecycle
+- first retained build-lifecycle sequence:
+  `forkchoiceUpdatedV1 -> getPayloadV1 -> newPayloadV1`
+- first markdown-derived no-build sequence:
+  valid `forkchoiceUpdatedV1` with `payloadAttributes: null`
+
+The MVP must use a Hive-first stack. It must not be squeezed into the
+single-call `.io` fixture format, and it should not reimplement infrastructure
+that Hive already solves.
+
+### Additional entry criteria
+
+Before full Phase 5 implementation, complete two targeted validation steps:
+
+1. `Normalization prototype`
+   Build a small response corpus from `geth` and `reth` for the planned MVP
+   scenarios and validate the first normalization rules against real outputs.
+2. `Determinism probe`
+   Re-run the same `rlp_import_plus_headfcu` bootstrap and early scenario set
+   multiple times per client to confirm stable within-client outcomes before
+   relying on offline cross-client artifact diff.
+
+Phase 5 should not proceed directly from plan to full simulator work without
+these two checks.
+
+### Oracle policy
+
+- OpenRPC YAML is the grammar and shape layer.
+- Fork-scoped markdown is the semantic authority for high-value invariants,
+  especially null semantics, error-code branches, and stateful behavior.
+- Current static checker findings remain tracked as `shape-oracle debt`.
+- Even for `Paris`, accepted YAML projection conventions mean markdown cannot be
+  discarded as an oracle for null-sensitive branches.
+- `rpc-compat` remains out of scope as the replacement vehicle because it is
+  still single-call JSON-RPC conformance rather than stateful Engine API
+  testing.
+
+For concrete architecture, interfaces, state recipes, and scenario definitions,
+see [el-differential-testing-plan.md](./el-differential-testing-plan.md).
 
 ### Deliverables
 
-- `Engine API protocol state model`
-- `Stateful scenario suite`
+- Hive-first MVP for `geth` and `reth`
+- reusable bootstrap definitions for `genesis_only`, `rlp_import`, and
+  `rlp_import_plus_headfcu`
+- normalization prototype and initial comparison rule set for `geth` and `reth`
+- repeated-run determinism report for the bootstrap and early scenario set
+- thin custom Engine API scenario layer for runtime-only state
+- fixed request-sequence scenarios
+- response normalization and offline pairwise differential comparison
+- first markdown-derived boundary scenario library
 
-## Phase 6: Differential Testing Across Execution Clients
+## Phase 6: Client Expansion
 
 ### Purpose
 
-Check whether different EL clients behave equivalently under the same Engine API workloads.
+Expand coverage only after the `Paris + geth/reth` Hive-first stack is stable
+and the MVP result buckets are trustworthy.
 
-### Tasks
+### Order
 
-1. Select an initial client set, such as:
-   - Geth
-   - Nethermind
-   - Besu
-   - Erigon
-2. Run golden conformance scenarios first.
-3. Then run state-machine differential tests over the same action sequences.
-4. Compare:
-   - response shape
-   - status values
-   - error codes
-   - observable state transitions
-   - capability negotiation outcomes
-5. Triaging policy:
-   - spec bug
-   - ambiguous spec
-   - single-client bug
-   - multi-client common divergence
+1. Add `nethermind`
+2. Add `besu`
+3. Add `erigon`
+4. Expand fork coverage beyond `Paris`
+5. Add broader bootstrap and runtime state families
+6. Revisit blob and payload-bodies families
+7. Revisit generated state-machine exploration
 
 ### Deliverables
 
-- `Golden conformance dashboard`
+- `Expanded client matrix`
+- `Expanded fork matrix`
 - `Differential discrepancy report`
-
-## Recommended Start Order
-
-The initial execution order should be:
-
-1. Build the specification surface inventory for `Paris` through `Amsterdam`:
-   - method/version matrix
-   - data structure inventory
-   - routine inventory
-   - linkage map
-2. Build the atomic rule table and provenance table.
-3. Implement a first `delta checker`.
-4. Implement a first `markdown vs OpenRPC` consistency checker.
-5. Convert a small set of high-value rules into fixture candidates.
-6. Define the minimal state machine for later differential testing.
 
 ## Immediate Next Step
 
-The next concrete task is:
+Design and review the Hive-first MVP under
+[el-differential-testing-plan.md](./el-differential-testing-plan.md)
+with these concrete requirements:
 
-Complete the remaining `Amsterdam` static review pass using the established
-`markdown <-> OpenRPC YAML` method, then consolidate cross-fork findings from
-`Paris -> Osaka` before moving back up to the broader specification-surface
-inventory work.
+- `Paris` first
+- `geth + reth` first
+- no MVP `hard invariant` may depend on `unknown` provenance
+- `chain.rlp` and `headfcu.json` used only for persistent comparable state
+- one normalization prototype pass before custom simulator expansion
+- one repeated-run determinism probe before offline differential comparison
+- one bootstrap sanity scenario first
+- one deterministic build-lifecycle sequence first
+- one markdown-derived boundary sequence first
+- current `7` static checker findings treated as parallel `shape-oracle debt`,
+  not as a blocking prerequisite
