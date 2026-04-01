@@ -158,7 +158,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  `pending`
+  `b08100c` - `Complete P2-T02 nethermind startup contract`
 
 **Validation Method**
 
