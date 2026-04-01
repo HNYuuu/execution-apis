@@ -1,112 +1,136 @@
-# 2026-04-01 Hive MVP Progress Snapshot
+# 2026-04-01 Hive MVP And Phase-2 Snapshot
 
 ## Purpose
 
-This snapshot records the first implementation day of the Hive-first Engine
-API MVP. It is the current restart point for review, rollback planning, and
-next-step execution.
+This snapshot is the current end-of-day restart point after:
+
+- the accepted `Paris geth/reth` MVP was fully closed
+- phase planning was reorganized under `plans/phases/`
+- phase-2 was started and its first two tasks were completed
 
 Use this file to recover:
 
-- what changed in the test plan
-- which MVP tasks are actually complete
-- which runtime paths were proved with real clients
-- which artifacts and commits anchor the current state
+- what phase-1 actually achieved
+- what changed in the plan and file architecture
+- which phase-2 tasks are already complete
+- what concrete blocker now gates the next runtime step
 
-## Current Phase
+## Current Project State
 
-The work has moved from plan-only refinement into early executable MVP
-implementation.
+The work is no longer in MVP implementation. Phase-1 is complete and accepted.
+The active line is now `phase-2-paris-third-client`.
 
 Current state:
 
-- planning is now explicitly `Hive-first`
-- `T01`, `T02`, `T03`, and `T05` are complete
-- the first real client-runtime bootstrap path has been proved
-- the next active task is `T04`:
-  `headfcu-bootstrap-smoke`
+- phase-1 status: `done`
+- phase-2 status: started
+- complete phase-2 tasks: `P2-T01`, `P2-T02`
+- next active task: `P2-T03`
 
-## Main Decisions From Today
+## Main Decisions Captured Today
 
-### 1. Real runtime checks must happen early
+### 1. Phase-1 is now treated as a closed baseline
 
-The earlier offline `T03` baseline was not treated as sufficient completion
-evidence.
+The accepted `Paris geth/reth` MVP remains the baseline for all later work.
 
-Decision:
+That baseline now includes:
 
-- keep offline artifacts only as preparation
-- require real runtime execution before treating bootstrap scenarios as done
+- real runtime bootstrap validation
+- real runtime custom scenarios
+- conservative normalization
+- determinism probing
+- offline `ResultEnvelope` diff
+- explicit MVP acceptance review returning `go`
 
-This is now reflected in:
+Primary acceptance anchor:
 
-- `context/plans/test-plan.md`
-- `context/plans/el-differential-testing-plan.md`
-- `context/plans/hive-first-mvp-task-tracker.md`
+- `context/plans/t15-mvp-acceptance/paris-mvp-acceptance.decision.json`
 
-### 2. Hive is the environment anchor, but thin direct client execution is acceptable
+### 2. Phase-owned planning documents now live under the owning phase
 
-`T05` proved that the local environment can run Hive-backed client images for:
+The active phase-1 source-of-truth planning files were moved under:
 
-- `go-ethereum`
-- `reth`
+- `context/plans/phases/phase-1-paris-mvp/`
 
-For `T03`, the thinnest working path was:
+This applies to:
 
-1. `docker create`
-2. `docker cp genesis.json`
-3. `docker cp chain.rlp`
-4. `docker start`
-5. JSON-RPC queries
-6. `docker rm -f`
+- `el-differential-testing-plan.md`
+- `hive-first-mvp-task-tracker.md`
+- `paris-differential-insights.md`
 
-This path was chosen because the client startup scripts move `/genesis.json`,
-so direct bind-mounting to `/genesis.json` is not viable.
+Implementation artifact directories `t01-*` through `t15-*` were deliberately
+left in place as historical execution records.
 
-### 3. `chain.rlp` bootstrap is now runtime-proved for `geth` and `reth`
+### 3. Phase-2 stays narrow: Paris only, one new client, no scenario expansion
 
-`T03` no longer depends on fixture-only expectations.
+`P2-T01` froze phase-2 to the accepted phase-1 Paris scenario surface.
 
-It now proves with real runtime execution that:
+Frozen scope:
 
-- both clients import `genesis + chain.rlp`
-- both expose RPC after startup
-- both report:
-  - head number `0x2d`
-  - head hash `0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2`
-- repeated runs are stable within each client
+- fork: `Paris`
+- new client target: `nethermind`
+- reused scenarios:
+  - `rlp-bootstrap-smoke`
+  - `headfcu-bootstrap-smoke`
+  - `fcu-no-build`
+  - `fcu-build-getpayload-newpayload`
+  - `repeat-fcu-same-head`
+  - `unknown-payloadid`
+
+Comparison-discipline constraints carried into phase-2:
+
+- object key order remains normalization-only noise
+- `null` vs omitted stays deferred without new evidence
+- Paris scenarios must keep Paris-era fixture alignment
+- client-local runtime identifiers stay out of cross-client equality
+- `engine_newPayloadV1` success remains a structured category
+- `feeRecipient` is not hard-tied to `suggestedFeeRecipient`
+- `unknown-payloadid` keeps the mutated-real-Paris-`payloadId` input class
+
+### 4. `nethermind` acquisition is now concrete enough for runtime work
+
+`P2-T02` fixed the startup contract for the third client.
+
+Acquisition decision:
+
+- use Hive client wrapper source at `/tmp/hive/clients/nethermind`
+- target image name: `hive/clients/nethermind:latest`
+- wrapper base image: `nethermindeth/nethermind:master`
+
+Runtime contract:
+
+- entrypoint: `/nethermind.sh`
+- HTTP RPC: `8545`
+- authenticated Engine/API: `8551`
+- JWT file: `/jwt.secret`
+- generated config: `/configs/test.json`
+- generated chainspec: `/chainspec/test.json`
+
+Important parity note:
+
+- unlike `geth` and `reth`, `nethermind` exposes authrpc and chain import
+  through generated config rather than only through command-line flags
 
 ## Tasks Completed Today
 
-### `T01` MVP oracle gate
+### Phase-1 closure status
 
-Status:
+Phase-1 completion and acceptance are now fully in place:
 
-- complete
+- `T01` through `T15`: complete
+- phase-1 acceptance decision: `go`
 
-Commit:
+Relevant commits already in history before today’s phase-2 work include:
 
-- `07ddaf1` `Implement T01 MVP oracle gate artifacts`
+- `09192ad` `Complete T15 MVP acceptance review`
+- `11f5821` `Backfill T15 git record in task tracker`
+- `06158d9` `Update plans after Paris MVP acceptance`
+- `11213e0` `Add phase-oriented roadmap after Paris MVP`
+- `9224614` `Add phase-2 task tracker and auto-commit rule`
 
-Key output:
+### Phase-2 task progress
 
-- froze the allowed `Paris` MVP hard-invariant subset
-
-### `T02` bootstrap contract
-
-Status:
-
-- complete
-
-Commit:
-
-- `5ce313c` `Implement T02 bootstrap contract artifacts`
-
-Key output:
-
-- fixed `StateBootstrap` definitions and state-family boundaries
-
-### `T03` rlp bootstrap smoke
+#### `P2-T01` Third-client scope freeze and comparison gate
 
 Status:
 
@@ -114,85 +138,47 @@ Status:
 
 Commits:
 
-- `c738763` `Add T03 rlp bootstrap smoke baseline artifacts`
-- `ba15ce4` `Complete T03 real runtime rlp bootstrap smoke`
-
-Key output:
-
-- upgraded from offline baseline to real-runtime execution
-- generated JSON log plus four raw boot logs
+- `a3dab7f` `Complete P2-T01 scope freeze and comparison gate`
+- `b7f731c` `Backfill P2-T01 git record in task tracker`
 
 Primary artifacts:
 
-- `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json`
-- `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run1.raw.log`
-- `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.geth.run2.raw.log`
-- `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run1.raw.log`
-- `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.reth.run2.raw.log`
+- `context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.log.json`
+- `context/plans/phases/phase-2-paris-third-client/p2-t01-scope-gate/paris-phase2-scope-gate.report.md`
 
-### `T05` runtime reality check plus Hive integration spike
+#### `P2-T02` Nethermind startup contract
 
 Status:
 
 - complete
 
-Commit:
+Commits:
 
-- `4879f9c` `Implement T05 Hive runtime reality check artifacts`
-
-Key output:
-
-- proved Docker + local Hive execution path
-- proved minimal authenticated Engine API path through Hive engine smoke
-- captured the local Docker Desktop compatibility patch as an artifact
+- `b08100c` `Complete P2-T02 nethermind startup contract`
+- `30579db` `Backfill P2-T02 git record in task tracker`
 
 Primary artifacts:
 
-- `context/plans/t05-hive-reality-check/paris-hive-reality-check.log.json`
-- `context/plans/t05-hive-reality-check/paris-hive-engine-smoke.log.json`
-- `context/plans/t05-hive-reality-check/paris-hive-integration-memo.md`
-- `context/plans/t05-hive-reality-check/hive-docker-desktop-compat.patch`
+- `context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log.json`
+- `context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.report.md`
 
-## Important Runtime Findings
+## Important Current Blocker
 
-### 1. Docker Desktop compatibility issue in local Hive clone
+The next task is not blocked by ambiguity anymore. It is blocked by a concrete
+runtime precondition:
 
-The upstream Hive clone in `/tmp/hive` needed a local compatibility patch in:
+- local image `hive/clients/nethermind:latest` is not built yet
 
-- `internal/libdocker/container.go`
+Observed command result:
 
-Reason:
-
-- Docker Desktop populated container IPs under
-  `NetworkSettings.Networks.<name>.IPAddress`
-- the older top-level `NetworkSettings.IPAddress` field was empty
-
-Without the patch, simulator containers received an empty `HIVE_SIMULATOR`
-host.
-
-The patch has been recorded in-repo at:
-
-- `context/plans/t05-hive-reality-check/hive-docker-desktop-compat.patch`
-
-### 2. Sandbox and Docker socket access are different concerns
-
-Real Docker-backed runs succeeded outside the restricted sandbox but may report
-permission-denied results if re-run without Docker socket access.
+- `docker image inspect hive/clients/nethermind:latest`
+- daemon response: `No such image`
 
 Interpretation:
 
-- repository logs should be treated as the source of record for the successful
-  real-runtime runs
-- future re-runs need Docker socket access
-
-### 3. Client startup scripts are not bind-mount friendly for `/genesis.json`
-
-Both client startup flows assume they can move or rewrite `/genesis.json`.
-
-Practical implication:
-
-- future bootstrap tasks should prefer container file copy over direct bind
-  mounts to the destination filename used by the startup scripts
+- `P2-T02` is complete because the startup contract is concrete
+- `P2-T03` must now either build the Hive wrapper image or let Hive build it
+  during the first real runtime run
 
 ## Current Working State
 
@@ -204,25 +190,25 @@ Workspace state at snapshot time:
 
 - clean working tree
 
-Task tracker status:
+Phase status:
 
-- done: `T01`, `T02`, `T03`, `T05`
-- todo: `T04`, `T06`, `T07`, `T08`, `T09`, `T10`, `T11`, `T12`, `T13`, `T14`,
-  `T15`
+- phase-1: `done`
+- phase-2: `P2-T01`, `P2-T02` done; `P2-T03` through `P2-T10` todo
 
 ## Immediate Next Step
 
-Start `T04`:
+Start `P2-T03`:
 
-- bootstrap from `genesis + chain.rlp`
-- replay `tests/headfcu.json` over authenticated Engine API
-- confirm whether `geth` and `reth` accept the replay
-- capture comparable `B2` state evidence
+- build or trigger build of `hive/clients/nethermind:latest`
+- prove `nethermind` starts in the controlled Docker/Hive environment
+- prove authenticated Engine RPC is reachable
+- run a minimal Hive or equivalent engine smoke path
+- fail fast if the wrapper image or auth wiring is still not runnable
 
-Recommended reading order before `T04` work:
+Recommended reading order before `P2-T03` work:
 
 1. `context/snapshots/2026-04-01-hive-mvp-progress.md`
-2. `context/plans/hive-first-mvp-task-tracker.md`
-3. `context/plans/t05-hive-reality-check/paris-hive-integration-memo.md`
-4. `context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json`
-5. `context/plans/el-differential-testing-plan.md`
+2. `context/plans/phases/phase-2-paris-third-client/task-tracker.md`
+3. `context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.report.md`
+4. `context/plans/t05-hive-reality-check/paris-hive-integration-memo.md`
+5. `context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md`
