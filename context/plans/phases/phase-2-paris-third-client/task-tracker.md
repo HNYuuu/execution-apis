@@ -47,7 +47,7 @@ Status values:
 | `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `done` |
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `done` |
 | `P2-T05` | `nethermind` early runtime scenarios | `done` |
-| `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `todo` |
+| `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `done` |
 | `P2-T07` | Three-client corpus extension and normalization review | `todo` |
 | `P2-T08` | Three-client determinism probe | `todo` |
 | `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `todo` |
@@ -378,7 +378,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -402,6 +402,38 @@ Status values:
 - `nethermind` build-lifecycle artifacts
 - `nethermind` unknown-payload artifacts
 - explicit notes on any newly exposed implementation-behavior observations
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-build-and-unknown-scenarios.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-build-and-unknown-scenarios.js)
+- `script`
+  [run-engine-phase2-build-and-unknown-scenarios.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-build-and-unknown-scenarios.sh)
+- `config`
+  [paris-phase2-build-and-unknown-scenarios.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.config.json)
+- `test case`
+  [paris-phase2-build-and-unknown-scenarios.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.test-case.json)
+- `log format`
+  [paris-phase2-build-and-unknown-scenarios.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log-format.md)
+- `log output`
+  [paris-phase2-build-and-unknown-scenarios.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json)
+- `report`
+  [paris-phase2-build-and-unknown-scenarios.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.report.md)
+- `notes`
+  [paris-phase2-build-and-unknown-scenarios.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.notes.md)
+- `raw logs`
+  [p2-t06-build-and-unknown-scenarios](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios)
+
+**Notes**
+
+- `payloadId` remained client-local across all three clients.
+- `nethermind` returned lowercase `unknown payload`, but the normalized error
+  category stayed `unknown_payload`, so no new insight was required.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

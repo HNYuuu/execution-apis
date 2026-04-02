@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-T06",
+  "expected_clients": ["geth", "reth", "nethermind"],
+  "expected_head_hash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+  "expected_child_block_number": "0x2e",
+  "required_build_invariants": [
+    "PARIS-METHOD-FCU-18",
+    "PARIS-METHOD-GP-01"
+  ],
+  "required_unknown_invariants": [
+    "PARIS-METHOD-GP-02"
+  ],
+  "allowed_newpayload_statuses": [
+    "VALID",
+    "ACCEPTED"
+  ]
+}
