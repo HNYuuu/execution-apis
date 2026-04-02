@@ -1,0 +1,1390 @@
+{
+  "taskId": "P2-T04",
+  "generatedAt": "2026-04-02T09:01:14.398Z",
+  "status": "pass",
+  "executionMode": "real-runtime",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.test-case.json",
+    "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+    "runtime_source": "phase1-direct-docker-bootstrap-scripts-plus-nethermind-runtime-proof",
+    "prerequisite_runtime_proof": "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json"
+  },
+  "summary": {
+    "fork": "Paris",
+    "clients": [
+      "geth",
+      "reth",
+      "nethermind"
+    ],
+    "runs_per_client": 2,
+    "scenario_ids": [
+      "rlp-bootstrap-smoke",
+      "headfcu-bootstrap-smoke"
+    ],
+    "bootstrap_modes": [
+      "rlp_import",
+      "rlp_import_plus_headfcu"
+    ]
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/genesis.json",
+          "bytes": 6871
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/chain.rlp",
+          "bytes": 54615
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/forkenv.json",
+          "bytes": 886
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/headfcu.json",
+          "bytes": 405
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+          "bytes": 19750
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+          "bytes": 26189
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+          "bytes": 4815
+        }
+      ]
+    },
+    {
+      "check": "required Hive client images exist locally",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "image": "hive/clients/go-ethereum:latest"
+        },
+        {
+          "client": "reth",
+          "image": "hive/clients/reth:latest"
+        },
+        {
+          "client": "nethermind",
+          "image": "hive/clients/nethermind:latest"
+        }
+      ]
+    },
+    {
+      "check": "B1 and B2 bootstrap observations are stable within each client",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "per_client": [
+            {
+              "client": "geth",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            },
+            {
+              "client": "reth",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            },
+            {
+              "client": "nethermind",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            }
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "per_client": [
+            {
+              "client": "geth",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            },
+            {
+              "client": "reth",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            },
+            {
+              "client": "nethermind",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "check": "B1 and B2 bootstrap observations agree across all three clients",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "per_client": [
+            {
+              "client": "geth",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            },
+            {
+              "client": "reth",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            },
+            {
+              "client": "nethermind",
+              "observation": {
+                "payload_status": null,
+                "latest_valid_hash": null,
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+            }
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "per_client": [
+            {
+              "client": "geth",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            },
+            {
+              "client": "reth",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            },
+            {
+              "client": "nethermind",
+              "observation": {
+                "payload_status": "VALID",
+                "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "payload_id": null,
+                "head_number": "0x2d",
+                "latest_block_number": "0x2d",
+                "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              },
+              "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "bootstrap_mode": "rlp_import",
+      "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+      "expected_observation": {
+        "head_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      },
+      "expected_payload_status": null,
+      "runs": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "geth",
+          "run": 1,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-geth-run1-1775120428724",
+          "docker_image": "hive/clients/go-ethereum:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.geth.run1.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "baseFeePerGas": "0x5763d64",
+                  "blobGasUsed": "0x0",
+                  "difficulty": "0x0",
+                  "excessBlobGas": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "geth",
+          "run": 2,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-geth-run2-1775120431143",
+          "docker_image": "hive/clients/go-ethereum:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.geth.run2.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "baseFeePerGas": "0x5763d64",
+                  "blobGasUsed": "0x0",
+                  "difficulty": "0x0",
+                  "excessBlobGas": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "reth",
+          "run": 1,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-reth-run1-1775120433532",
+          "docker_image": "hive/clients/reth:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.reth.run1.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "difficulty": "0x0",
+                  "number": "0x2d",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "timestamp": "0x1c2",
+                  "extraData": "0x",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "baseFeePerGas": "0x5763d64",
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "size": "0x633",
+                  "uncles": [],
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "withdrawals": []
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "reth",
+          "run": 2,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-reth-run2-1775120435938",
+          "docker_image": "hive/clients/reth:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.reth.run2.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "difficulty": "0x0",
+                  "number": "0x2d",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "timestamp": "0x1c2",
+                  "extraData": "0x",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "baseFeePerGas": "0x5763d64",
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "size": "0x633",
+                  "uncles": [],
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "withdrawals": []
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "nethermind",
+          "run": 1,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-nethermind-run1-1775120438328",
+          "docker_image": "hive/clients/nethermind:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.nethermind.run1.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "result": "0x2d",
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "difficulty": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "baseFeePerGas": "0x5763d64",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+                },
+                "id": 1
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import",
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e",
+          "client": "nethermind",
+          "run": 2,
+          "container_name": "p2-t04-rlp-bootstrap-smoke-nethermind-run2-1775120444836",
+          "docker_image": "hive/clients/nethermind:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/rlp-bootstrap-smoke.nethermind.run2.raw.log",
+          "requests": [
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "result": "0x2d",
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "difficulty": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "baseFeePerGas": "0x5763d64",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+                },
+                "id": 1
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        }
+      ],
+      "per_client": [
+        {
+          "client": "geth",
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+        },
+        {
+          "client": "reth",
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+        },
+        {
+          "client": "nethermind",
+          "observation": {
+            "payload_status": null,
+            "latest_valid_hash": null,
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+        }
+      ]
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "bootstrap_mode": "rlp_import_plus_headfcu",
+      "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+      "expected_observation": {
+        "head_number": "0x2d",
+        "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      },
+      "expected_payload_status": "VALID",
+      "runs": [
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "geth",
+          "run": 1,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-geth-run1-1775120451341",
+          "docker_image": "hive/clients/go-ethereum:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.geth.run1.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                }
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "baseFeePerGas": "0x5763d64",
+                  "blobGasUsed": "0x0",
+                  "difficulty": "0x0",
+                  "excessBlobGas": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "geth",
+          "run": 2,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-geth-run2-1775120453793",
+          "docker_image": "hive/clients/go-ethereum:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.geth.run2.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                }
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "baseFeePerGas": "0x5763d64",
+                  "blobGasUsed": "0x0",
+                  "difficulty": "0x0",
+                  "excessBlobGas": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "reth",
+          "run": 1,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-reth-run1-1775120456254",
+          "docker_image": "hive/clients/reth:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.reth.run1.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                }
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "difficulty": "0x0",
+                  "number": "0x2d",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "timestamp": "0x1c2",
+                  "extraData": "0x",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "baseFeePerGas": "0x5763d64",
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "size": "0x633",
+                  "uncles": [],
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "withdrawals": []
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "reth",
+          "run": 2,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-reth-run2-1775120458722",
+          "docker_image": "hive/clients/reth:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.reth.run2.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                }
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": "0x2d"
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "id": 1,
+                "result": {
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "difficulty": "0x0",
+                  "number": "0x2d",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "timestamp": "0x1c2",
+                  "extraData": "0x",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "baseFeePerGas": "0x5763d64",
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+                  "size": "0x633",
+                  "uncles": [],
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "withdrawals": []
+                }
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "nethermind",
+          "run": 1,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-nethermind-run1-1775120461180",
+          "docker_image": "hive/clients/nethermind:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.nethermind.run1.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                },
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "result": "0x2d",
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "difficulty": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "baseFeePerGas": "0x5763d64",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+                },
+                "id": 1
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_mode": "rlp_import_plus_headfcu",
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944",
+          "client": "nethermind",
+          "run": 2,
+          "container_name": "p2-t04-headfcu-bootstrap-smoke-nethermind-run2-1775120467803",
+          "docker_image": "hive/clients/nethermind:latest",
+          "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/headfcu-bootstrap-smoke.nethermind.run2.raw.log",
+          "requests": [
+            {
+              "method": "engine_forkchoiceUpdatedV3",
+              "params": [
+                {
+                  "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+                },
+                null
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "payloadStatus": {
+                    "status": "VALID",
+                    "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                    "validationError": null
+                  },
+                  "payloadId": null
+                },
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_blockNumber",
+              "response": {
+                "jsonrpc": "2.0",
+                "result": "0x2d",
+                "id": 1
+              }
+            },
+            {
+              "method": "eth_getBlockByNumber",
+              "params": [
+                "latest",
+                false
+              ],
+              "response": {
+                "jsonrpc": "2.0",
+                "result": {
+                  "difficulty": "0x0",
+                  "extraData": "0x",
+                  "gasLimit": "0x47e7c40",
+                  "gasUsed": "0x54a92",
+                  "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                  "miner": "0x0000000000000000000000000000000000000000",
+                  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+                  "nonce": "0x0000000000000000",
+                  "number": "0x2d",
+                  "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+                  "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+                  "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+                  "size": "0x633",
+                  "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+                  "timestamp": "0x1c2",
+                  "baseFeePerGas": "0x5763d64",
+                  "transactions": [
+                    "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+                    "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+                    "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+                    "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+                    "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+                    "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+                  ],
+                  "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+                  "uncles": [],
+                  "withdrawals": [],
+                  "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+                  "blobGasUsed": "0x0",
+                  "excessBlobGas": "0x0",
+                  "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+                  "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+                },
+                "id": 1
+              }
+            }
+          ],
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          }
+        }
+      ],
+      "per_client": [
+        {
+          "client": "geth",
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+        },
+        {
+          "client": "reth",
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+        },
+        {
+          "client": "nethermind",
+          "observation": {
+            "payload_status": "VALID",
+            "latest_valid_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+            "payload_id": null,
+            "head_number": "0x2d",
+            "latest_block_number": "0x2d",
+            "head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+          },
+          "bootstrap_digest": "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+        }
+      ]
+    }
+  ]
+}

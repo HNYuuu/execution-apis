@@ -45,7 +45,7 @@ Status values:
 | `P2-T01` | Third-client scope freeze and comparison-discipline gate | `done` |
 | `P2-T02` | `nethermind` acquisition and startup contract | `done` |
 | `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `done` |
-| `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `todo` |
+| `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `done` |
 | `P2-T05` | `nethermind` early runtime scenarios | `todo` |
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `todo` |
 | `P2-T07` | Three-client corpus extension and normalization review | `todo` |
@@ -245,7 +245,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -267,6 +267,37 @@ Status values:
 - `nethermind` `B1` bootstrap artifacts
 - `nethermind` `B2` bootstrap artifacts
 - three-client bootstrap comparison notes
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-bootstrap-validation.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-bootstrap-validation.js)
+- `script`
+  [run-engine-phase2-bootstrap-validation.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-bootstrap-validation.sh)
+- `config`
+  [paris-phase2-bootstrap-validation.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.config.json)
+- `test case`
+  [paris-phase2-bootstrap-validation.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.test-case.json)
+- `log format`
+  [paris-phase2-bootstrap-validation.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log-format.md)
+- `log output`
+  [paris-phase2-bootstrap-validation.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json)
+- `bootstrap memo`
+  [paris-phase2-bootstrap-validation.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.report.md)
+- `raw logs`
+  [p2-t04-bootstrap-validation](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation)
+
+**Notes**
+
+- `B1` and `B2` both matched the accepted phase-1 observable state on
+  `geth/reth/nethermind`.
+- `bootstrap_digest` is now explicitly recorded for both bootstrap states and
+  remained identical across all three clients.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

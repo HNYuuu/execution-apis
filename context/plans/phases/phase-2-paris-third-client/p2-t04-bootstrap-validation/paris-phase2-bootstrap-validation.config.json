@@ -1,0 +1,75 @@
+{
+  "task_id": "P2-T04",
+  "fork": "Paris",
+  "runtime_source": "phase1-direct-docker-bootstrap-scripts-plus-nethermind-runtime-proof",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "fork_env_file": "tests/forkenv.json",
+  "runs_per_client": 2,
+  "startup_timeout_ms": 120000,
+  "auth_timeout_ms": 60000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "prerequisite_runtime_proof": "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 31545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 31551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 32545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 32551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    },
+    {
+      "client": "nethermind",
+      "image": "hive/clients/nethermind:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 33545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 33551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "bootstrap_mode": "rlp_import",
+      "genesis_file": "tests/genesis.json",
+      "chain_file": "tests/chain.rlp",
+      "requires_authrpc": false
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "bootstrap_mode": "rlp_import_plus_headfcu",
+      "genesis_file": "tests/genesis.json",
+      "chain_file": "tests/chain.rlp",
+      "headfcu_file": "tests/headfcu.json",
+      "requires_authrpc": true
+    }
+  ],
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t03-rlp-bootstrap-smoke/paris-rlp-bootstrap-smoke.log.json",
+    "context/plans/t04-headfcu-bootstrap-smoke/paris-headfcu-bootstrap-smoke.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json"
+  ]
+}
