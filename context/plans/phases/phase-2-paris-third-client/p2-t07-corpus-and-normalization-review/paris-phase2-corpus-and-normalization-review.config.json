@@ -1,0 +1,31 @@
+{
+  "task_id": "P2-T07",
+  "phase1_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+  "phase1_insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+  "source_logs": [
+    {
+      "task_id": "P2-T04",
+      "path": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json"
+    },
+    {
+      "task_id": "P2-T05",
+      "path": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json"
+    },
+    {
+      "task_id": "P2-T06",
+      "path": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json"
+    }
+  ],
+  "required_artifacts": [
+    "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+    "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
+  ],
+  "corpus_output_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-response-corpus.samples.json",
+  "ledger_output_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+  "report_output_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.report.md",
+  "decision_log_output_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md",
+  "insight_note_output_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-insight-note.md"
+}

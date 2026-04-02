@@ -1,0 +1,27 @@
+{
+  "task_id": "P2-T07",
+  "expected_clients": ["geth", "reth", "nethermind"],
+  "required_source_tasks": ["P2-T04", "P2-T05", "P2-T06"],
+  "required_active_rules": [
+    "stable_object_key_order",
+    "canonical_hex_quantity"
+  ],
+  "required_deferred_rules": [
+    "null_vs_omitted_when_explicitly_allowed",
+    "non_semantic_error_text"
+  ],
+  "required_candidate_rules": [
+    "non_semantic_error_text"
+  ],
+  "required_sample_ids": [
+    "p2t04-rlp-bootstrap-smoke-latest-header",
+    "p2t04-headfcu-response",
+    "p2t05-fcu-no-build",
+    "p2t05-repeat-fcu-same-head-first",
+    "p2t05-repeat-fcu-same-head-second",
+    "p2t06-build-fcu",
+    "p2t06-getpayload-projection",
+    "p2t06-newpayload-category",
+    "p2t06-unknown-payload-error"
+  ]
+}

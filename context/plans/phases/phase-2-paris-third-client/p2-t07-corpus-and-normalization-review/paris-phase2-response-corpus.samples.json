@@ -1,0 +1,730 @@
+{
+  "corpus_id": "paris-phase2-three-client-v0",
+  "generated_at": "2026-04-02T09:26:12.713Z",
+  "source_tasks": [
+    "P2-T04",
+    "P2-T05",
+    "P2-T06"
+  ],
+  "clients": [
+    "geth",
+    "reth",
+    "nethermind"
+  ],
+  "categories": [
+    "bootstrap",
+    "runtime",
+    "build_lifecycle",
+    "error_shape"
+  ],
+  "samples": [
+    {
+      "sample_id": "p2t04-rlp-bootstrap-smoke-latest-header",
+      "source_task": "P2-T04",
+      "scenario_id": "rlp-bootstrap-smoke",
+      "method": "eth_getBlockByNumber",
+      "category": "bootstrap",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "hash",
+        "number",
+        "parentHash",
+        "transactions",
+        "withdrawals"
+      ],
+      "values": {
+        "geth": {
+          "baseFeePerGas": "0x5763d64",
+          "blobGasUsed": "0x0",
+          "difficulty": "0x0",
+          "excessBlobGas": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x633",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "timestamp": "0x1c2",
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "uncles": [],
+          "withdrawals": [],
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+        },
+        "reth": {
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "difficulty": "0x0",
+          "number": "0x2d",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "timestamp": "0x1c2",
+          "extraData": "0x",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "baseFeePerGas": "0x5763d64",
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+          "blobGasUsed": "0x0",
+          "excessBlobGas": "0x0",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+          "size": "0x633",
+          "uncles": [],
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "withdrawals": []
+        },
+        "nethermind": {
+          "difficulty": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x633",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "timestamp": "0x1c2",
+          "baseFeePerGas": "0x5763d64",
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "uncles": [],
+          "withdrawals": [],
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+          "blobGasUsed": "0x0",
+          "excessBlobGas": "0x0",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t04-headfcu-response",
+      "source_task": "P2-T04",
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "method": "engine_forkchoiceUpdatedV3",
+      "category": "bootstrap",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "result.payloadStatus.status",
+        "result.payloadStatus.latestValidHash",
+        "result.payloadId"
+      ],
+      "values": {
+        "geth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "reth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "nethermind": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t05-fcu-no-build",
+      "source_task": "P2-T05",
+      "scenario_id": "fcu-no-build",
+      "method": "engine_forkchoiceUpdatedV1",
+      "category": "runtime",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "result.payloadStatus.status",
+        "result.payloadStatus.latestValidHash",
+        "result.payloadId"
+      ],
+      "values": {
+        "geth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "reth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "nethermind": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t05-repeat-fcu-same-head-first",
+      "source_task": "P2-T05",
+      "scenario_id": "repeat-fcu-same-head",
+      "method": "engine_forkchoiceUpdatedV1",
+      "category": "runtime",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "result.payloadStatus.status",
+        "result.payloadStatus.latestValidHash",
+        "result.payloadId"
+      ],
+      "values": {
+        "geth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "reth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "nethermind": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t05-repeat-fcu-same-head-second",
+      "source_task": "P2-T05",
+      "scenario_id": "repeat-fcu-same-head",
+      "method": "engine_forkchoiceUpdatedV1",
+      "category": "runtime",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "result.payloadStatus.status",
+        "result.payloadStatus.latestValidHash",
+        "result.payloadId"
+      ],
+      "values": {
+        "geth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "reth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "nethermind": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": true,
+          "observed_difference_type": "object_field_order_only"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t06-build-fcu",
+      "source_task": "P2-T06",
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "method": "engine_forkchoiceUpdatedV1",
+      "category": "build_lifecycle",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "result.payloadStatus.status",
+        "result.payloadStatus.latestValidHash",
+        "result.payloadIdClass"
+      ],
+      "values": {
+        "geth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "status": "VALID",
+              "validationError": null
+            },
+            "payloadIdClass": "present"
+          }
+        },
+        "reth": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "status": "VALID",
+              "validationError": null
+            },
+            "payloadIdClass": "present"
+          }
+        },
+        "nethermind": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "status": "VALID",
+              "validationError": null
+            },
+            "payloadIdClass": "present"
+          }
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t06-getpayload-projection",
+      "source_task": "P2-T06",
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "method": "engine_getPayloadV1",
+      "category": "build_lifecycle",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "parentHash",
+        "blockNumber",
+        "timestamp",
+        "prevRandao",
+        "feeRecipient"
+      ],
+      "values": {
+        "geth": {
+          "parentHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "blockNumber": "0x2e",
+          "timestamp": "0x1c3",
+          "prevRandao": "0x1111111111111111111111111111111111111111111111111111111111111111",
+          "feeRecipient": "0x0000000000000000000000000000000000001234"
+        },
+        "reth": {
+          "parentHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "blockNumber": "0x2e",
+          "timestamp": "0x1c3",
+          "prevRandao": "0x1111111111111111111111111111111111111111111111111111111111111111",
+          "feeRecipient": "0x0000000000000000000000000000000000001234"
+        },
+        "nethermind": {
+          "parentHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "blockNumber": "0x2e",
+          "timestamp": "0x1c3",
+          "prevRandao": "0x1111111111111111111111111111111111111111111111111111111111111111",
+          "feeRecipient": "0x0000000000000000000000000000000000001234"
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t06-newpayload-category",
+      "source_task": "P2-T06",
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "method": "engine_newPayloadV1",
+      "category": "build_lifecycle",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "status",
+        "payload_block_hash_relation",
+        "validationError"
+      ],
+      "values": {
+        "geth": {
+          "status": "VALID",
+          "payload_block_hash_relation": "equals_payload_block_hash",
+          "validationError": null
+        },
+        "reth": {
+          "status": "VALID",
+          "payload_block_hash_relation": "equals_payload_block_hash",
+          "validationError": null
+        },
+        "nethermind": {
+          "status": "VALID",
+          "payload_block_hash_relation": "equals_payload_block_hash",
+          "validationError": null
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        }
+      ]
+    },
+    {
+      "sample_id": "p2t06-unknown-payload-error",
+      "source_task": "P2-T06",
+      "scenario_id": "unknown-payloadid",
+      "method": "engine_getPayloadV1",
+      "category": "error_shape",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "semantic_fields": [
+        "error.code",
+        "error.message",
+        "normalized_error_category"
+      ],
+      "values": {
+        "geth": {
+          "code": -38001,
+          "message": "Unknown payload",
+          "normalized_error_category": "unknown_payload"
+        },
+        "reth": {
+          "code": -38001,
+          "message": "Unknown payload",
+          "normalized_error_category": "unknown_payload"
+        },
+        "nethermind": {
+          "code": -38001,
+          "message": "unknown payload",
+          "normalized_error_category": "unknown_payload"
+        }
+      },
+      "pairwise": [
+        {
+          "pair": "geth/reth",
+          "raw_equal": true,
+          "normalized_equal": true,
+          "observed_difference_type": "exact_match"
+        },
+        {
+          "pair": "geth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": false,
+          "observed_difference_type": "semantic_difference"
+        },
+        {
+          "pair": "reth/nethermind",
+          "raw_equal": false,
+          "normalized_equal": false,
+          "observed_difference_type": "semantic_difference"
+        }
+      ],
+      "candidate_rule_evaluation": {
+        "rule_id": "non_semantic_error_text",
+        "pairwise_after_candidate": [
+          {
+            "pair": "geth/reth",
+            "equal_after_candidate": true
+          },
+          {
+            "pair": "geth/nethermind",
+            "equal_after_candidate": true
+          },
+          {
+            "pair": "reth/nethermind",
+            "equal_after_candidate": true
+          }
+        ]
+      }
+    }
+  ]
+}

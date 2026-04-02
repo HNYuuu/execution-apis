@@ -1,0 +1,262 @@
+{
+  "taskId": "P2-T07",
+  "generatedAt": "2026-04-02T09:26:12.714Z",
+  "status": "pass",
+  "executionMode": "offline-from-real-runtime-logs",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.test-case.json",
+    "source_logs": [
+      {
+        "task_id": "P2-T04",
+        "path": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json"
+      },
+      {
+        "task_id": "P2-T05",
+        "path": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json"
+      },
+      {
+        "task_id": "P2-T06",
+        "path": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json"
+      }
+    ],
+    "phase1_profile_file": "context/plans/t09-normalization-profile/paris-normalization-profile.json",
+    "phase1_insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
+  },
+  "summary": {
+    "source_tasks": [
+      "P2-T04",
+      "P2-T05",
+      "P2-T06"
+    ],
+    "sample_count": 9,
+    "active_rules": [
+      "stable_object_key_order",
+      "canonical_hex_quantity"
+    ],
+    "deferred_rules": [
+      "null_vs_omitted_when_explicitly_allowed",
+      "non_semantic_error_text"
+    ],
+    "candidate_rule_ids": [
+      "non_semantic_error_text"
+    ],
+    "order_only_sample_ids": [
+      "p2t04-rlp-bootstrap-smoke-latest-header",
+      "p2t04-headfcu-response",
+      "p2t05-fcu-no-build",
+      "p2t05-repeat-fcu-same-head-first",
+      "p2t05-repeat-fcu-same-head-second"
+    ]
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+          "bytes": 71293
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+          "bytes": 46236
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+          "bytes": 60651
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t09-normalization-profile/paris-normalization-profile.json",
+          "bytes": 2580
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+          "bytes": 5159
+        }
+      ]
+    },
+    {
+      "check": "three-client corpus covers bootstrap, runtime, build-lifecycle, and error-shape categories",
+      "status": "pass",
+      "details": {
+        "source_tasks": [
+          "P2-T04",
+          "P2-T05",
+          "P2-T06"
+        ],
+        "categories": [
+          "bootstrap",
+          "runtime",
+          "build_lifecycle",
+          "error_shape"
+        ],
+        "sample_ids": [
+          "p2t04-rlp-bootstrap-smoke-latest-header",
+          "p2t04-headfcu-response",
+          "p2t05-fcu-no-build",
+          "p2t05-repeat-fcu-same-head-first",
+          "p2t05-repeat-fcu-same-head-second",
+          "p2t06-build-fcu",
+          "p2t06-getpayload-projection",
+          "p2t06-newpayload-category",
+          "p2t06-unknown-payload-error"
+        ]
+      }
+    },
+    {
+      "check": "phase-1 active normalization rules remain sufficient for current three-client order-only noise",
+      "status": "pass",
+      "details": [
+        {
+          "sample_id": "p2t04-rlp-bootstrap-smoke-latest-header",
+          "pairwise": [
+            {
+              "pair": "geth/reth",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "geth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "reth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            }
+          ]
+        },
+        {
+          "sample_id": "p2t04-headfcu-response",
+          "pairwise": [
+            {
+              "pair": "geth/reth",
+              "raw_equal": true,
+              "normalized_equal": true,
+              "observed_difference_type": "exact_match"
+            },
+            {
+              "pair": "geth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "reth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            }
+          ]
+        },
+        {
+          "sample_id": "p2t05-fcu-no-build",
+          "pairwise": [
+            {
+              "pair": "geth/reth",
+              "raw_equal": true,
+              "normalized_equal": true,
+              "observed_difference_type": "exact_match"
+            },
+            {
+              "pair": "geth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "reth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            }
+          ]
+        },
+        {
+          "sample_id": "p2t05-repeat-fcu-same-head-first",
+          "pairwise": [
+            {
+              "pair": "geth/reth",
+              "raw_equal": true,
+              "normalized_equal": true,
+              "observed_difference_type": "exact_match"
+            },
+            {
+              "pair": "geth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "reth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            }
+          ]
+        },
+        {
+          "sample_id": "p2t05-repeat-fcu-same-head-second",
+          "pairwise": [
+            {
+              "pair": "geth/reth",
+              "raw_equal": true,
+              "normalized_equal": true,
+              "observed_difference_type": "exact_match"
+            },
+            {
+              "pair": "geth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            },
+            {
+              "pair": "reth/nethermind",
+              "raw_equal": false,
+              "normalized_equal": true,
+              "observed_difference_type": "object_field_order_only"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "check": "candidate deferred rule is recorded in the discrepancy ledger instead of being auto-activated",
+      "status": "pass",
+      "details": [
+        {
+          "discrepancy_id": "P2-D01",
+          "status": "candidate_pending_manual_confirmation",
+          "rule_id": "non_semantic_error_text",
+          "evidence_samples": [
+            "p2t06-unknown-payload-error"
+          ],
+          "triage_label": "candidate-normalization-activation",
+          "manual_confirmation_required": true,
+          "activation_decision": "deferred",
+          "rationale": "geth/reth return 'Unknown payload' while nethermind returns 'unknown payload' for the same -38001 unknown-payload branch. Error code and normalized category match, but the rule must not activate without manual review."
+        }
+      ]
+    },
+    {
+      "check": "no deferred rule moved directly to active during phase-2 review",
+      "status": "pass",
+      "details": {
+        "active_rules": [
+          "stable_object_key_order",
+          "canonical_hex_quantity"
+        ],
+        "deferred_rules": [
+          "null_vs_omitted_when_explicitly_allowed",
+          "non_semantic_error_text"
+        ],
+        "unchanged_from_phase1": true
+      }
+    }
+  ]
+}

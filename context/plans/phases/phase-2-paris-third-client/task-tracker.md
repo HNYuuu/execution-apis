@@ -48,7 +48,7 @@ Status values:
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `done` |
 | `P2-T05` | `nethermind` early runtime scenarios | `done` |
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `done` |
-| `P2-T07` | Three-client corpus extension and normalization review | `todo` |
+| `P2-T07` | Three-client corpus extension and normalization review | `done` |
 | `P2-T08` | Three-client determinism probe | `todo` |
 | `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `todo` |
 | `P2-T10` | Phase-2 acceptance review and go/no-go checkpoint | `todo` |
@@ -445,7 +445,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -471,6 +471,43 @@ Status values:
 - normalization review memo
 - discrepancy-ledger entries for any candidate normalization activation
 - updated insight note and normalization decision log
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-corpus-and-normalization-review.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-corpus-and-normalization-review.js)
+- `script`
+  [run-engine-phase2-corpus-and-normalization-review.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-corpus-and-normalization-review.sh)
+- `config`
+  [paris-phase2-corpus-and-normalization-review.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.config.json)
+- `test case`
+  [paris-phase2-corpus-and-normalization-review.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.test-case.json)
+- `log format`
+  [paris-phase2-corpus-and-normalization-review.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.log-format.md)
+- `log output`
+  [paris-phase2-corpus-and-normalization-review.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.log.json)
+- `corpus`
+  [paris-phase2-response-corpus.samples.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-response-corpus.samples.json)
+- `discrepancy ledger`
+  [paris-phase2-discrepancy-ledger.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json)
+- `review report`
+  [paris-phase2-corpus-and-normalization-review.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-corpus-and-normalization-review.report.md)
+- `decision log`
+  [paris-phase2-normalization-decision-log.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md)
+- `insight note`
+  [paris-phase2-insight-note.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-insight-note.md)
+
+**Notes**
+
+- Active rules remained unchanged from phase-1.
+- `non_semantic_error_text` is now recorded as candidate discrepancy
+  `P2-D01`, but it remains deferred pending manual confirmation.
+- No new shared Paris differential insight was promoted in this task.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

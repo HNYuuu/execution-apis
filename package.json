@@ -32,6 +32,7 @@
     "engine:phase2-bootstrap-validation": "bash scripts/run-engine-phase2-bootstrap-validation.sh",
     "engine:phase2-early-runtime-scenarios": "bash scripts/run-engine-phase2-early-runtime-scenarios.sh",
     "engine:phase2-build-and-unknown-scenarios": "bash scripts/run-engine-phase2-build-and-unknown-scenarios.sh",
+    "engine:phase2-corpus-and-normalization-review": "bash scripts/run-engine-phase2-corpus-and-normalization-review.sh",
     "clean": "rm -rf build && mkdir -p build",
     "graphql:schema": "node scripts/graphql.js",
     "graphql:validate": "node scripts/graphql-validate.js",
