@@ -1,0 +1,20 @@
+{
+  "task_id": "P2-T03",
+  "expected_result": {
+    "suites": 1,
+    "tests": 5,
+    "failed": 0
+  },
+  "required_http_methods": [
+    "eth_getBlockByNumber"
+  ],
+  "required_engine_methods": [
+    "engine_exchangeCapabilities",
+    "engine_forkchoiceUpdatedV2",
+    "engine_getPayloadV2",
+    "engine_newPayloadV2"
+  ],
+  "expected_cleared_blocker_ids": [
+    "P2-T02-B01"
+  ]
+}

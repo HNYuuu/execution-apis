@@ -44,7 +44,7 @@ Status values:
 | --- | --- | --- |
 | `P2-T01` | Third-client scope freeze and comparison-discipline gate | `done` |
 | `P2-T02` | `nethermind` acquisition and startup contract | `done` |
-| `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `todo` |
+| `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `done` |
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `todo` |
 | `P2-T05` | `nethermind` early runtime scenarios | `todo` |
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `todo` |
@@ -174,7 +174,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -195,6 +195,41 @@ Status values:
 - real runtime `nethermind` smoke log
 - startup memo for `nethermind`
 - blocker memo if the environment is not yet phase-2-ready
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-nethermind-runtime-reality-check.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-nethermind-runtime-reality-check.js)
+- `script`
+  [run-engine-phase2-nethermind-runtime-reality-check.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-nethermind-runtime-reality-check.sh)
+- `config`
+  [paris-nethermind-runtime-reality-check.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.config.json)
+- `test case`
+  [paris-nethermind-runtime-reality-check.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.test-case.json)
+- `log format`
+  [paris-nethermind-runtime-reality-check.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log-format.md)
+- `log output`
+  [paris-nethermind-runtime-reality-check.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json)
+- `startup memo`
+  [paris-nethermind-runtime-reality-check.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.report.md)
+- `raw Hive stdout/stderr`
+  [paris-nethermind-runtime-reality-check.hive-run.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.hive-run.raw.log)
+- `raw simulator log`
+  [paris-nethermind-runtime-reality-check.simulator.raw.log](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.simulator.raw.log)
+- `raw Hive result JSON`
+  [paris-nethermind-runtime-reality-check.run.raw.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.run.raw.json)
+- `raw Hive metadata`
+  [paris-nethermind-runtime-reality-check.hive.raw.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.hive.raw.json)
+
+**Notes**
+
+- `P2-T02-B01` is cleared by this task.
+- `P2-T04` is now unblocked.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

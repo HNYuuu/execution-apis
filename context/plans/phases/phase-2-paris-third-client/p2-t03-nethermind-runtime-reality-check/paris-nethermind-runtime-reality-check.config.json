@@ -1,0 +1,38 @@
+{
+  "task_id": "P2-T03",
+  "hive_root": "/tmp/hive",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "simulator": "ethereum/engine",
+  "sim_limit": "engine-exchange-capabilities/",
+  "sim_parallelism": 1,
+  "client_check_timeout": "10m",
+  "sim_timeout": "30m",
+  "client": "nethermind",
+  "results_root": "/tmp/hive-results-nethermind-p2t03",
+  "target_wrapper_image": "hive/clients/nethermind:latest",
+  "required_artifacts": [
+    "/tmp/hive/hive",
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t05-hive-reality-check/hive-docker-desktop-compat.patch",
+    "context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log.json"
+  ],
+  "required_hive_patch_markers": [
+    "if info.IP == \"\" || info.MAC == \"\" {",
+    "for _, network := range container.NetworkSettings.Networks {",
+    "network.MacAddress"
+  ],
+  "startup_contract_source": "context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log.json",
+  "copied_artifacts": {
+    "hive_run_log": "paris-nethermind-runtime-reality-check.hive-run.raw.log",
+    "simulator_log": "paris-nethermind-runtime-reality-check.simulator.raw.log",
+    "run_json": "paris-nethermind-runtime-reality-check.run.raw.json",
+    "hive_json": "paris-nethermind-runtime-reality-check.hive.raw.json"
+  },
+  "notes": [
+    "This task reuses the phase-1 Docker Desktop compatibility patch for local Hive IP discovery.",
+    "A passing run clears the phase-2 startup blocker that the nethermind wrapper image is not yet available locally."
+  ]
+}

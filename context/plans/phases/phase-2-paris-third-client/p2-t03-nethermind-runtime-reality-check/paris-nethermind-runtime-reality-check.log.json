@@ -1,0 +1,130 @@
+{
+  "task_id": "P2-T03",
+  "generated_at": "2026-04-02T08:54:25.373Z",
+  "status": "pass",
+  "execution_mode": "real-runtime",
+  "inputs": {
+    "config_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.config.json",
+    "test_case_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.test-case.json",
+    "hive_root": "/tmp/hive",
+    "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+    "simulator": "ethereum/engine",
+    "sim_limit": "engine-exchange-capabilities/",
+    "client": "nethermind",
+    "results_root": "/tmp/hive-results-nethermind-p2t03"
+  },
+  "summary": {
+    "client": "nethermind",
+    "expected_result": {
+      "suites": 1,
+      "tests": 5,
+      "failed": 0
+    },
+    "observed_result": {
+      "summary_line": "Apr  2 16:54:25.349 INF simulation ethereum/engine finished suites=1 tests=5 failed=0",
+      "suites": 1,
+      "tests": 5,
+      "failed": 0
+    },
+    "target_wrapper_image": "hive/clients/nethermind:latest",
+    "image_present_before_run": true,
+    "image_present_after_run": true,
+    "client_version": "1.37.0-unstable+a9532d5f",
+    "hive_version": {
+      "commit": "96bf24da632ad88cfdbfe4f676eb043671f474e1",
+      "commitDate": "2026-03-28T16:02:24Z",
+      "branch": "master",
+      "dirty": true
+    }
+  },
+  "validations": [
+    {
+      "check": "phase-1 Hive Docker Desktop compatibility patch is still present in the local Hive clone",
+      "status": "pass",
+      "details": {
+        "hive_root": "/tmp/hive",
+        "verified_markers": [
+          "if info.IP == \"\" || info.MAC == \"\" {",
+          "for _, network := range container.NetworkSettings.Networks {",
+          "network.MacAddress"
+        ]
+      }
+    },
+    {
+      "check": "nethermind wrapper image is available for phase-2 runtime work",
+      "status": "pass",
+      "details": {
+        "target_wrapper_image": "hive/clients/nethermind:latest",
+        "image_present_before_run": true,
+        "image_present_after_run": true,
+        "cleared_blocker_ids": [
+          "P2-T02-B01"
+        ]
+      }
+    },
+    {
+      "check": "stock Hive engine smoke passes for nethermind in the controlled Docker environment",
+      "status": "pass",
+      "details": {
+        "summary": {
+          "summary_line": "Apr  2 16:54:25.349 INF simulation ethereum/engine finished suites=1 tests=5 failed=0",
+          "suites": 1,
+          "tests": 5,
+          "failed": 0
+        },
+        "simulator_log": "paris-nethermind-runtime-reality-check.simulator.raw.log",
+        "run_json": "paris-nethermind-runtime-reality-check.run.raw.json",
+        "hive_json": "paris-nethermind-runtime-reality-check.hive.raw.json"
+      }
+    },
+    {
+      "check": "the same real runtime run exercises both HTTP RPC and authenticated Engine RPC",
+      "status": "pass",
+      "details": {
+        "http_methods": [
+          "eth_getBlockByNumber"
+        ],
+        "engine_methods": [
+          "engine_exchangeCapabilities",
+          "engine_forkchoiceUpdatedV1",
+          "engine_forkchoiceUpdatedV2",
+          "engine_forkchoiceUpdatedV3",
+          "engine_getPayloadV1",
+          "engine_getPayloadV2",
+          "engine_getPayloadV3",
+          "engine_newPayloadV1",
+          "engine_newPayloadV2",
+          "engine_newPayloadV3"
+        ]
+      }
+    }
+  ],
+  "runtime_contract_update": {
+    "target_client": "nethermind",
+    "startup_contract_source": "context/plans/phases/phase-2-paris-third-client/p2-t02-nethermind-startup-contract/paris-nethermind-startup-contract.log.json",
+    "blocker_clearance": [
+      {
+        "id": "P2-T02-B01",
+        "resolution": "cleared by successful stock Hive engine smoke"
+      }
+    ]
+  },
+  "copied_artifacts": {
+    "hive_run_log": "paris-nethermind-runtime-reality-check.hive-run.raw.log",
+    "simulator_log": "paris-nethermind-runtime-reality-check.simulator.raw.log",
+    "run_json": "paris-nethermind-runtime-reality-check.run.raw.json",
+    "hive_json": "paris-nethermind-runtime-reality-check.hive.raw.json",
+    "original_results_root": "/tmp/hive-results-nethermind-p2t03",
+    "original_files": [
+      "1775120045-simulator-d593c7a57915b9c5fee04b3a0d0b01d609cd80d34ba67bc1b486736ab5778143.log",
+      "1775120065-df1174b1e837e8b1ac777e430c7c91f6.json",
+      "details",
+      "hive.json",
+      "nethermind"
+    ]
+  },
+  "notes": [
+    "This task reuses the phase-1 Docker Desktop compatibility patch for local Hive IP discovery.",
+    "A passing run clears the phase-2 startup blocker that the nethermind wrapper image is not yet available locally."
+  ]
+}

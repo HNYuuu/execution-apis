@@ -1,0 +1,24 @@
+Apr  2 16:54:05.192 INF building image image=hive/hiveproxy nocache=false pull=false
+Apr  2 16:54:05.207 INF building 1 clients...
+Apr  2 16:54:05.207 INF building image image=hive/clients/nethermind:latest dir=clients/nethermind nocache=false pull=false
+Apr  2 16:54:05.264 INF building 1 simulators...
+Apr  2 16:54:05.264 INF building image image=hive/simulators/ethereum/engine:latest dir=simulators/ethereum/engine nocache=false pull=false
+Apr  2 16:54:05.356 INF running simulation: ethereum/engine
+Apr  2 16:54:05.456 INF hiveproxy started container=166895fc51e5 addr=172.17.0.2:8081
+Apr  2 16:54:05.606 INF API: suite started suite=0 name=engine-exchange-capabilities
+Apr  2 16:54:05.607 INF API: test started suite=0 test=1 name="engine-excap test loader"
+Apr  2 16:54:05.612 INF API: test started suite=0 test=2 name="Exchange Capabilities - Shanghai (Active) (Shanghai) (nethermind)"
+Apr  2 16:54:07.827 INF API: client nethermind started suite=0 test=2 container=65dfed22
+Apr  2 16:54:09.305 INF API: test ended suite=0 test=2 pass=true
+Apr  2 16:54:09.307 INF API: test started suite=0 test=3 name="Exchange Capabilities - Shanghai (Not active) (Shanghai) (nethermind)"
+Apr  2 16:54:11.323 INF API: client nethermind started suite=0 test=3 container=3b0d0b53
+Apr  2 16:54:12.769 INF API: test ended suite=0 test=3 pass=true
+Apr  2 16:54:12.771 INF API: test started suite=0 test=4 name="Exchange Capabilities - Cancun (Active) (Cancun) (nethermind)"
+Apr  2 16:54:17.486 INF API: client nethermind started suite=0 test=4 container=2934892a
+Apr  2 16:54:18.931 INF API: test ended suite=0 test=4 pass=true
+Apr  2 16:54:18.933 INF API: test started suite=0 test=5 name="Exchange Capabilities - Cancun (Not active) (Cancun) (nethermind)"
+Apr  2 16:54:23.642 INF API: client nethermind started suite=0 test=5 container=d1e022d9
+Apr  2 16:54:25.112 INF API: test ended suite=0 test=5 pass=true
+Apr  2 16:54:25.114 INF API: test ended suite=0 test=1 pass=true
+Apr  2 16:54:25.159 INF API: suite ended suite=0
+Apr  2 16:54:25.349 INF simulation ethereum/engine finished suites=1 tests=5 failed=0
