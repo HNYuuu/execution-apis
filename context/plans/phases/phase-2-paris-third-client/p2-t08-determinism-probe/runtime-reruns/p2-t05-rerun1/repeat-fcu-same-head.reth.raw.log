@@ -1,0 +1,382 @@
+Supplied genesis state (trimmed, use --sim.loglevel 4 or 5 for full output):
+{
+  "config": {
+    "ethash": {},
+    "chainId": 3503995874084926,
+    "homesteadBlock": 0,
+    "eip150Block": 3,
+    "eip155Block": 6,
+    "eip158Block": 6,
+    "byzantiumBlock": 9,
+    "constantinopleBlock": 12,
+    "petersburgBlock": 15,
+    "istanbulBlock": 18,
+    "muirGlacierBlock": 21,
+    "berlinBlock": 24,
+    "londonBlock": 27,
+    "arrowGlacierBlock": 30,
+    "grayGlacierBlock": 33,
+    "mergeNetsplitBlock": 36,
+    "terminalTotalDifficulty": 4732352,
+    "blobSchedule": {
+      "cancun": {
+        "target": 3,
+        "max": 6,
+        "baseFeeUpdateFraction": 3338477
+      },
+      "prague": {
+        "target": 6,
+        "max": 9,
+        "baseFeeUpdateFraction": 5007716
+      },
+      "osaka": {
+        "target": 6,
+        "max": 9,
+        "baseFeeUpdateFraction": 5007716
+      },
+      "bpo1": {
+        "target": 10,
+        "max": 15,
+        "baseFeeUpdateFraction": 8346193
+      },
+      "bpo2": {
+        "target": 14,
+        "max": 21,
+        "baseFeeUpdateFraction": 11684671
+      },
+      "bpo3": {
+        "target": 9,
+        "max": 14,
+        "baseFeeUpdateFraction": 8832827
+      },
+      "bpo4": {
+        "target": 9,
+        "max": 14,
+        "baseFeeUpdateFraction": 8832827
+      },
+      "bpo5": {
+        "target": 9,
+        "max": 14,
+        "baseFeeUpdateFraction": 8832827
+      }
+    },
+    "depositContractAddress": "0x00000000219ab540356cBB839Cbe05303d7705Fa"
+  },
+  "nonce": "0x0",
+  "timestamp": "0x0",
+  "extraData": "0x68697665636861696e",
+  "gasLimit": "0x5f5e100",
+  "difficulty": "0x20000",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "00000961ef480eb55e80d19ad83579a64c007002": {
+      "code": "0x3373fffffffffffffffffffffffffffffffffffffffe1460cb5760115f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146101f457600182026001905f5b5f82111560685781019083028483029004916001019190604d565b909390049250505036603814608857366101f457346101f4575f5260205ff35b34106101f457600154600101600155600354806003026004013381556001015f35815560010160203590553360601b5f5260385f601437604c5fa0600101600355005b6003546002548082038060101160df575060105b5f5b8181146101835782810160030260040181604c02815460601b8152601401816001015481526020019060020154807fffffffffffffffffffffffffffffffff00000000000000000000000000000000168252906010019060401c908160381c81600701538160301c81600601538160281c81600501538160201c81600401538160181c81600301538160101c81600201538160081c81600101535360010160e1565b910180921461019557906002556101a0565b90505f6002555f6003555b5f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff14156101cd57505f5b6001546002828201116101e25750505f6101e8565b01600290035b5f555f600155604c025ff35b5f5ffd",
+      "balance": "0x1"
+    },
+    "0000bbddc7ce488642fb579f8b00f3a590007251": {
+      "code": "0x3373fffffffffffffffffffffffffffffffffffffffe1460d35760115f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1461019a57600182026001905f5b5f82111560685781019083028483029004916001019190604d565b9093900492505050366060146088573661019a573461019a575f5260205ff35b341061019a57600154600101600155600354806004026004013381556001015f358155600101602035815560010160403590553360601b5f5260605f60143760745fa0600101600355005b6003546002548082038060021160e7575060025b5f5b8181146101295782810160040260040181607402815460601b815260140181600101548152602001816002015481526020019060030154905260010160e9565b910180921461013b5790600255610146565b90505f6002555f6003555b5f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff141561017357505f5b6001546001828201116101885750505f61018e565b01600190035b5f555f6001556074025ff35b5f5ffd",
+      "balance": "0x1"
+    },
+    "0000f90827f1c53a10cb7a02335b175320002935": {
+      "code": "0x3373fffffffffffffffffffffffffffffffffffffffe14604657602036036042575f35600143038111604257611fff81430311604257611fff9006545f5260205ff35b5f5ffd5b5f35611fff60014303065500",
+      "balance": "0x1"
+    },
+    "000f3df6d732807ef1319fb7b8bb8522d0beac02": {
+      "code": "0x3373fffffffffffffffffffffffffffffffffffffffe14604d57602036146024575f5ffd5b5f35801560495762001fff810690815414603c575f5ffd5b62001fff01545f5260205ff35b5f5ffd5b62001fff42064281555f359062001fff015500",
+      "balance": "0x2a"
+    },
+    "0c2c51a0990aee1d73c1228de158688341557508": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "14e46043e63d0e3cdcf2530519f4cfaf35058cb2": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "16c57edf7fa9d9525378b0b81bf8a3ced0620c1c": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "1f4924b14f34e24159387c0a4cdbaa32f3ddb0cf": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "1f5bde34b4afc686f136c7a3cb6ec376f7357759": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "2d389075be5be9f2246ad654ce152cf05990b209": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "3ae75c08b4c907eb63a8960c45b86e1e9ab6123c": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "4340ee1b812acb40a1eb561c019c327b243b92df": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "4a0f1452281bcec5bd90c3dce6162a5995bfe9df": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "4dde844b71bcdf95512fb4dc94e84fb67b512ed8": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "5f552da00dfb4d3749d9e62dcee3c918855a86a0": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "654aa64f5fbefb84c270ec74211b81ca8c44a72e": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "717f8aa2b982bee0e29f573d31df288663e1ce16": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "7435ed30a8b4aeb0877cef0c6e8cffe834eb865f": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "7dcd17433742f4c0ca53122ab541d0ba67fc27df": {
+      "code": "0x3680600080376000206000548082558060010160005560005263656d697460206000a2",
+      "balance": "0x0"
+    },
+    "83c7e323d189f18725ac510004fdc2941f8c4a78": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "84e75c28348fb86acea1a93a39426d7d60f4cc46": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "8bebc8ba651aee624937e7d897853ac30c95a067": {
+      "storage": {
+        "0x0000000000000000000000000000000000000000000000000000000000000001": "0x0000000000000000000000000000000000000000000000000000000000000001",
+        "0x0000000000000000000000000000000000000000000000000000000000000002": "0x0000000000000000000000000000000000000000000000000000000000000002",
+        "0x0000000000000000000000000000000000000000000000000000000000000003": "0x0000000000000000000000000000000000000000000000000000000000000003"
+      },
+      "balance": "0x1",
+      "nonce": "0x1"
+    },
+    "8dcd17433742f4c0ca53122ab541d0ba67fc27ff": {
+      "code": "0x6202e6306000a0",
+      "balance": "0x0"
+    },
+    "c7b99a164efd027a93f147376cc7da7c67c6bbe0": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "d803681e487e6ac18053afc5a6cd813c86ec3e4d": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "e7d13f7aa2a838d24c59b40186a0aca1e21cffcc": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    },
+    "eda8645ba6948855e3b3cd596bbb07596d59c603": {
+      "balance": "0xc097ce7bc90715b34b9f1000000000"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "baseFeePerGas": null,
+  "excessBlobGas": null,
+  "blobGasUsed": null
+}
+Command flags till now:
+-vvv --datadir /reth-hive-datadir
+Initializing database with genesis state...
+2026-04-02T09:42:12.258837Z  INFO Initialized tracing, debug log directory: /root/.cache/reth/logs/3503995874084926
+2026-04-02T09:42:12.259549Z  INFO reth init starting
+2026-04-02T09:42:12.261452Z  INFO Opening storage db_path="/reth-hive-datadir/db" sf_path="/reth-hive-datadir/static_files"
+2026-04-02T09:42:12.284998Z  INFO check_consistency{read_only=false}: Verifying storage consistency.
+2026-04-02T09:42:12.304512Z  INFO Genesis block written hash=0x44fd89d504659cd58f48f4796b77a7e7012cf296a2409afa2f6c3cb99b5b3d99
+Loading initial blockchain...
+2026-04-02T09:42:12.448473Z  INFO Initialized tracing, debug log directory: /root/.cache/reth/logs/3503995874084926
+2026-04-02T09:42:12.449245Z  INFO reth 1.11.3 (d6324d6) starting
+2026-04-02T09:42:12.450769Z  INFO Opening storage db_path="/reth-hive-datadir/db" sf_path="/reth-hive-datadir/static_files"
+2026-04-02T09:42:12.471434Z  INFO check_consistency{read_only=false}: Verifying storage consistency.
+2026-04-02T09:42:12.480794Z  INFO Starting import of 1 file(s)
+2026-04-02T09:42:12.480803Z  INFO Importing file 1 of 1: /chain.rlp
+2026-04-02T09:42:12.480819Z  INFO Consensus engine initialized
+2026-04-02T09:42:12.481944Z  INFO Importing chain file chunk
+2026-04-02T09:42:12.481963Z  INFO Chain file chunk read
+2026-04-02T09:42:12.482056Z  INFO Downloading bodies count=45 range=1..=45
+2026-04-02T09:42:12.482188Z  INFO Starting sync pipeline
+2026-04-02T09:42:12.482559Z  INFO Preparing stage pipeline_stages=1/13 stage=Headers checkpoint=0 target=45
+2026-04-02T09:42:12.483133Z  INFO Received headers total=45 from_block=45 to_block=1
+2026-04-02T09:42:12.483254Z  INFO Writing headers total=45
+2026-04-02T09:42:12.483273Z  INFO Executing stage pipeline_stages=1/13 stage=Headers checkpoint=0 target=45
+2026-04-02T09:42:12.483556Z  INFO Writing headers hash index total=45
+2026-04-02T09:42:12.488457Z  INFO Finished stage pipeline_stages=1/13 stage=Headers checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.488483Z  INFO Preparing stage pipeline_stages=2/13 stage=Bodies checkpoint=0 target=45
+2026-04-02T09:42:12.489100Z  INFO Executing stage pipeline_stages=2/13 stage=Bodies checkpoint=0 target=45
+2026-04-02T09:42:12.494410Z  INFO Finished stage pipeline_stages=2/13 stage=Bodies checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.494427Z  INFO Preparing stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=0 target=45
+2026-04-02T09:42:12.494471Z  INFO Recovering senders tx_range=0..217
+2026-04-02T09:42:12.494470Z  INFO Executing stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=0 target=45
+2026-04-02T09:42:12.500546Z  INFO Finished stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.500561Z  INFO Preparing stage pipeline_stages=4/13 stage=Execution checkpoint=0 target=45
+2026-04-02T09:42:12.500624Z  INFO Executing stage pipeline_stages=4/13 stage=Execution checkpoint=0 target=45
+2026-04-02T09:42:12.524260Z  INFO Finished stage pipeline_stages=4/13 stage=Execution checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.524277Z  INFO Preparing stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=0 target=45
+2026-04-02T09:42:12.524314Z  INFO Stage is always skipped
+2026-04-02T09:42:12.524328Z  INFO Executing stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=0 target=45
+2026-04-02T09:42:12.524816Z  INFO Finished stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=45 target=45
+2026-04-02T09:42:12.524832Z  INFO Preparing stage pipeline_stages=6/13 stage=AccountHashing checkpoint=0 target=45
+2026-04-02T09:42:12.524834Z  INFO Executing stage pipeline_stages=6/13 stage=AccountHashing checkpoint=0 target=45
+2026-04-02T09:42:12.525127Z  INFO Hashed 104 entries
+2026-04-02T09:42:12.525260Z  INFO Inserting hashes progress=9.62%
+2026-04-02T09:42:12.525280Z  INFO Inserting hashes progress=19.23%
+2026-04-02T09:42:12.525318Z  INFO Inserting hashes progress=28.85%
+2026-04-02T09:42:12.525321Z  INFO Inserting hashes progress=38.46%
+2026-04-02T09:42:12.525323Z  INFO Inserting hashes progress=48.08%
+2026-04-02T09:42:12.525326Z  INFO Inserting hashes progress=57.69%
+2026-04-02T09:42:12.525355Z  INFO Inserting hashes progress=67.31%
+2026-04-02T09:42:12.525405Z  INFO Inserting hashes progress=76.92%
+2026-04-02T09:42:12.525409Z  INFO Inserting hashes progress=86.54%
+2026-04-02T09:42:12.525412Z  INFO Inserting hashes progress=96.15%
+2026-04-02T09:42:12.525952Z  INFO Finished stage pipeline_stages=6/13 stage=AccountHashing checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.525967Z  INFO Preparing stage pipeline_stages=7/13 stage=StorageHashing checkpoint=0 target=45
+2026-04-02T09:42:12.526015Z  INFO Executing stage pipeline_stages=7/13 stage=StorageHashing checkpoint=0 target=45
+2026-04-02T09:42:12.526191Z  INFO Hashed 121 entries
+2026-04-02T09:42:12.526310Z  INFO Inserting hashes progress=9.92%
+2026-04-02T09:42:12.526326Z  INFO Inserting hashes progress=19.83%
+2026-04-02T09:42:12.526330Z  INFO Inserting hashes progress=29.75%
+2026-04-02T09:42:12.526335Z  INFO Inserting hashes progress=39.67%
+2026-04-02T09:42:12.526340Z  INFO Inserting hashes progress=49.59%
+2026-04-02T09:42:12.526356Z  INFO Inserting hashes progress=59.50%
+2026-04-02T09:42:12.526372Z  INFO Inserting hashes progress=69.42%
+2026-04-02T09:42:12.526405Z  INFO Inserting hashes progress=79.34%
+2026-04-02T09:42:12.526453Z  INFO Inserting hashes progress=89.26%
+2026-04-02T09:42:12.526474Z  INFO Inserting hashes progress=99.17%
+2026-04-02T09:42:12.526914Z  INFO Finished stage pipeline_stages=7/13 stage=StorageHashing checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.526926Z  INFO Preparing stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=0 target=45
+2026-04-02T09:42:12.526969Z  INFO Executing stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=0 target=45
+2026-04-02T09:42:12.529630Z  INFO Finished stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.529644Z  INFO Preparing stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=0 target=45
+2026-04-02T09:42:12.529678Z  INFO Updating transaction lookup tx_range=0..=45
+2026-04-02T09:42:12.529701Z  INFO Executing stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=0 target=45
+2026-04-02T09:42:12.529728Z  INFO Calculating transaction hashes tx_range=0..217
+2026-04-02T09:42:12.530073Z  INFO Inserting hashes append_only=true progress=9.68%
+2026-04-02T09:42:12.530090Z  INFO Inserting hashes append_only=true progress=19.35%
+2026-04-02T09:42:12.530094Z  INFO Inserting hashes append_only=true progress=29.03%
+2026-04-02T09:42:12.530103Z  INFO Inserting hashes append_only=true progress=38.71%
+2026-04-02T09:42:12.530107Z  INFO Inserting hashes append_only=true progress=48.39%
+2026-04-02T09:42:12.530116Z  INFO Inserting hashes append_only=true progress=58.06%
+2026-04-02T09:42:12.530121Z  INFO Inserting hashes append_only=true progress=67.74%
+2026-04-02T09:42:12.530150Z  INFO Inserting hashes append_only=true progress=77.42%
+2026-04-02T09:42:12.530166Z  INFO Inserting hashes append_only=true progress=87.10%
+2026-04-02T09:42:12.530170Z  INFO Inserting hashes append_only=true progress=96.77%
+2026-04-02T09:42:12.531790Z  INFO Finished stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.531805Z  INFO Preparing stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=0 target=45
+2026-04-02T09:42:12.531847Z  INFO Collecting indices first_sync=true use_rocksdb=false
+2026-04-02T09:42:12.531869Z  INFO Executing stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=0 target=45
+2026-04-02T09:42:12.531979Z  INFO Loading indices into database
+2026-04-02T09:42:12.532096Z  INFO Writing indices progress=9.92%
+2026-04-02T09:42:12.532117Z  INFO Writing indices progress=19.83%
+2026-04-02T09:42:12.532122Z  INFO Writing indices progress=29.75%
+2026-04-02T09:42:12.532135Z  INFO Writing indices progress=39.67%
+2026-04-02T09:42:12.532159Z  INFO Writing indices progress=49.59%
+2026-04-02T09:42:12.532166Z  INFO Writing indices progress=59.50%
+2026-04-02T09:42:12.532189Z  INFO Writing indices progress=69.42%
+2026-04-02T09:42:12.532222Z  INFO Writing indices progress=79.34%
+2026-04-02T09:42:12.532233Z  INFO Writing indices progress=89.26%
+2026-04-02T09:42:12.532239Z  INFO Writing indices progress=99.17%
+2026-04-02T09:42:12.534327Z  INFO Finished stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=45 target=45
+2026-04-02T09:42:12.534352Z  INFO Preparing stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=0 target=45
+2026-04-02T09:42:12.534386Z  INFO Collecting indices first_sync=true use_rocksdb=false
+2026-04-02T09:42:12.534406Z  INFO Executing stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=0 target=45
+2026-04-02T09:42:12.534503Z  INFO Loading indices into database
+2026-04-02T09:42:12.534585Z  INFO Writing indices progress=9.62%
+2026-04-02T09:42:12.534604Z  INFO Writing indices progress=19.23%
+2026-04-02T09:42:12.534609Z  INFO Writing indices progress=28.85%
+2026-04-02T09:42:12.534614Z  INFO Writing indices progress=38.46%
+2026-04-02T09:42:12.534620Z  INFO Writing indices progress=48.08%
+2026-04-02T09:42:12.534667Z  INFO Writing indices progress=57.69%
+2026-04-02T09:42:12.534689Z  INFO Writing indices progress=67.31%
+2026-04-02T09:42:12.534714Z  INFO Writing indices progress=76.92%
+2026-04-02T09:42:12.534723Z  INFO Writing indices progress=86.54%
+2026-04-02T09:42:12.534728Z  INFO Writing indices progress=96.15%
+2026-04-02T09:42:12.536440Z  INFO Finished stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=45 target=45
+2026-04-02T09:42:12.536454Z  INFO Preparing stage pipeline_stages=12/13 stage=Prune checkpoint=0 target=45
+2026-04-02T09:42:12.536508Z  INFO Executing stage pipeline_stages=12/13 stage=Prune checkpoint=0 target=45
+2026-04-02T09:42:12.536993Z  INFO Finished stage pipeline_stages=12/13 stage=Prune checkpoint=45 target=45
+2026-04-02T09:42:12.537028Z  INFO Preparing stage pipeline_stages=13/13 stage=Finish checkpoint=0 target=45
+2026-04-02T09:42:12.537031Z  INFO Executing stage pipeline_stages=13/13 stage=Finish checkpoint=0 target=45
+2026-04-02T09:42:12.537449Z  INFO Finished stage pipeline_stages=13/13 stage=Finish checkpoint=45 target=45
+2026-04-02T09:42:12.537465Z  INFO Chain was fully imported total_imported_blocks=45 total_imported_txns=217
+2026-04-02T09:42:12.537476Z  INFO Successfully imported file /chain.rlp: 45 blocks, 217 transactions
+2026-04-02T09:42:12.537497Z  INFO Import complete. Total: 45/45 blocks, 217/217 transactions
+Loading remaining individual blocks...
+Warning: No blocks found.
+Running reth with flags:  -vvv --datadir /reth-hive-datadir --chain /genesis.json --http --http.addr=0.0.0.0 --http.api=admin,debug,trace,eth,net,txpool,web3,testing --ws --ws.addr=0.0.0.0 --ws.api=admin,debug,trace,eth,net,txpool,web3,testing --authrpc.addr=0.0.0.0 --authrpc.jwtsecret=/jwt.secret --nat none --block-interval 500000
+2026-04-02T09:42:12.559722Z  INFO Initialized tracing, debug log directory: /root/.cache/reth/logs/3503995874084926
+2026-04-02T09:42:12.562293Z  INFO Starting Reth version="1.11.3 (d6324d6)"
+2026-04-02T09:42:12.562310Z  INFO Opening database path="/reth-hive-datadir/db"
+2026-04-02T09:42:12.566415Z  INFO Launching node
+2026-04-02T09:42:12.567059Z  INFO Saving prune config to toml file
+2026-04-02T09:42:12.567148Z  INFO Configuration loaded path="/reth-hive-datadir/reth.toml"
+2026-04-02T09:42:12.582957Z  INFO check_consistency: Healing static file inconsistencies.
+2026-04-02T09:42:12.591317Z  INFO check_consistency:check_consistency{read_only=false}: Verifying storage consistency.
+2026-04-02T09:42:12.591427Z  INFO Database opened
+2026-04-02T09:42:12.591564Z  INFO 
+Pre-merge hard forks (block based):
+- Frontier                         @0
+- Homestead                        @0
+- Tangerine                        @3
+- SpuriousDragon                   @6
+- Byzantium                        @9
+- Constantinople                   @12
+- Petersburg                       @15
+- Istanbul                         @18
+- MuirGlacier                      @21
+- Berlin                           @24
+- London                           @27
+- ArrowGlacier                     @30
+- GrayGlacier                      @33
+Merge hard forks:
+- Paris                            @4732352 (network is known to be merged)
+2026-04-02T09:42:12.591587Z  INFO Loaded storage settings settings=StorageSettings { storage_v2: false }
+2026-04-02T09:42:12.591914Z  INFO Transaction pool initialized
+2026-04-02T09:42:12.617922Z  INFO P2P networking initialized enode=enode://99ddd91bc8f492452441f0e20ba33d5e0f36baf4448682bb1725c960b1d8be42de5b035c85f9bc89cc4cc37033a37d8b134b00a0cce5f1b7bf7f31b38da5f82c@0.0.0.0:30303
+2026-04-02T09:42:12.618050Z  INFO StaticFileProducer initialized
+2026-04-02T09:42:12.618464Z  INFO Pruner initialized prune_config=PruneConfig { block_interval: 500000, segments: PruneModes { sender_recovery: None, transaction_lookup: None, receipts: None, account_history: None, storage_history: None, bodies_history: None, receipts_log_filter: ReceiptsLogPruneConfig({}) } }
+2026-04-02T09:42:12.619217Z  INFO Consensus engine initialized
+2026-04-02T09:42:12.619280Z  INFO Engine API handler initialized
+2026-04-02T09:42:12.620031Z  INFO RPC auth server started url=0.0.0.0:8551
+2026-04-02T09:42:12.621257Z  INFO RPC IPC server started path=/tmp/reth.ipc
+2026-04-02T09:42:12.621284Z  INFO RPC HTTP server started url=0.0.0.0:8545
+2026-04-02T09:42:12.621291Z  INFO RPC WS server started url=0.0.0.0:8546
+2026-04-02T09:42:12.621406Z  INFO Starting consensus engine
+2026-04-02T09:42:12.621879Z  INFO Target block already reached checkpoint=45 target=Hash(0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2)
+2026-04-02T09:42:12.621897Z  INFO Preparing stage pipeline_stages=1/13 stage=Headers checkpoint=45 target=None
+2026-04-02T09:42:12.621972Z  INFO Executing stage pipeline_stages=1/13 stage=Headers checkpoint=45 target=None
+2026-04-02T09:42:12.622082Z  INFO Finished stage pipeline_stages=1/13 stage=Headers checkpoint=45 target=None stage_progress=100.00%
+2026-04-02T09:42:12.622096Z  INFO Preparing stage pipeline_stages=2/13 stage=Bodies checkpoint=45 target=45
+2026-04-02T09:42:12.622125Z  INFO Executing stage pipeline_stages=2/13 stage=Bodies checkpoint=45 target=45
+2026-04-02T09:42:12.622235Z  INFO Finished stage pipeline_stages=2/13 stage=Bodies checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.622263Z  INFO Preparing stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=45 target=45
+2026-04-02T09:42:12.622373Z  INFO Executing stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=45 target=45
+2026-04-02T09:42:12.622429Z  INFO Finished stage pipeline_stages=3/13 stage=SenderRecovery checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.622453Z  INFO Preparing stage pipeline_stages=4/13 stage=Execution checkpoint=45 target=45
+2026-04-02T09:42:12.622513Z  INFO Executing stage pipeline_stages=4/13 stage=Execution checkpoint=45 target=45
+2026-04-02T09:42:12.622621Z  INFO Finished stage pipeline_stages=4/13 stage=Execution checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.622686Z  INFO Preparing stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=45 target=45
+2026-04-02T09:42:12.622708Z  INFO Stage is always skipped
+2026-04-02T09:42:12.622741Z  INFO Executing stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=45 target=45
+2026-04-02T09:42:12.622822Z  INFO Finished stage pipeline_stages=5/13 stage=MerkleUnwind checkpoint=45 target=45
+2026-04-02T09:42:12.622873Z  INFO Preparing stage pipeline_stages=6/13 stage=AccountHashing checkpoint=45 target=45
+2026-04-02T09:42:12.622896Z  INFO Executing stage pipeline_stages=6/13 stage=AccountHashing checkpoint=45 target=45
+2026-04-02T09:42:12.622981Z  INFO Finished stage pipeline_stages=6/13 stage=AccountHashing checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.622995Z  INFO Preparing stage pipeline_stages=7/13 stage=StorageHashing checkpoint=45 target=45
+2026-04-02T09:42:12.622998Z  INFO Executing stage pipeline_stages=7/13 stage=StorageHashing checkpoint=45 target=45
+2026-04-02T09:42:12.623102Z  INFO Finished stage pipeline_stages=7/13 stage=StorageHashing checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.623163Z  INFO Preparing stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=45 target=45
+2026-04-02T09:42:12.623222Z  INFO Executing stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=45 target=45
+2026-04-02T09:42:12.623361Z  INFO Finished stage pipeline_stages=8/13 stage=MerkleExecute checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.623432Z  INFO Preparing stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=45 target=45
+2026-04-02T09:42:12.623481Z  INFO Executing stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=45 target=45
+2026-04-02T09:42:12.623553Z  INFO Finished stage pipeline_stages=9/13 stage=TransactionLookup checkpoint=45 target=45 stage_progress=100.00%
+2026-04-02T09:42:12.623605Z  INFO Preparing stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623614Z  INFO Executing stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623701Z  INFO Finished stage pipeline_stages=10/13 stage=IndexStorageHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623713Z  INFO Preparing stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623765Z  INFO Executing stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623871Z  INFO Finished stage pipeline_stages=11/13 stage=IndexAccountHistory checkpoint=45 target=45
+2026-04-02T09:42:12.623890Z  INFO Preparing stage pipeline_stages=12/13 stage=Prune checkpoint=45 target=45
+2026-04-02T09:42:12.623949Z  INFO Executing stage pipeline_stages=12/13 stage=Prune checkpoint=45 target=45
+2026-04-02T09:42:12.624041Z  INFO Finished stage pipeline_stages=12/13 stage=Prune checkpoint=45 target=45
+2026-04-02T09:42:12.624059Z  INFO Preparing stage pipeline_stages=13/13 stage=Finish checkpoint=45 target=45
+2026-04-02T09:42:12.624124Z  INFO Executing stage pipeline_stages=13/13 stage=Finish checkpoint=45 target=45
+2026-04-02T09:42:12.624231Z  INFO Finished stage pipeline_stages=13/13 stage=Finish checkpoint=45 target=45
+2026-04-02T09:42:14.250929Z  INFO Forkchoice updated head_block_hash=0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2 safe_block_hash=0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2 finalized_block_hash=0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2
+2026-04-02T09:42:14.252689Z  INFO Forkchoice updated head_block_hash=0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55 safe_block_hash=0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55 finalized_block_hash=0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55

@@ -1,14 +1,14 @@
 [
   {
     "discrepancy_id": "P2-D01",
-    "status": "candidate_pending_manual_confirmation",
+    "status": "resolved_by_manual_confirmation",
     "rule_id": "non_semantic_error_text",
     "evidence_samples": [
       "p2t06-unknown-payload-error"
     ],
-    "triage_label": "candidate-normalization-activation",
-    "manual_confirmation_required": true,
-    "activation_decision": "deferred",
-    "rationale": "geth/reth return 'Unknown payload' while nethermind returns 'unknown payload' for the same -38001 unknown-payload branch. Error code and normalized category match, but the rule must not activate without manual review."
+    "triage_label": "non-diff-target-case-only",
+    "manual_confirmation_required": false,
+    "activation_decision": "phase2_case_only_ignored",
+    "rationale": "Manual phase-2 decision: case-only error-text differences are not differential targets unless they carry semantic meaning. For this -38001 unknown-payload branch, compare error.code and normalized_error_category; do not compare raw message casing."
   }
 ]

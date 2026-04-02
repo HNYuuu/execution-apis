@@ -1,0 +1,24 @@
+{
+  "task_id": "P2-T08",
+  "t04_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+  "t05_baseline_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+  "t05_config_file": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.config.json",
+  "t05_test_case_file": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.test-case.json",
+  "t06_baseline_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+  "t06_config_file": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.config.json",
+  "t06_test_case_file": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.test-case.json",
+  "phase2_normalization_decision_log": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md",
+  "runtime_reruns": 2,
+  "runtime_rerun_dir": "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/runtime-reruns",
+  "required_artifacts": [
+    "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.config.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.test-case.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.config.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.test-case.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md"
+  ]
+}

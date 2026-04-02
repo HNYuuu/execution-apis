@@ -4,15 +4,19 @@
 
 - `stable_object_key_order`
 - `canonical_hex_quantity`
+- `non_semantic_error_text`
+  Scope: phase-2 comparison only for case-only message variation that does not
+  change semantic error classification.
 
 ## Deferred Rules Retained
 
 - `null_vs_omitted_when_explicitly_allowed`
-- `non_semantic_error_text`
 
-## Candidate Activation
+## Manual Confirmation Applied
 
 - discrepancy id: `P2-D01`
-- candidate rule: `non_semantic_error_text`
-- decision in this task: remain `deferred`
-- reason: manual confirmation is required before activation because the evidence comes from error-text casing differences in the `unknown-payloadid` branch
+- rule: `non_semantic_error_text`
+- decision: case-only error-message differences are not diff targets unless
+  they encode semantic divergence
+- effect on phase-2 diff: compare `error.code` and normalized error category;
+  ignore raw message casing for the current `unknown-payloadid` branch

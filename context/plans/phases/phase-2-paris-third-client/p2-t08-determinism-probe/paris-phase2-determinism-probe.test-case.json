@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-T08",
+  "required_clients": ["geth", "reth", "nethermind"],
+  "expected_repeatable_ids": [
+    "rlp-bootstrap-smoke",
+    "headfcu-bootstrap-smoke",
+    "fcu-no-build",
+    "repeat-fcu-same-head",
+    "phase2-early-runtime-scenarios",
+    "fcu-build-getpayload-newpayload",
+    "unknown-payloadid",
+    "phase2-build-and-unknown-scenarios"
+  ]
+}

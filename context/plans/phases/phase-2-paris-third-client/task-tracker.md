@@ -49,7 +49,7 @@ Status values:
 | `P2-T05` | `nethermind` early runtime scenarios | `done` |
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `done` |
 | `P2-T07` | Three-client corpus extension and normalization review | `done` |
-| `P2-T08` | Three-client determinism probe | `todo` |
+| `P2-T08` | Three-client determinism probe | `done` |
 | `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `todo` |
 | `P2-T10` | Phase-2 acceptance review and go/no-go checkpoint | `todo` |
 
@@ -500,8 +500,8 @@ Status values:
 **Notes**
 
 - Active rules remained unchanged from phase-1.
-- `non_semantic_error_text` is now recorded as candidate discrepancy
-  `P2-D01`, but it remains deferred pending manual confirmation.
+- Manual phase-2 follow-up resolved `P2-D01`: case-only error-message
+  differences are not a diff target unless semantics diverge.
 - No new shared Paris differential insight was promoted in this task.
 
 **Git Record**
@@ -520,7 +520,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -540,6 +540,39 @@ Status values:
 
 - three-client determinism report
 - explicit repeatable vs blocked scenario list
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-determinism-probe.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-determinism-probe.js)
+- `script`
+  [run-engine-phase2-determinism-probe.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-determinism-probe.sh)
+- `config`
+  [paris-phase2-determinism-probe.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.config.json)
+- `test case`
+  [paris-phase2-determinism-probe.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.test-case.json)
+- `log format`
+  [paris-phase2-determinism-probe.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log-format.md)
+- `log output`
+  [paris-phase2-determinism-probe.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json)
+- `report`
+  [paris-phase2-determinism-probe.report.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.report.json)
+- `rerun outputs`
+  [runtime-reruns](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/runtime-reruns)
+
+**Notes**
+
+- `P2-T08` re-ran `P2-T05` and `P2-T06` twice on top of their baseline runs.
+- The phase-2 manual decision for `P2-D01` is now applied in determinism:
+  case-only error-text differences are not diff targets unless semantics
+  diverge.
+- Current result: `24` stability records, `0` unstable records, `0` blocked
+  scenario ids.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 
