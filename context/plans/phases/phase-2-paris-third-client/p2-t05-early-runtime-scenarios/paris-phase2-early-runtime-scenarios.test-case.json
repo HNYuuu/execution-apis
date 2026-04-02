@@ -1,0 +1,12 @@
+{
+  "task_id": "P2-T05",
+  "expected_clients": ["geth", "reth", "nethermind"],
+  "required_fcu_no_build_invariants": [
+    "PARIS-METHOD-FCU-17",
+    "PARIS-METHOD-FCU-22",
+    "PARIS-METHOD-FCU-23"
+  ],
+  "required_repeat_invariants": [
+    "PARIS-METHOD-FCU-03"
+  ]
+}

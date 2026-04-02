@@ -1,0 +1,1101 @@
+{
+  "taskId": "P2-T05",
+  "generatedAt": "2026-04-02T09:08:36.481Z",
+  "status": "pass",
+  "executionMode": "real-runtime",
+  "inputs": {
+    "configFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.config.json",
+    "testCaseFile": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.test-case.json",
+    "prerequisite_bootstrap_validation": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "prerequisite_insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md"
+  },
+  "summary": {
+    "clients": [
+      "geth",
+      "reth",
+      "nethermind"
+    ],
+    "scenarios": [
+      "fcu-no-build",
+      "repeat-fcu-same-head"
+    ],
+    "hard_invariants": [
+      "PARIS-METHOD-FCU-17",
+      "PARIS-METHOD-FCU-22",
+      "PARIS-METHOD-FCU-23",
+      "PARIS-METHOD-FCU-03"
+    ],
+    "new_insight_count": 0
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/genesis.json",
+          "bytes": 6871
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/chain.rlp",
+          "bytes": 54615
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/forkenv.json",
+          "bytes": 886
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/tests/headfcu.json",
+          "bytes": 405
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json",
+          "bytes": 6672
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp",
+          "bytes": 58813
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json",
+          "bytes": 536
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json",
+          "bytes": 405
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+          "bytes": 71293
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+          "bytes": 5159
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t11-fcu-no-build/paris-fcu-no-build.log.json",
+          "bytes": 16013
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json",
+          "bytes": 28778
+        }
+      ]
+    },
+    {
+      "check": "nethermind satisfies the accepted fcu-no-build hard invariants",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "invariant_evaluations": [
+            {
+              "rule_id": "PARIS-METHOD-FCU-22",
+              "passed": true,
+              "details": {
+                "second_param_is_null": true,
+                "response_has_error": false
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-23",
+              "passed": true,
+              "details": {
+                "payloadId": null
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-17",
+              "passed": true,
+              "details": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "validationError": null
+                },
+                "payloadId": null,
+                "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              }
+            }
+          ]
+        },
+        {
+          "client": "reth",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "invariant_evaluations": [
+            {
+              "rule_id": "PARIS-METHOD-FCU-22",
+              "passed": true,
+              "details": {
+                "second_param_is_null": true,
+                "response_has_error": false
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-23",
+              "passed": true,
+              "details": {
+                "payloadId": null
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-17",
+              "passed": true,
+              "details": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "validationError": null
+                },
+                "payloadId": null,
+                "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              }
+            }
+          ]
+        },
+        {
+          "client": "nethermind",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "invariant_evaluations": [
+            {
+              "rule_id": "PARIS-METHOD-FCU-22",
+              "passed": true,
+              "details": {
+                "second_param_is_null": true,
+                "response_has_error": false
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-23",
+              "passed": true,
+              "details": {
+                "payloadId": null
+              }
+            },
+            {
+              "rule_id": "PARIS-METHOD-FCU-17",
+              "passed": true,
+              "details": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                  "validationError": null
+                },
+                "payloadId": null,
+                "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "check": "repeat-fcu-same-head remains a valid-ancestor shortcut on all clients",
+      "status": "pass",
+      "details": [
+        {
+          "client": "geth",
+          "invariant_evaluation": {
+            "rule_id": "PARIS-METHOD-FCU-03",
+            "passed": true,
+            "details": {
+              "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "first": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              },
+              "second": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              }
+            }
+          },
+          "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+        },
+        {
+          "client": "reth",
+          "invariant_evaluation": {
+            "rule_id": "PARIS-METHOD-FCU-03",
+            "passed": true,
+            "details": {
+              "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "first": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              },
+              "second": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              }
+            }
+          },
+          "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+        },
+        {
+          "client": "nethermind",
+          "invariant_evaluation": {
+            "rule_id": "PARIS-METHOD-FCU-03",
+            "passed": true,
+            "details": {
+              "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+              "first": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              },
+              "second": {
+                "payloadStatus": {
+                  "status": "VALID",
+                  "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                  "validationError": null
+                },
+                "payloadId": null
+              }
+            }
+          },
+          "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+        }
+      ]
+    },
+    {
+      "check": "no new comparison-discipline insight is required for the third client at the early runtime stage",
+      "status": "pass",
+      "details": {
+        "new_insights": []
+      }
+    }
+  ],
+  "scenarios": {
+    "fcu_no_build": [
+      {
+        "client": "geth",
+        "docker_image": "hive/clients/go-ethereum:latest",
+        "container_name": "p2-t05-fcu-no-build-geth-1775120895138",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/fcu-no-build.geth.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "request": {
+          "method": "engine_forkchoiceUpdatedV1",
+          "params": [
+            {
+              "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            },
+            null
+          ]
+        },
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "normalized_response": {
+          "id": 1,
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadId": null,
+            "payloadStatus": {
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "status": "VALID",
+              "validationError": null
+            }
+          }
+        },
+        "latest_header": {
+          "baseFeePerGas": "0x5763d64",
+          "blobGasUsed": "0x0",
+          "difficulty": "0x0",
+          "excessBlobGas": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x633",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "timestamp": "0x1c2",
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "uncles": [],
+          "withdrawals": [],
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"
+        },
+        "invariant_evaluations": [
+          {
+            "rule_id": "PARIS-METHOD-FCU-22",
+            "passed": true,
+            "details": {
+              "second_param_is_null": true,
+              "response_has_error": false
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-23",
+            "passed": true,
+            "details": {
+              "payloadId": null
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-17",
+            "passed": true,
+            "details": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "validationError": null
+              },
+              "payloadId": null,
+              "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            }
+          }
+        ]
+      },
+      {
+        "client": "reth",
+        "docker_image": "hive/clients/reth:latest",
+        "container_name": "p2-t05-fcu-no-build-reth-1775120900186",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/fcu-no-build.reth.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "request": {
+          "method": "engine_forkchoiceUpdatedV1",
+          "params": [
+            {
+              "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            },
+            null
+          ]
+        },
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "normalized_response": {
+          "id": 1,
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadId": null,
+            "payloadStatus": {
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "status": "VALID",
+              "validationError": null
+            }
+          }
+        },
+        "latest_header": {
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "difficulty": "0x0",
+          "number": "0x2d",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "timestamp": "0x1c2",
+          "extraData": "0x",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "baseFeePerGas": "0x5763d64",
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+          "blobGasUsed": "0x0",
+          "excessBlobGas": "0x0",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543",
+          "size": "0x633",
+          "uncles": [],
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "withdrawals": []
+        },
+        "invariant_evaluations": [
+          {
+            "rule_id": "PARIS-METHOD-FCU-22",
+            "passed": true,
+            "details": {
+              "second_param_is_null": true,
+              "response_has_error": false
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-23",
+            "passed": true,
+            "details": {
+              "payloadId": null
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-17",
+            "passed": true,
+            "details": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "validationError": null
+              },
+              "payloadId": null,
+              "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            }
+          }
+        ]
+      },
+      {
+        "client": "nethermind",
+        "docker_image": "hive/clients/nethermind:latest",
+        "container_name": "p2-t05-fcu-no-build-nethermind-1775120905167",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/fcu-no-build.nethermind.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        },
+        "request": {
+          "method": "engine_forkchoiceUpdatedV1",
+          "params": [
+            {
+              "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            },
+            null
+          ]
+        },
+        "response": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        },
+        "normalized_response": {
+          "id": 1,
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadId": null,
+            "payloadStatus": {
+              "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+              "status": "VALID",
+              "validationError": null
+            }
+          }
+        },
+        "latest_header": {
+          "difficulty": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0x47e7c40",
+          "gasUsed": "0x54a92",
+          "hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+          "logsBloom": "0x00000000008000000000000000000040000000000000000000000000800000000000000008000000000000000000000000000000000000000000000000000000000000000000000000004000000000020200000000000000000000000000002000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000009000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentHash": "0x4b9d85c6787612e87e0659e11a347d415040465e492358f79cc7e2e293f38aa7",
+          "receiptsRoot": "0x2c86b2791cdd088d3c3e9d6225f71724d3e8c67bdd13cd6208831058cee1043f",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x633",
+          "stateRoot": "0xf61892bbb9a9df427d1f941dc8c536d72c41efed598244726ea21a0f183ff232",
+          "timestamp": "0x1c2",
+          "baseFeePerGas": "0x5763d64",
+          "transactions": [
+            "0x2fbbd036996c7487316c92b9e5798edb98fd57f32a6c1075e904a734821e1cd2",
+            "0x16f6724ad864e7664c367893cae3e176d362bea3a47495cec3b246555a7228da",
+            "0xddf234c5f149d2d1a4d01276d42e38a6234bfa7b987c49ba889b028b429aac8f",
+            "0x3d3d02e1bdc39a6eab20f7b44ed299ca61eb1d642806bfa07e3a7ee8edd700e5",
+            "0x195a09414344f56e7a202d1493b258b2394b9b93811ce4ee96212a7d34ffb04f",
+            "0xdf66bea01c5cf47b48ec11453822d751a5daaf1d16959772c2196c5ab8cf8438"
+          ],
+          "transactionsRoot": "0xc541c333ff4a96a17d3601f7d628ea27ecf4597a11077e5d9d1c4dbed6c7f401",
+          "uncles": [],
+          "withdrawals": [],
+          "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+          "blobGasUsed": "0x0",
+          "excessBlobGas": "0x0",
+          "parentBeaconBlockRoot": "0x4b118bd31ed2c4eeb81dc9e3919e9989994333fe36f147c2930f12c53f0d3c78",
+          "requestsHash": "0x57cac3e52cdcd73e52bd9e54956e0eae370f00ed41f68edc78266bdb46c3a543"
+        },
+        "invariant_evaluations": [
+          {
+            "rule_id": "PARIS-METHOD-FCU-22",
+            "passed": true,
+            "details": {
+              "second_param_is_null": true,
+              "response_has_error": false
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-23",
+            "passed": true,
+            "details": {
+              "payloadId": null
+            }
+          },
+          {
+            "rule_id": "PARIS-METHOD-FCU-17",
+            "passed": true,
+            "details": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+                "validationError": null
+              },
+              "payloadId": null,
+              "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+            }
+          }
+        ]
+      }
+    ],
+    "repeat_fcu_same_head": [
+      {
+        "client": "geth",
+        "docker_image": "hive/clients/go-ethereum:latest",
+        "container_name": "p2-t05-repeat-fcu-same-head-geth-1775120897670",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/repeat-fcu-same-head.geth.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "latest_header": {
+          "baseFeePerGas": "0x56adcfc",
+          "difficulty": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0xbebc200",
+          "gasUsed": "0x3e43d",
+          "hash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "logsBloom": "0x00000040000080000000000800000040000000000000008200000000800000000000000100000000000000000000002008000000001000000000000000000100000000000000100000004000000000000200000000000000000000000200122000000001000020000000040000000000000000000000000001000000202000000000000000000000000000040000000000000000000000000000000000000200000000000000009000000100000000000000000800000000000000008000000010010000000000000000000020000000000000000000000020000000000000000000000000000000000000004000000000000002000000000000100000200010",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+          "receiptsRoot": "0x2521e9edb0a07b3ca49317d351e11f96e11ef208e165ff23952f6bb0138c985c",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x3d5",
+          "stateRoot": "0x67bde0d5cf2297d4ea83a76e032c0119aff7f14ad9a00ad2a4d46ac4b3bf8f1f",
+          "timestamp": "0x1c2",
+          "transactions": [
+            "0x094d15c1cdd7ce1af9752d88e6f46e64c181624233a5af01d760e61323f72cb0",
+            "0xc2e0fc0171e28437dd7fd34b50638137622f477c211b4e624d6358efe945bf25",
+            "0xc0ba40cb7f2f95acc1de771ffe96ec3a412d7a7ba7358af9aedd0b54bf4c7e7e",
+            "0x9d9e03e087fa819a4717e101363d386cc2d38d9840dfa2dbb70b00e26a65fbfd"
+          ],
+          "transactionsRoot": "0x4f5aa053ca82129243e25893d682cfcbe96ae978c7e1ef20127e5aba8a1b5984",
+          "uncles": []
+        },
+        "semantic_mode": "valid_ancestor_shortcut_repeated",
+        "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+        "first": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "second": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "invariant_evaluation": {
+          "rule_id": "PARIS-METHOD-FCU-03",
+          "passed": true,
+          "details": {
+            "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+            "first": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            },
+            "second": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          }
+        }
+      },
+      {
+        "client": "reth",
+        "docker_image": "hive/clients/reth:latest",
+        "container_name": "p2-t05-repeat-fcu-same-head-reth-1775120902670",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/repeat-fcu-same-head.reth.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "validationError": null
+            },
+            "payloadId": null
+          }
+        },
+        "latest_header": {
+          "hash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "parentHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "stateRoot": "0x67bde0d5cf2297d4ea83a76e032c0119aff7f14ad9a00ad2a4d46ac4b3bf8f1f",
+          "transactionsRoot": "0x4f5aa053ca82129243e25893d682cfcbe96ae978c7e1ef20127e5aba8a1b5984",
+          "receiptsRoot": "0x2521e9edb0a07b3ca49317d351e11f96e11ef208e165ff23952f6bb0138c985c",
+          "logsBloom": "0x00000040000080000000000800000040000000000000008200000000800000000000000100000000000000000000002008000000001000000000000000000100000000000000100000004000000000000200000000000000000000000200122000000001000020000000040000000000000000000000000001000000202000000000000000000000000000040000000000000000000000000000000000000200000000000000009000000100000000000000000800000000000000008000000010010000000000000000000020000000000000000000000020000000000000000000000000000000000000004000000000000002000000000000100000200010",
+          "difficulty": "0x0",
+          "number": "0x2d",
+          "gasLimit": "0xbebc200",
+          "gasUsed": "0x3e43d",
+          "timestamp": "0x1c2",
+          "extraData": "0x",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "baseFeePerGas": "0x56adcfc",
+          "size": "0x3d5",
+          "uncles": [],
+          "transactions": [
+            "0x094d15c1cdd7ce1af9752d88e6f46e64c181624233a5af01d760e61323f72cb0",
+            "0xc2e0fc0171e28437dd7fd34b50638137622f477c211b4e624d6358efe945bf25",
+            "0xc0ba40cb7f2f95acc1de771ffe96ec3a412d7a7ba7358af9aedd0b54bf4c7e7e",
+            "0x9d9e03e087fa819a4717e101363d386cc2d38d9840dfa2dbb70b00e26a65fbfd"
+          ]
+        },
+        "semantic_mode": "valid_ancestor_shortcut_repeated",
+        "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+        "first": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "second": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "invariant_evaluation": {
+          "rule_id": "PARIS-METHOD-FCU-03",
+          "passed": true,
+          "details": {
+            "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+            "first": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            },
+            "second": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          }
+        }
+      },
+      {
+        "client": "nethermind",
+        "docker_image": "hive/clients/nethermind:latest",
+        "container_name": "p2-t05-repeat-fcu-same-head-nethermind-1775120911831",
+        "raw_log_file": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/repeat-fcu-same-head.nethermind.raw.log",
+        "bootstrap_fcu": {
+          "jsonrpc": "2.0",
+          "result": {
+            "payloadStatus": {
+              "status": "VALID",
+              "latestValidHash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+              "validationError": null
+            },
+            "payloadId": null
+          },
+          "id": 1
+        },
+        "latest_header": {
+          "difficulty": "0x0",
+          "extraData": "0x",
+          "gasLimit": "0xbebc200",
+          "gasUsed": "0x3e43d",
+          "hash": "0x70cb2dd99d2a8ee7ef38bd5024aa7fb84e1247feefeb2e9be41a7dfe396337d2",
+          "logsBloom": "0x00000040000080000000000800000040000000000000008200000000800000000000000100000000000000000000002008000000001000000000000000000100000000000000100000004000000000000200000000000000000000000200122000000001000020000000040000000000000000000000000001000000202000000000000000000000000000040000000000000000000000000000000000000200000000000000009000000100000000000000000800000000000000008000000010010000000000000000000020000000000000000000000020000000000000000000000000000000000000004000000000000002000000000000100000200010",
+          "miner": "0x0000000000000000000000000000000000000000",
+          "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "nonce": "0x0000000000000000",
+          "number": "0x2d",
+          "parentHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+          "receiptsRoot": "0x2521e9edb0a07b3ca49317d351e11f96e11ef208e165ff23952f6bb0138c985c",
+          "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+          "size": "0x3d5",
+          "stateRoot": "0x67bde0d5cf2297d4ea83a76e032c0119aff7f14ad9a00ad2a4d46ac4b3bf8f1f",
+          "timestamp": "0x1c2",
+          "baseFeePerGas": "0x56adcfc",
+          "transactions": [
+            "0x094d15c1cdd7ce1af9752d88e6f46e64c181624233a5af01d760e61323f72cb0",
+            "0xc2e0fc0171e28437dd7fd34b50638137622f477c211b4e624d6358efe945bf25",
+            "0xc0ba40cb7f2f95acc1de771ffe96ec3a412d7a7ba7358af9aedd0b54bf4c7e7e",
+            "0x9d9e03e087fa819a4717e101363d386cc2d38d9840dfa2dbb70b00e26a65fbfd"
+          ],
+          "transactionsRoot": "0x4f5aa053ca82129243e25893d682cfcbe96ae978c7e1ef20127e5aba8a1b5984",
+          "uncles": []
+        },
+        "semantic_mode": "valid_ancestor_shortcut_repeated",
+        "ancestor_hash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+        "first": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            },
+            "id": 1
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "second": {
+          "request": {
+            "method": "engine_forkchoiceUpdatedV1",
+            "params": [
+              {
+                "headBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "safeBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "finalizedBlockHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55"
+              },
+              null
+            ]
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            },
+            "id": 1
+          },
+          "normalized_response": {
+            "id": 1,
+            "jsonrpc": "2.0",
+            "result": {
+              "payloadId": null,
+              "payloadStatus": {
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "status": "VALID",
+                "validationError": null
+              }
+            }
+          }
+        },
+        "invariant_evaluation": {
+          "rule_id": "PARIS-METHOD-FCU-03",
+          "passed": true,
+          "details": {
+            "ancestorHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+            "first": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            },
+            "second": {
+              "payloadStatus": {
+                "status": "VALID",
+                "latestValidHash": "0x71df9c95500c95f3abc30604fcfe3d431b210779f019e7018f0229646484be55",
+                "validationError": null
+              },
+              "payloadId": null
+            }
+          }
+        }
+      }
+    ]
+  }
+}

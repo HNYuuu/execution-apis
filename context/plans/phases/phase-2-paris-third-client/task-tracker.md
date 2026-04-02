@@ -46,7 +46,7 @@ Status values:
 | `P2-T02` | `nethermind` acquisition and startup contract | `done` |
 | `P2-T03` | `nethermind` runtime reality check and Hive wiring proof | `done` |
 | `P2-T04` | `nethermind` bootstrap validation for `B1` and `B2` | `done` |
-| `P2-T05` | `nethermind` early runtime scenarios | `todo` |
+| `P2-T05` | `nethermind` early runtime scenarios | `done` |
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `todo` |
 | `P2-T07` | Three-client corpus extension and normalization review | `todo` |
 | `P2-T08` | Three-client determinism probe | `todo` |
@@ -312,7 +312,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -335,6 +335,38 @@ Status values:
 - `nethermind` runtime artifacts for the early custom scenarios
 - invariant evaluations for `nethermind`
 - updated insight notes if new non-semantic differences appear
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-early-runtime-scenarios.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-early-runtime-scenarios.js)
+- `script`
+  [run-engine-phase2-early-runtime-scenarios.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-early-runtime-scenarios.sh)
+- `config`
+  [paris-phase2-early-runtime-scenarios.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.config.json)
+- `test case`
+  [paris-phase2-early-runtime-scenarios.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.test-case.json)
+- `log format`
+  [paris-phase2-early-runtime-scenarios.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log-format.md)
+- `log output`
+  [paris-phase2-early-runtime-scenarios.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json)
+- `report`
+  [paris-phase2-early-runtime-scenarios.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.report.md)
+- `notes`
+  [paris-phase2-early-runtime-scenarios.notes.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.notes.md)
+- `raw logs`
+  [p2-t05-early-runtime-scenarios](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios)
+
+**Notes**
+
+- `nethermind` passed the accepted phase-1 hard invariants for both early
+  runtime scenarios.
+- No new comparison-discipline insight was needed at this stage.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

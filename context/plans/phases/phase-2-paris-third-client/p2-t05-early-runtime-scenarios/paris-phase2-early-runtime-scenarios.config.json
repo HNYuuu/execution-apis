@@ -1,0 +1,85 @@
+{
+  "task_id": "P2-T05",
+  "fork": "Paris",
+  "docker_endpoint": "unix:///Users/ningyuhe/.docker/run/docker.sock",
+  "startup_timeout_ms": 120000,
+  "rpc_poll_interval_ms": 2000,
+  "request_timeout_ms": 10000,
+  "prerequisite_bootstrap_validation": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+  "prerequisite_insights_file": "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+  "clients": [
+    {
+      "client": "geth",
+      "image": "hive/clients/go-ethereum:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 41545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 41551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3",
+        "HIVE_NODETYPE": "full"
+      }
+    },
+    {
+      "client": "reth",
+      "image": "hive/clients/reth:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 42545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 42551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    },
+    {
+      "client": "nethermind",
+      "image": "hive/clients/nethermind:latest",
+      "http_host": "127.0.0.1",
+      "http_port": 43545,
+      "auth_host": "127.0.0.1",
+      "auth_port": 43551,
+      "extra_env": {
+        "HIVE_LOGLEVEL": "3"
+      }
+    }
+  ],
+  "fcu_no_build": {
+    "scenario_id": "fcu-no-build",
+    "genesis_file": "tests/genesis.json",
+    "chain_file": "tests/chain.rlp",
+    "fork_env_file": "tests/forkenv.json",
+    "bootstrap_headfcu_file": "tests/headfcu.json",
+    "method": "engine_forkchoiceUpdatedV1",
+    "request_params": [
+      {
+        "headBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+        "safeBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2",
+        "finalizedBlockHash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+      },
+      null
+    ],
+    "expected_head_hash": "0xe27a3e81bd7cfe2aec2cc9e832c73a17c93e7efcf659cf4b39883b96c48708c2"
+  },
+  "repeat_fcu_same_head": {
+    "scenario_id": "repeat-fcu-same-head",
+    "genesis_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json",
+    "chain_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp",
+    "fork_env_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json",
+    "bootstrap_headfcu_file": "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json",
+    "method": "engine_forkchoiceUpdatedV1"
+  },
+  "required_artifacts": [
+    "tests/genesis.json",
+    "tests/chain.rlp",
+    "tests/forkenv.json",
+    "tests/headfcu.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/genesis.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/chain.rlp",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/forkenv.json",
+    "context/plans/t12-fcu-build-getpayload-newpayload/paris-fixtures/headfcu.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "context/plans/phases/phase-1-paris-mvp/paris-differential-insights.md",
+    "context/plans/t11-fcu-no-build/paris-fcu-no-build.log.json",
+    "context/plans/t13-repeat-fcu-and-unknown-payloadid/paris-t13-scenarios.log.json"
+  ]
+}
