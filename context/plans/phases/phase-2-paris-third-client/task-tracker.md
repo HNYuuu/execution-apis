@@ -507,7 +507,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  `pending`
+  `d437bd9` - `Complete P2-T07 corpus and normalization review`
 
 **Validation Method**
 
