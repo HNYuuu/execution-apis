@@ -27,9 +27,15 @@ Phase 2 is accepted only if:
 
 - all phase-1 Paris scenarios run successfully on the third client
 - complete `ResultEnvelope` artifacts exist for the three-client matrix
+- compared runs that claim the same pre-state also carry the same
+  `bootstrap_digest`
 - determinism remains acceptable for the added client and updated matrix
 - no comparison bucket depends on `unknown` provenance or undocumented
   normalization
+- no deferred normalization rule is activated without first being recorded as a
+  candidate discrepancy and manually confirmed
+- phase-1-accepted `geth/reth` differences are marked as inherited baseline
+  differences rather than re-triaged as new phase-2 discrepancies
 - any newly exposed discrepancy is reproducible and triaged as one of:
   implementation bug, spec ambiguity, normalization issue, or explicit
   implementation-behavior observation

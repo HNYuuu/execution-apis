@@ -137,6 +137,9 @@ Status values:
 - `nethermind` startup contract
 - per-client parity notes against `geth` and `reth`
 - explicit blocker list if the image or startup path is not ready
+- explicit note that the `P2-T02` code and script validate the documented
+  startup contract only, and do not replace the runtime proof owned by
+  `P2-T03`
 
 **Artifacts**
 
@@ -164,6 +167,8 @@ Status values:
 
 - Confirm the startup contract is concrete enough to run real bootstrap tasks.
 - Confirm JWT/auth RPC expectations are explicit rather than implicit.
+- Confirm the `P2-T02` automation is documentary validation of startup
+  assumptions, not a substitute for real client launch and smoke execution.
 
 ## `P2-T03` `nethermind` Runtime Reality Check And Hive Wiring Proof
 
@@ -196,6 +201,10 @@ Status values:
 - Confirm the environment can reach both HTTP RPC and authenticated Engine RPC.
 - Confirm this task fails fast on environment blockers rather than letting them
   leak into later scenario tasks.
+- Confirm `P2-T03` is marked `done` only when a successful runtime smoke log
+  exists.
+- Confirm `P2-T03` remains `blocked` rather than `done` if it can only produce
+  a blocker memo.
 
 ## `P2-T04` `nethermind` Bootstrap Validation For `B1` And `B2`
 
@@ -226,6 +235,8 @@ Status values:
 
 **Validation Method**
 
+- Confirm `P2-T03` produced a successful runtime smoke log, not only a blocker
+  memo.
 - Confirm the `B1` and `B2` observable states are comparable across all three
   clients.
 - Confirm bootstrap-only differences are not misclassified as runtime
@@ -317,19 +328,25 @@ Status values:
 1. Extend the Paris response corpus to include `nethermind`.
 2. Test whether existing normalization rules still hold on the three-client
    matrix.
-3. Decide whether any deferred normalization rule now has enough real evidence
-   to activate.
-4. Record any new insight without normalizing away semantic differences.
+3. If a deferred normalization rule looks activatable, first record it in the
+   discrepancy ledger as a candidate semantic difference rather than activating
+   it immediately.
+4. Activate a deferred normalization rule only after the candidate entry has
+   been manually reviewed and confirmed.
+5. Record any new insight without normalizing away semantic differences.
 
 **Expected Outputs**
 
 - three-client Paris corpus
 - normalization review memo
+- discrepancy-ledger entries for any candidate normalization activation
 - updated insight note and normalization decision log
 
 **Validation Method**
 
 - Confirm any normalization change is evidence-driven.
+- Confirm no rule moves directly from `deferred` to `active` without a
+  discrepancy-ledger entry and manual confirmation.
 - Confirm no semantic discrepancy is hidden by a newly activated rule.
 
 ## `P2-T08` Three-Client Determinism Probe
@@ -379,8 +396,13 @@ Status values:
 1. Extend `ResultEnvelope` generation from two clients to three.
 2. Run offline pairwise and matrix-level comparison for the accepted Paris
    surface.
-3. Keep the phase-1 comparison-discipline exclusions intact.
-4. Triage every newly exposed discrepancy as:
+3. Triage all three pairwise comparisons explicitly:
+   `geth/reth`, `geth/nethermind`, and `reth/nethermind`, plus the matrix-level
+   three-client view.
+4. Keep the phase-1 comparison-discipline exclusions intact, and mark any
+   previously accepted `geth/reth` difference as `inherited-baseline` rather
+   than as a new phase-2 discrepancy.
+5. Triage every newly exposed discrepancy as:
    implementation bug,
    spec ambiguity,
    normalization issue,
@@ -390,11 +412,16 @@ Status values:
 
 - three-client `ResultEnvelope` artifacts
 - offline diff report for the three-client matrix
-- first discrepancy ledger for phase-2
+- first discrepancy ledger for phase-2, including `inherited-baseline` versus
+  `new-in-phase-2` labeling
 
 **Validation Method**
 
 - Confirm complete envelopes exist for the three-client scenario matrix.
+- Confirm the pairwise set is explicit and complete:
+  `geth/reth`, `geth/nethermind`, `reth/nethermind`.
+- Confirm previously accepted phase-1 `geth/reth` differences are filtered or
+  labeled as inherited baseline noise rather than re-triaged as new items.
 - Confirm every discrepancy is triaged rather than left as an unlabeled diff.
 
 ## `P2-T10` Phase-2 Acceptance Review And Go/No-Go Checkpoint
@@ -415,7 +442,9 @@ Status values:
    comparison discipline.
 3. Confirm determinism and offline diff remain trustworthy on the three-client
    matrix.
-4. Make an explicit go/no-go decision for moving to the broader Paris client
+4. Confirm matching pre-states across the three-client matrix carry matching
+   `bootstrap_digest` values.
+5. Make an explicit go/no-go decision for moving to the broader Paris client
    matrix.
 
 **Expected Outputs**

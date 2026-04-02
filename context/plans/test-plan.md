@@ -444,7 +444,8 @@ decision and a stable offline diff path. Expansion should still remain
 incremental:
 
 1. add one new client to the existing Paris pipeline
-2. rerun the same normalization, determinism, and offline diff discipline
+2. rerun the same normalization, determinism, `bootstrap_digest`, and offline
+   diff discipline
 3. only then widen fork coverage or scenario families
 
 ## Immediate Next Step
@@ -459,5 +460,11 @@ Recommended order:
 3. preserve the current comparison-discipline constraints, especially:
    client-local runtime identifiers, conservative normalization, and the
    provenance-aware `unknown-payloadid` input class
-4. only after the third-client Paris run remains stable, expand to `besu`,
+4. treat any newly activatable normalization rule as a discrepancy-ledger
+   candidate first; do not move it from `deferred` to `active` without manual
+   confirmation
+5. triage the full three-pair comparison set explicitly and label accepted
+   phase-1 `geth/reth` differences as inherited baseline rather than new
+   phase-2 discrepancies
+6. only after the third-client Paris run remains stable, expand to `besu`,
    `erigon`, or later forks
