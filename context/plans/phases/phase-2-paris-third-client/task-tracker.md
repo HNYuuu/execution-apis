@@ -50,7 +50,7 @@ Status values:
 | `P2-T06` | `nethermind` build-lifecycle and unknown-payload scenarios | `done` |
 | `P2-T07` | Three-client corpus extension and normalization review | `done` |
 | `P2-T08` | Three-client determinism probe | `done` |
-| `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `todo` |
+| `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `done` |
 | `P2-T10` | Phase-2 acceptance review and go/no-go checkpoint | `todo` |
 
 ## `P2-T01` Third-Client Scope Freeze And Comparison-Discipline Gate
@@ -583,7 +583,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -614,6 +614,46 @@ Status values:
 - offline diff report for the three-client matrix
 - first discrepancy ledger for phase-2, including `inherited-baseline` versus
   `new-in-phase-2` labeling
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-result-envelope-diff.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-result-envelope-diff.js)
+- `script`
+  [run-engine-phase2-result-envelope-diff.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-result-envelope-diff.sh)
+- `config`
+  [paris-phase2-result-envelope-diff.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.config.json)
+- `test case`
+  [paris-phase2-result-envelope-diff.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.test-case.json)
+- `log format`
+  [paris-phase2-result-envelope-diff.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log-format.md)
+- `log output`
+  [paris-phase2-result-envelope-diff.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json)
+- `result envelopes`
+  [paris-phase2-result-envelopes.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelopes.json)
+- `diff output`
+  [paris-phase2-result-envelope-diff.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.json)
+- `discrepancy ledger`
+  [paris-phase2-discrepancy-ledger.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-discrepancy-ledger.json)
+- `report`
+  [paris-phase2-result-envelope-diff.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.report.md)
+
+**Notes**
+
+- The full three-client matrix currently lands in `agree after normalization`
+  for all six accepted Paris scenarios.
+- `geth/reth` entries inherited from phase-1 are explicitly labeled
+  `inherited-baseline`.
+- Phase-2 newly exposed comparisons against `nethermind` are currently all
+  triaged as `normalization issue`, not as implementation bug or spec
+  ambiguity.
+- New phase-2 observations include response-object key-order noise for
+  `fcu-no-build` and `repeat-fcu-same-head`.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

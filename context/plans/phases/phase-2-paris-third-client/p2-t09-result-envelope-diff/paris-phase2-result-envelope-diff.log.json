@@ -1,0 +1,388 @@
+{
+  "taskId": "P2-T09",
+  "generatedAt": "2026-04-02T09:52:01.211Z",
+  "status": "pass",
+  "executionMode": "offline-artifact-diff",
+  "inputs": {
+    "config_file": "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.config.json",
+    "test_case_file": "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.test-case.json",
+    "t04_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "t05_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+    "t06_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+    "t08_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json",
+    "phase1_t14_diff_file": "context/plans/t14-result-envelope-diff/paris-result-envelope-diff.json",
+    "phase2_normalization_decision_log": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md"
+  },
+  "summary": {
+    "scenario_count": 6,
+    "envelope_count": 18,
+    "pairwise_comparison_count": 18,
+    "matrix_bucket_counts": {
+      "all agree": 0,
+      "agree after normalization": 6,
+      "diverge across clients": 0,
+      "violates hard invariant": 0
+    },
+    "discrepancy_count": 16
+  },
+  "validations": [
+    {
+      "check": "complete envelopes exist for the three-client scenario matrix",
+      "status": "pass",
+      "details": {
+        "envelope_count": 18,
+        "expected_count": 18
+      }
+    },
+    {
+      "check": "pairwise comparison set is explicit and complete",
+      "status": "pass",
+      "details": {
+        "pairwise_count": 18,
+        "expected_count": 18,
+        "pairs": [
+          "geth/reth",
+          "geth/nethermind",
+          "reth/nethermind"
+        ]
+      }
+    },
+    {
+      "check": "phase-1 accepted geth/reth differences are labeled inherited baseline when they recur",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "client_local_runtime_values_excluded",
+            "newpayload_compared_as_success_category"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "compare_code_and_category_only",
+            "case_only_error_message_difference_is_not_a_diff_target"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "every discrepancy ledger entry is triaged",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "fcu-no-build",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "response_object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "fcu-no-build",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "response_object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "client_local_runtime_values_excluded",
+            "newpayload_compared_as_success_category"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "client_local_runtime_values_excluded",
+            "newpayload_compared_as_success_category"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "client_local_runtime_values_excluded",
+            "newpayload_compared_as_success_category"
+          ]
+        },
+        {
+          "scenario_id": "repeat-fcu-same-head",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "response_object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "repeat-fcu-same-head",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "response_object_key_order_only"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "comparison_scope": "pairwise",
+          "pair": "geth/reth",
+          "bucket": "agree after normalization",
+          "baseline_label": "inherited-baseline",
+          "triage": "normalization issue",
+          "notes": [
+            "compare_code_and_category_only",
+            "case_only_error_message_difference_is_not_a_diff_target"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "comparison_scope": "pairwise",
+          "pair": "geth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "compare_code_and_category_only",
+            "case_only_error_message_difference_is_not_a_diff_target"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "comparison_scope": "pairwise",
+          "pair": "reth/nethermind",
+          "bucket": "agree after normalization",
+          "baseline_label": "new-in-phase-2",
+          "triage": "normalization issue",
+          "notes": [
+            "compare_code_and_category_only",
+            "case_only_error_message_difference_is_not_a_diff_target"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "determinism leaves no blocked scenario ids for offline diff",
+      "status": "pass",
+      "details": {
+        "blocked_ids": []
+      }
+    },
+    {
+      "check": "all compared envelopes sharing a scenario also share bootstrap_digest",
+      "status": "pass",
+      "details": [
+        {
+          "scenario_id": "rlp-bootstrap-smoke",
+          "bootstrap_digests": [
+            "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+          ]
+        },
+        {
+          "scenario_id": "headfcu-bootstrap-smoke",
+          "bootstrap_digests": [
+            "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+          ]
+        },
+        {
+          "scenario_id": "fcu-no-build",
+          "bootstrap_digests": [
+            "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+          ]
+        },
+        {
+          "scenario_id": "fcu-build-getpayload-newpayload",
+          "bootstrap_digests": [
+            "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+          ]
+        },
+        {
+          "scenario_id": "repeat-fcu-same-head",
+          "bootstrap_digests": [
+            "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+          ]
+        },
+        {
+          "scenario_id": "unknown-payloadid",
+          "bootstrap_digests": [
+            "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+          ]
+        }
+      ]
+    },
+    {
+      "check": "expected matrix bucket for rlp-bootstrap-smoke",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected matrix bucket for headfcu-bootstrap-smoke",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected matrix bucket for fcu-no-build",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected matrix bucket for fcu-build-getpayload-newpayload",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected matrix bucket for repeat-fcu-same-head",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    },
+    {
+      "check": "expected matrix bucket for unknown-payloadid",
+      "status": "pass",
+      "details": {
+        "expected_bucket": "agree after normalization",
+        "actual_bucket": "agree after normalization"
+      }
+    }
+  ]
+}

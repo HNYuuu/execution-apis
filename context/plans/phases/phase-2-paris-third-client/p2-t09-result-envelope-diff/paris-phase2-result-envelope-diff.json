@@ -1,0 +1,218 @@
+{
+  "taskId": "P2-T09",
+  "generatedAt": "2026-04-02T09:52:01.210Z",
+  "matrixComparisons": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "95a4cab87a4b8ecb72f51dbcaabb894029f22c9c27df4c59494e3f86f631fd3e"
+      ]
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+      ]
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+      ]
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+      ]
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+      ]
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "clients": [
+        "geth",
+        "reth",
+        "nethermind"
+      ],
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true,
+      "bootstrap_digests": [
+        "ef592ea141df7f49503b1fb1b276e8668df2186d41c364040e500b40e25ca944"
+      ]
+    }
+  ],
+  "pairwiseComparisons": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "pair": "geth/reth",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "pair": "geth/reth",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "pair": "geth/reth",
+      "final_bucket": "all agree",
+      "raw_equal": true,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "pair": "geth/reth",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "pair": "geth/reth",
+      "final_bucket": "all agree",
+      "raw_equal": true,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "pair": "geth/reth",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "pair": "geth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "pair": "reth/nethermind",
+      "final_bucket": "agree after normalization",
+      "raw_equal": false,
+      "normalized_equal": true
+    }
+  ]
+}

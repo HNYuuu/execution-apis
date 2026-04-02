@@ -1,0 +1,35 @@
+{
+  "task_id": "P2-T09",
+  "required_clients": ["geth", "reth", "nethermind"],
+  "expected_pairs": [
+    ["geth", "reth"],
+    ["geth", "nethermind"],
+    ["reth", "nethermind"]
+  ],
+  "expected_matrix_scenarios": [
+    {
+      "scenario_id": "rlp-bootstrap-smoke",
+      "expected_bucket": "agree after normalization"
+    },
+    {
+      "scenario_id": "headfcu-bootstrap-smoke",
+      "expected_bucket": "agree after normalization"
+    },
+    {
+      "scenario_id": "fcu-no-build",
+      "expected_bucket": "agree after normalization"
+    },
+    {
+      "scenario_id": "fcu-build-getpayload-newpayload",
+      "expected_bucket": "agree after normalization"
+    },
+    {
+      "scenario_id": "repeat-fcu-same-head",
+      "expected_bucket": "agree after normalization"
+    },
+    {
+      "scenario_id": "unknown-payloadid",
+      "expected_bucket": "agree after normalization"
+    }
+  ]
+}
