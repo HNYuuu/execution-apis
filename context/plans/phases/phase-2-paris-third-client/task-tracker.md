@@ -229,7 +229,7 @@ Status values:
 **Git Record**
 
 - `commit`
-  `pending`
+  `ed8e70b` - `Complete P2-T03 nethermind runtime reality check`
 
 **Validation Method**
 
