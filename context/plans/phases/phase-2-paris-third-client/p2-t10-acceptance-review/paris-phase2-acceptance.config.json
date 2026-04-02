@@ -1,0 +1,29 @@
+{
+  "task_id": "P2-T10",
+  "inputs": {
+    "phase_readme_file": "context/plans/phases/phase-2-paris-third-client/README.md",
+    "phase3_readme_file": "context/plans/phases/phase-3-paris-full-client-matrix/README.md",
+    "t03_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+    "t04_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "t05_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+    "t06_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+    "t07_discrepancy_ledger_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+    "t07_decision_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md",
+    "t08_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json",
+    "t09_log_file": "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json",
+    "t09_discrepancy_ledger_file": "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-discrepancy-ledger.json"
+  },
+  "required_artifacts": [
+    "context/plans/phases/phase-2-paris-third-client/README.md",
+    "context/plans/phases/phase-3-paris-full-client-matrix/README.md",
+    "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md",
+    "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json",
+    "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-discrepancy-ledger.json"
+  ]
+}

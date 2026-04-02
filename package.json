@@ -35,6 +35,7 @@
     "engine:phase2-corpus-and-normalization-review": "bash scripts/run-engine-phase2-corpus-and-normalization-review.sh",
     "engine:phase2-determinism-probe": "bash scripts/run-engine-phase2-determinism-probe.sh",
     "engine:phase2-result-envelope-diff": "bash scripts/run-engine-phase2-result-envelope-diff.sh",
+    "engine:phase2-acceptance-review": "bash scripts/run-engine-phase2-acceptance-review.sh",
     "clean": "rm -rf build && mkdir -p build",
     "graphql:schema": "node scripts/graphql.js",
     "graphql:validate": "node scripts/graphql-validate.js",

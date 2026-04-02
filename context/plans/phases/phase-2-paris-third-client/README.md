@@ -2,7 +2,7 @@
 
 ## Status
 
-`todo`
+`done`
 
 ## Goal
 
@@ -46,3 +46,9 @@ Phase 2 is accepted only if:
 
 - [task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/task-tracker.md)
   Executable phase-2 task list.
+
+## Canonical Artifacts
+
+- [README.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/README.md)
+- [task-tracker.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/task-tracker.md)
+- [paris-phase2-acceptance.decision.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.decision.json)

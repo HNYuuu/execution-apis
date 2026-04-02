@@ -51,7 +51,7 @@ Status values:
 | `P2-T07` | Three-client corpus extension and normalization review | `done` |
 | `P2-T08` | Three-client determinism probe | `done` |
 | `P2-T09` | Three-client `ResultEnvelope` diff and discrepancy triage | `done` |
-| `P2-T10` | Phase-2 acceptance review and go/no-go checkpoint | `todo` |
+| `P2-T10` | Phase-2 acceptance review and go/no-go checkpoint | `done` |
 
 ## `P2-T01` Third-Client Scope Freeze And Comparison-Discipline Gate
 
@@ -668,7 +668,7 @@ Status values:
 
 **Status**
 
-`todo`
+`done`
 
 **Inputs**
 
@@ -692,6 +692,36 @@ Status values:
 - phase-2 review summary
 - explicit go/no-go decision
 - next-step task list for phase-3 or remediation
+
+**Artifacts**
+
+- `code`
+  [engine-phase2-acceptance-review.js](/Users/ningyuhe/Documents/execution-apis/scripts/engine-phase2-acceptance-review.js)
+- `script`
+  [run-engine-phase2-acceptance-review.sh](/Users/ningyuhe/Documents/execution-apis/scripts/run-engine-phase2-acceptance-review.sh)
+- `config`
+  [paris-phase2-acceptance.config.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.config.json)
+- `test case`
+  [paris-phase2-acceptance.test-case.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.test-case.json)
+- `log format`
+  [paris-phase2-acceptance.log-format.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.log-format.md)
+- `log output`
+  [paris-phase2-acceptance.log.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.log.json)
+- `report`
+  [paris-phase2-acceptance.report.md](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.report.md)
+- `decision`
+  [paris-phase2-acceptance.decision.json](/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.decision.json)
+
+**Notes**
+
+- Phase-2 acceptance review passed with `decision = go`.
+- The accepted next step is phase-3, beginning with adding `besu` to the
+  Paris matrix.
+
+**Git Record**
+
+- `commit`
+  `pending`
 
 **Validation Method**
 

@@ -1,0 +1,41 @@
+{
+  "task_id": "P2-T10",
+  "criteria": [
+    {
+      "id": "third_client_executes_phase1_surface",
+      "label": "all accepted Paris scenarios run successfully on the third client"
+    },
+    {
+      "id": "complete_result_envelopes_exist",
+      "label": "complete ResultEnvelope artifacts exist for the three-client matrix"
+    },
+    {
+      "id": "bootstrap_digest_consistency",
+      "label": "matching pre-states across the matrix keep matching bootstrap_digest values"
+    },
+    {
+      "id": "determinism_is_acceptable",
+      "label": "determinism remains acceptable for the added client and updated matrix"
+    },
+    {
+      "id": "no_unknown_provenance_or_undocumented_normalization",
+      "label": "no comparison bucket depends on unknown provenance or undocumented normalization"
+    },
+    {
+      "id": "deferred_rule_activation_guard_holds",
+      "label": "no deferred normalization rule is activated without candidate discrepancy plus manual confirmation"
+    },
+    {
+      "id": "inherited_baseline_is_preserved",
+      "label": "phase-1 accepted geth/reth differences remain labeled as inherited baseline"
+    },
+    {
+      "id": "new_discrepancies_are_reproducible_and_triaged",
+      "label": "newly exposed discrepancies are reproducible and explicitly triaged"
+    },
+    {
+      "id": "phase2_go_no_go_is_explicit",
+      "label": "phase-2 ends with an explicit go/no-go checkpoint"
+    }
+  ]
+}

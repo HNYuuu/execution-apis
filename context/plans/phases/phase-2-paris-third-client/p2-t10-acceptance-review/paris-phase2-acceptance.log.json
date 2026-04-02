@@ -1,0 +1,218 @@
+{
+  "taskId": "P2-T10",
+  "generatedAt": "2026-04-02T09:58:08.428Z",
+  "status": "pass",
+  "executionMode": "offline-acceptance-review",
+  "inputs": {
+    "config_file": "context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.config.json",
+    "test_case_file": "context/plans/phases/phase-2-paris-third-client/p2-t10-acceptance-review/paris-phase2-acceptance.test-case.json"
+  },
+  "summary": {
+    "pass_count": 9,
+    "fail_count": 0,
+    "blocked_count": 0,
+    "decision": "go"
+  },
+  "validations": [
+    {
+      "check": "required artifacts exist",
+      "status": "pass",
+      "details": [
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/README.md",
+          "bytes": 2118
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-3-paris-full-client-matrix/README.md",
+          "bytes": 1130
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+          "bytes": 4815
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+          "bytes": 71293
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+          "bytes": 46236
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+          "bytes": 60651
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+          "bytes": 618
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md",
+          "bytes": 691
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json",
+          "bytes": 237836
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json",
+          "bytes": 13108
+        },
+        {
+          "path": "/Users/ningyuhe/Documents/execution-apis/context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-discrepancy-ledger.json",
+          "bytes": 5099
+        }
+      ]
+    },
+    {
+      "id": "third_client_executes_phase1_surface",
+      "label": "all accepted Paris scenarios run successfully on the third client",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t03-nethermind-runtime-reality-check/paris-nethermind-runtime-reality-check.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t05-early-runtime-scenarios/paris-phase2-early-runtime-scenarios.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json"
+      ],
+      "details": {
+        "third_client": "nethermind",
+        "accepted_scenarios": [
+          "rlp-bootstrap-smoke",
+          "headfcu-bootstrap-smoke",
+          "fcu-no-build",
+          "fcu-build-getpayload-newpayload",
+          "repeat-fcu-same-head",
+          "unknown-payloadid"
+        ]
+      }
+    },
+    {
+      "id": "complete_result_envelopes_exist",
+      "label": "complete ResultEnvelope artifacts exist for the three-client matrix",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "scenario_count": 6,
+        "envelope_count": 18,
+        "pairwise_comparison_count": 18
+      }
+    },
+    {
+      "id": "bootstrap_digest_consistency",
+      "label": "matching pre-states across the matrix keep matching bootstrap_digest values",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t04-bootstrap-validation/paris-phase2-bootstrap-validation.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "t04_check": "B1 and B2 bootstrap observations agree across all three clients",
+        "t09_check": "all compared envelopes sharing a scenario also share bootstrap_digest"
+      }
+    },
+    {
+      "id": "determinism_is_acceptable",
+      "label": "determinism remains acceptable for the added client and updated matrix",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json"
+      ],
+      "details": {
+        "runtime_reruns": 2,
+        "stable_record_count": 24,
+        "blocked_ids": []
+      }
+    },
+    {
+      "id": "no_unknown_provenance_or_undocumented_normalization",
+      "label": "no comparison bucket depends on unknown provenance or undocumented normalization",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t06-build-and-unknown-scenarios/paris-phase2-build-and-unknown-scenarios.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md"
+      ],
+      "details": {
+        "provenance_check": "unknown-payloadid keeps the mutated-real-payload provenance discipline",
+        "resolved_manual_items": [
+          "P2-D01"
+        ]
+      }
+    },
+    {
+      "id": "deferred_rule_activation_guard_holds",
+      "label": "no deferred normalization rule is activated without candidate discrepancy plus manual confirmation",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-discrepancy-ledger.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t07-corpus-and-normalization-review/paris-phase2-normalization-decision-log.md"
+      ],
+      "details": {
+        "resolved_discrepancy": "P2-D01",
+        "deferred_rule_still_retained": "null_vs_omitted_when_explicitly_allowed"
+      }
+    },
+    {
+      "id": "inherited_baseline_is_preserved",
+      "label": "phase-1 accepted geth/reth differences remain labeled as inherited baseline",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-result-envelope-diff.log.json"
+      ],
+      "details": {
+        "inherited_pairs": [
+          {
+            "scenario_id": "rlp-bootstrap-smoke",
+            "pair": "geth/reth",
+            "baseline_label": "inherited-baseline"
+          },
+          {
+            "scenario_id": "headfcu-bootstrap-smoke",
+            "pair": "geth/reth",
+            "baseline_label": "inherited-baseline"
+          },
+          {
+            "scenario_id": "fcu-build-getpayload-newpayload",
+            "pair": "geth/reth",
+            "baseline_label": "inherited-baseline"
+          },
+          {
+            "scenario_id": "unknown-payloadid",
+            "pair": "geth/reth",
+            "baseline_label": "inherited-baseline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "new_discrepancies_are_reproducible_and_triaged",
+      "label": "newly exposed discrepancies are reproducible and explicitly triaged",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/p2-t08-determinism-probe/paris-phase2-determinism-probe.log.json",
+        "context/plans/phases/phase-2-paris-third-client/p2-t09-result-envelope-diff/paris-phase2-discrepancy-ledger.json"
+      ],
+      "details": {
+        "discrepancy_count": 16,
+        "new_in_phase_2_count": 12,
+        "triage_set": [
+          "normalization issue"
+        ]
+      }
+    },
+    {
+      "id": "phase2_go_no_go_is_explicit",
+      "label": "phase-2 ends with an explicit go/no-go checkpoint",
+      "status": "pass",
+      "evidence": [
+        "context/plans/phases/phase-2-paris-third-client/README.md",
+        "context/plans/phases/phase-3-paris-full-client-matrix/README.md"
+      ],
+      "details": {
+        "next_phase": "Phase 3: Paris Full Client Matrix"
+      }
+    }
+  ]
+}
